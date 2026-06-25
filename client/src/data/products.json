@@ -1,0 +1,499 @@
+[
+  {
+    "id": 1,
+    "name": "Sodium Chloride Injection IP (0.9% w/v)",
+    "composition": "Each 100 ml contains: Sodium Chloride IP 0.9 gm, Water for Injection IP q.s.",
+    "packSizes": ["100 ml", "500 ml", "1000 ml"],
+    "purpose": "Domestic"
+  },
+  {
+    "id": 2,
+    "name": "Dextrose Injection IP (5.0% w/v)",
+    "composition": "Each 100 ml contains: Dextrose Anhydrous IP 5.0 gm, Water for Injection IP q.s.",
+    "packSizes": ["500 ml", "1000 ml"],
+    "purpose": "Domestic"
+  },
+  {
+    "id": 3,
+    "name": "Dextrose Injection IP (10.0% w/v)",
+    "composition": "Each 100 ml contains: Dextrose Anhydrous IP 10.0 gm, Water for Injection IP q.s.",
+    "packSizes": ["100 ml", "500 ml"],
+    "purpose": "Domestic"
+  },
+  {
+    "id": 4,
+    "name": "Sodium Chloride (0.9% w/v) & Dextrose (5.0% w/v) Injection IP",
+    "composition": "Each 100 ml contains: Sodium Chloride IP 0.9 gm, Dextrose Anhydrous IP 5.0 gm, Water for Injection IP q.s.",
+    "packSizes": ["500 ml", "1000 ml"],
+    "purpose": "Domestic"
+  },
+  {
+    "id": 5,
+    "name": "Sodium Chloride (0.45% w/v) & Dextrose (5.0% w/v) Injection IP",
+    "composition": "Each 100 ml contains: Sodium Chloride IP 0.45 gm, Dextrose Anhydrous IP 5.0 gm, Water for Injection IP q.s.",
+    "packSizes": ["500 ml", "1000 ml"],
+    "purpose": "Domestic"
+  },
+  {
+    "id": 6,
+    "name": "Compound Sodium Lactate Injection IP (Ringer Lactate Solution for Injection)",
+    "composition": "Each 100 ml contains: Sodium Lactate Solution USP Eq. to Sodium Lactate 0.320 gm, Sodium Chloride IP 0.600 gm, Potassium Chloride IP 0.040 gm, Calcium Chloride IP 0.027 gm, Water for Injection IP q.s.",
+    "packSizes": ["500 ml", "1000 ml"],
+    "purpose": "Domestic"
+  },
+  {
+    "id": 7,
+    "name": "Metronidazole Injection IP (0.5% w/v)",
+    "composition": "Each 100 ml contains: Metronidazole IP 0.5 gm, Water for Injection IP q.s.",
+    "packSizes": ["100 ml"],
+    "purpose": "Domestic"
+  },
+  {
+    "id": 8,
+    "name": "Ciprofloxacin Injection IP (0.2% w/v)",
+    "composition": "Each 100 ml contains: Ciprofloxacin Hydrochloride IP Eq. to Ciprofloxacin 0.2 gm, Sodium Chloride IP 0.9 gm, Water for Injection IP q.s.",
+    "packSizes": ["100 ml"],
+    "purpose": "Domestic"
+  },
+  {
+    "id": 9,
+    "name": "Ofloxacin Infusion IP (0.2% w/v)",
+    "composition": "Each 100 ml contains: Ofloxacin IP 0.2 gm, Sodium Chloride IP 0.9 gm, Water for Injection IP q.s.",
+    "packSizes": ["100 ml"],
+    "purpose": "Domestic"
+  },
+  {
+    "id": 10,
+    "name": "Levofloxacin Infusion IP (0.5% w/v)",
+    "composition": "Each 100 ml contains: Levofloxacin Hemihydrate IP Eq. to Levofloxacin 0.5 gm, Sodium Chloride IP 0.9 gm, Water for Injection IP q.s.",
+    "packSizes": ["100 ml"],
+    "purpose": "Domestic"
+  },
+  {
+    "id": 11,
+    "name": "Sodium Chloride Intravenous Infusion BP (0.9% w/v)",
+    "composition": "Each 100 ml contains: Sodium Chloride BP 0.9 gm, Water for Injection BP q.s.",
+    "packSizes": ["100 ml", "500 ml", "1000 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 12,
+    "name": "Paracetamol Injection (1% w/v)",
+    "composition": "Each 100 ml contains: Paracetamol BP 1000 mg, Water for Injection BP q.s.",
+    "packSizes": ["100 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 13,
+    "name": "Levofloxacin Infusion",
+    "composition": "Each 100 ml contains: Levofloxacin Hemihydrate Eq. to Levofloxacin 500 mg, Glucose Anhydrous BP 5 gm, Water for Injection BP q.s.",
+    "packSizes": ["100 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 14,
+    "name": "Mannitol Intravenous Infusion BP (200 gm/Lit.)",
+    "composition": "Each 100 ml contains: Mannitol BP 20 gm, Water for Injection BP q.s.",
+    "packSizes": ["100 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 15,
+    "name": "Mannitol Injection IP (20% w/v)",
+    "composition": "Each 100 ml contains: Mannitol IP 20 gm, Water for Injection IP q.s.",
+    "packSizes": ["100 ml"],
+    "purpose": "Domestic"
+  },
+  {
+    "id": 16,
+    "name": "Paracetamol Infusion IP (1.0% w/v)",
+    "composition": "Each 100 ml contains: Paracetamol IP 1000 mg, Water for Injection IP q.s.",
+    "packSizes": ["100 ml"],
+    "purpose": "Domestic"
+  },
+  {
+    "id": 17,
+    "name": "Metronidazole Injection USP (0.5% w/v)",
+    "composition": "Each 100 ml contains: Metronidazole USP 0.5 gm, Sodium Chloride USP 0.9 gm, Water for Injection USP q.s.",
+    "packSizes": ["100 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 18,
+    "name": "Ciprofloxacin Injection USP (2 mg/ml)",
+    "composition": "Each 100 ml contains: Ciprofloxacin Lactate Eq. to Ciprofloxacin USP 200 mg, Sodium Chloride USP 900 mg, Water for Injection USP q.s.",
+    "packSizes": ["100 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 19,
+    "name": "Fluconazole Infusion (0.2% w/v)",
+    "composition": "Each 100 ml contains: Fluconazole USP 200 mg, Sodium Chloride BP 0.9 gm, Water for Injection BP q.s.",
+    "packSizes": ["100 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 20,
+    "name": "Metronidazole Intravenous Infusion BP",
+    "composition": "Each 100 ml contains: Metronidazole BP 500 mg, Water for Injection BP q.s.",
+    "packSizes": ["100 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 21,
+    "name": "Ciprofloxacin Intravenous Infusion BP",
+    "composition": "Each 100 ml contains: Ciprofloxacin Hydrochloride BP Eq. to Ciprofloxacin BP 0.2 gm, Sodium Chloride BP 0.9 gm, Water for Injection BP q.s.",
+    "packSizes": ["100 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 22,
+    "name": "Glucose Intravenous Infusion BP (5.0% w/v)",
+    "composition": "Each 100 ml contains: Glucose Anhydrous BP 5 gm, Water for Injection BP q.s.",
+    "packSizes": ["500 ml", "1000 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 23,
+    "name": "Glucose Intravenous Infusion BP (10.0% w/v)",
+    "composition": "Each 100 ml contains: Glucose Anhydrous BP 10 gm, Water for Injection BP q.s.",
+    "packSizes": ["100 ml", "500 ml", "1000 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 24,
+    "name": "Compound Sodium Lactate Intravenous Infusion BP (Ringer Lactate Solution for Injection)",
+    "composition": "Each 100 ml contains: Sodium Lactate Solution USP Eq. to Sodium Lactate 0.320 gm, Sodium Chloride BP 0.600 gm, Potassium Chloride BP 0.040 gm, Calcium Chloride BP 0.027 gm, Water for Injection BP q.s.",
+    "packSizes": ["500 ml", "1000 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 25,
+    "name": "Sterile Water for Irrigation USP",
+    "composition": "Each 100 ml contains: Water for Injection BP q.s.",
+    "packSizes": ["100 ml", "250 ml", "300 ml", "500 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 26,
+    "name": "Metronidazole Injection IP (0.5% w/v) - Secondary",
+    "composition": "Each 100 ml contains: Metronidazole IP 0.5 gm, Sodium Chloride IP 0.8 gm, Water for Injection IP q.s.",
+    "packSizes": ["100 ml"],
+    "purpose": "Domestic"
+  },
+  {
+    "id": 27,
+    "name": "Linezolid Infusion (200mg/100ml)",
+    "composition": "Each 100 ml contains: Linezolid IP 200 mg, Dextrose Anhydrous IP 5.0 gm, Water for Injection IP q.s.",
+    "packSizes": ["100 ml", "300 ml"],
+    "purpose": "Domestic"
+  },
+  {
+    "id": 28,
+    "name": "Sodium chloride Injection (0.45% w/v)",
+    "composition": "Each 100 ml contains: Sodium Chloride IP 0.45 gm, Water for Injection IP q.s.",
+    "packSizes": ["500 ml"],
+    "purpose": "Domestic"
+  },
+  {
+    "id": 29,
+    "name": "Fluconazole Intravenous Infusion",
+    "composition": "Each 100 ml contains: Fluconazole IP 200 mg, Sodium Chloride IP 0.9 gm, Water for Injection IP q.s.",
+    "packSizes": ["100 ml"],
+    "purpose": "Domestic"
+  },
+  {
+    "id": 30,
+    "name": "Ornidazole Intravenous Infusion",
+    "composition": "Each 100 ml contains: Ornidazole IP 500 mg, Sodium Chloride IP 0.9 gm, Water for Injection IP q.s.",
+    "packSizes": ["100 ml"],
+    "purpose": "Domestic"
+  },
+  {
+    "id": 31,
+    "name": "Glucose Intravenous Infusion BP (25.0% w/v)",
+    "composition": "Each 100 ml contains: Glucose Anhydrous BP 25 gm, Water for Injection BP q.s.",
+    "packSizes": ["100 ml", "500 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 32,
+    "name": "Moxifloxacin Intravenous Infusion (0.4% w/v)",
+    "composition": "Each 100 ml contains: Moxifloxacin Hydrochloride BP Eq. to Moxifloxacin 400 mg, Mannitol USP 5 gm, Water for Injections USP q.s.",
+    "packSizes": ["100 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 33,
+    "name": "Mannitol Intravenous Infusion BP (10% w/v)",
+    "composition": "Each 100 ml contains: Mannitol BP 10 gm, Water for Injection BP q.s.",
+    "packSizes": ["100 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 34,
+    "name": "Levofloxacin Infusion IP (0.5% w/v) - Secondary",
+    "composition": "Each 100 ml contains: Levofloxacin Hemihydrate IP Eq. to Levofloxacin 0.5 gm, Dextrose Anhydrous IP 5.0 gm, Water for Injection IP q.s.",
+    "packSizes": ["100 ml", "PE Bottle"],
+    "purpose": "Domestic"
+  },
+  {
+    "id": 35,
+    "name": "Dextrose Injection USP (25% w/v)",
+    "composition": "Each 100 ml contains: Dextrose Anhydrous USP 25.0 gm, Water for Injection USP q.s.",
+    "packSizes": ["100 ml", "500 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 36,
+    "name": "Mannitol Injection USP (20% w/v)",
+    "composition": "Each 100 ml contains: Mannitol USP 20 gm, Water for Injection USP q.s.",
+    "packSizes": ["100 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 37,
+    "name": "Mannitol Injection USP (10% w/v)",
+    "composition": "Each 100 ml contains: Mannitol USP 10 gm, Water for Injection USP q.s.",
+    "packSizes": ["100 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 38,
+    "name": "Glucose with Normal Saline Intravenous Infusion BP",
+    "composition": "Each 100 ml contains: Glucose Anhydrous BP 5.0 gm, Sodium Chloride BP 0.9 gm, Water for Injection BP q.s.",
+    "packSizes": ["500 ml", "1000 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 39,
+    "name": "Ciprofloxacin Injection USP (0.2% w/v)",
+    "composition": "Each 100 ml contains: Ciprofloxacin HCl USP Eq. to Ciprofloxacin 0.2 gm, Sodium Chloride USP 0.9 gm, Water for Injection USP q.s.",
+    "packSizes": ["100 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 40,
+    "name": "Dextrose Injection IP (25% w/v)",
+    "composition": "Each 100 ml contains: Dextrose Anhydrous IP 25.0 gm, Water for Injection IP q.s.",
+    "packSizes": ["100 ml", "500 ml"],
+    "purpose": "Domestic"
+  },
+  {
+    "id": 41,
+    "name": "Mannitol Injection IP (10% w/v)",
+    "composition": "Each 100 ml contains: Mannitol IP 10 gm, Water for Injection IP q.s.",
+    "packSizes": ["100 ml"],
+    "purpose": "Domestic"
+  },
+  {
+    "id": 42,
+    "name": "Multiple Electrolytes & Dextrose Injection Type - V IP",
+    "composition": "Each 100 ml contains: Sodium Acetate IP 0.640 gm, Sodium Chloride IP 0.500 gm, Sodium Citrate IP 0.075 gm, Potassium Chloride IP 0.075 gm, Calcium Chloride Dihydrate IP 0.035 gm, Magnesium Chloride IP 0.031 gm, Dextrose Anhydrous IP 5.00 gm, Water for Injection IP q.s.",
+    "packSizes": ["500 ml", "1000 ml"],
+    "purpose": "Domestic"
+  },
+  {
+    "id": 43,
+    "name": "Multiple Electrolytes & Dextrose Injection Type - I IP",
+    "composition": "Each 100 ml contains: Sodium Acetate IP 0.32 gm, Potassium Chloride IP 0.13 gm, Dipotassium Hydrogen Phosphate USP 0.026 gm, Magnesium Chloride IP 0.031 gm, Dextrose Anhydrous IP 5.00 gm, Stabilizer Sodium Metabisulphite IP q.s., Hydrochloric Acid IP q.s. to pH, Water for Injection IP q.s.",
+    "packSizes": ["500 ml", "1000 ml"],
+    "purpose": "Domestic"
+  },
+  {
+    "id": 44,
+    "name": "Multiple Electrolytes & Dextrose Injection Type - II IP",
+    "composition": "Each 100 ml contains: Dextrose Anhydrous IP 5.0 gm, Sodium Chloride IP 0.088 gm, Sodium Acetate IP 0.33 gm, Potassium Chloride IP 0.12 gm, Calcium Chloride Dihydrate IP 0.037 gm, Magnesium Chloride IP 0.031 gm, Stabilizer Sodium Metabisulphite IP q.s., Water for Injection IP q.s.",
+    "packSizes": ["500 ml", "1000 ml"],
+    "purpose": "Domestic"
+  },
+  {
+    "id": 45,
+    "name": "Multiple Electrolytes & Dextrose Injection Type - III IP",
+    "composition": "Each 100 ml contains: Sodium Acetate IP 0.28 gm, Sodium Chloride IP 0.10 gm, Potassium Chloride IP 0.15 gm, Dipotassium Hydrogen Phosphate USP 0.13 gm, Dextrose Anhydrous IP 5.00 gm, Stabilizer Sodium Metabisulphite IP q.s., Hydrochloric Acid IP q.s. to pH, Water for Injection IP q.s.",
+    "packSizes": ["500 ml", "1000 ml"],
+    "purpose": "Domestic"
+  },
+  {
+    "id": 46,
+    "name": "Multiple Electrolytes & Dextrose Injection Type - IV IP",
+    "composition": "Each 100 ml contains: Dextrose Anhydrous IP 5.0 gm, Sodium Chloride IP 0.370 gm, Potassium Chloride IP 0.130 gm, Ammonium Chloride IP 0.370 gm, Water for Injection IP q.s., Stabilizer Sodium Metabisulphite IP q.s.",
+    "packSizes": ["500 ml", "1000 ml"],
+    "purpose": "Domestic"
+  },
+  {
+    "id": 47,
+    "name": "Ofloxacin Injection (200 mg/100 ml)",
+    "composition": "Each 100 ml contains: Ofloxacin USP 200 mg, Sodium Chloride USP 0.9 gm, Water for Injection USP q.s.",
+    "packSizes": ["100 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 48,
+    "name": "Ofloxacin Intravenous Infusion (200 mg/100 ml)",
+    "composition": "Each 100 ml contains: Ofloxacin BP 200 mg, Sodium Chloride BP 0.9 gm, Water for Injection BP q.s.",
+    "packSizes": ["100 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 49,
+    "name": "Levofloxacin Infusion (500 mg/100 ml)",
+    "composition": "Each 100 ml contains: Levofloxacin Hemihydrate Eq. to Levofloxacin 500 mg, Sodium Chloride BP 0.9 gm, Water for Injection BP q.s.",
+    "packSizes": ["100 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 50,
+    "name": "Fluconazole Injection USP (200 mg/100 ml)",
+    "composition": "Each 100 ml contains: Fluconazole USP 200 mg, Sodium Chloride USP 900 mg, Water for Injection USP q.s.",
+    "packSizes": ["100 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 51,
+    "name": "Moxifloxacin Intravenous Infusion (400 mg/100ml)",
+    "composition": "Each 100 ml contains: Moxifloxacin Hydrochloride IP Eq. to Moxifloxacin 400 mg, Mannitol IP 5% w/v, Water for Injection IP q.s.",
+    "packSizes": ["100 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 52,
+    "name": "Mannitol & Glycerin Intravenous Infusion",
+    "composition": "Each 100 ml contains: Mannitol IP 10.0 gm, Glycerin IP 10.0 gm, Water for Injection IP q.s.",
+    "packSizes": ["100 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 53,
+    "name": "Sodium chloride injection (0.45% w/v) - Export",
+    "composition": "Each 100 ml contains: Sodium Chloride IP 0.45 gm, Water for Injection IP q.s.",
+    "packSizes": ["100 ml", "500 ml", "1000 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 54,
+    "name": "Tinidazole Intravenous Infusion (200 mg/100 ml)",
+    "composition": "Each 100 ml contains: Tinidazole IP 200 mg, Sodium Chloride IP 0.79% w/v, Water for Injection IP q.s.",
+    "packSizes": ["100 ml", "400 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 55,
+    "name": "Linezolid Intravenous Infusion (600 mg/300 ml) or (200 mg/100 ml)",
+    "composition": "Each 100 ml contains: Linezolid 200 mg (or 600 mg), Glucose Anhydrous BP 5% w/v, Water for Injection BP q.s.",
+    "packSizes": ["100 ml", "300 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 56,
+    "name": "Ornidazole Intravenous Infusion (500 mg/100 ml)",
+    "composition": "Each 100 ml contains: Ornidazole 500 mg, Sodium Chloride BP 0.9 gm, Water for Injection BP q.s.",
+    "packSizes": ["100 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 57,
+    "name": "Paracetamol Intravenous Infusion (1000 mg/100 ml)",
+    "composition": "Each 100 ml contains: Paracetamol BP 1000 mg, Mannitol BP 5% w/v, Water for Injection BP q.s.",
+    "packSizes": ["100 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 58,
+    "name": "Mannitol Injection IP (20% w/v) - Export",
+    "composition": "Each 100 ml contains: Mannitol IP 20 gm, Water for Injection IP q.s.",
+    "packSizes": ["100 ml", "350 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 59,
+    "name": "Mannitol Intravenous Infusion BP (20% w/v)",
+    "composition": "Each 100 ml contains: Mannitol BP 20 gm, Water for Injection BP q.s.",
+    "packSizes": ["100 ml", "350 ml", "500 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 60,
+    "name": "Dextrose Injection USP (5% w/v) - Export",
+    "composition": "Each 100 ml contains: Dextrose Anhydrous USP 5.0 gm, Water for Injection USP q.s.",
+    "packSizes": ["250 ml", "300 ml", "400 ml", "500 ml", "1000 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 61,
+    "name": "Dextrose Injection USP (10% w/v) - Export",
+    "composition": "Each 100 ml contains: Dextrose Anhydrous USP 10.0 gm, Water for Injection USP q.s.",
+    "packSizes": ["100 ml", "250 ml", "300 ml", "400 ml", "500 ml", "1000 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 62,
+    "name": "Sodium Chloride & Dextrose Injection USP (0.9% & 5.0% w/v)",
+    "composition": "Each 100 ml contains: Sodium Chloride USP 0.9 gm, Dextrose Anhydrous USP 5.0 gm, Water for Injection USP q.s.",
+    "packSizes": ["100 ml", "250 ml", "300 ml", "400 ml", "500 ml", "1000 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 63,
+    "name": "Compound Sodium Lactate Intravenous Infusion BP (Ringer Lactate Solution For Injection) - Export",
+    "composition": "Each 100 ml contains: Sodium Lactate BP 0.32 gm, Sodium Chloride BP 0.60 gm, Potassium Chloride BP 40 mg, Calcium Chloride BP 27 mg, Water for Injection BP q.s.",
+    "packSizes": ["100 ml", "250 ml", "300 ml", "400 ml", "500 ml", "1000 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 64,
+    "name": "Sodium Chloride & Glucose Intravenous Infusion BP (0.9% & 5.0% w/v)",
+    "composition": "Each 100 ml contains: Sodium Chloride BP 0.9 gm, Glucose Anhydrous BP 5 gm, Water for Injection BP q.s.",
+    "packSizes": ["100 ml", "250 ml", "300 ml", "400 ml", "500 ml", "1000 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 65,
+    "name": "Mannitol (10% w/v) & Glycerin (10% w/v) Intravenous Infusion",
+    "composition": "Each 100 ml contains: Mannitol BP 10.0 gm, Glycerin BP 10.0 gm, Water for Injection BP q.s.",
+    "packSizes": ["100 ml", "300 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 66,
+    "name": "Sodium chloride Injection USP (0.9% w/v) - Export",
+    "composition": "Each 100 ml contains: Sodium Chloride USP 0.9 gm, Water for Injection USP q.s.",
+    "packSizes": ["100 ml", "250 ml", "300 ml", "500 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 67,
+    "name": "Ringer's Injection USP",
+    "composition": "Each 100 ml contains: Sodium Chloride USP 0.860 gm, Potassium Chloride USP 0.03 gm, Calcium Chloride 2H2O USP 0.033 gm, Water for Injection USP q.s.",
+    "packSizes": ["100 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 68,
+    "name": "Levofloxacin Infusion (500 mg/100 ml) - Glucose Base",
+    "composition": "Each 100 ml contains: Levofloxacin Hemihydrate Eq. to Levofloxacin 500 mg, Glucose Anhydrous BP 5.0 gm, Water for Injection BP q.s.",
+    "packSizes": ["100 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 69,
+    "name": "Multiple Electrolytes Injection Type 1 USP",
+    "composition": "Each 100 ml contains: Sodium Chloride IP, Sodium Gluconate USP, Sodium Acetate trihydrate IP, Potassium Chloride IP, Magnesium Chloride Hexahydrate IP, Water for Injection IP q.s.",
+    "packSizes": ["100 ml", "250 ml", "300 ml", "500 ml"],
+    "purpose": "Domestic"
+  },
+  {
+    "id": 70,
+    "name": "Tinidazole Intravenous Infusion (200 mg/100 ml) - BP Base",
+    "composition": "Each 100 ml contains: Tinidazole BP 200 mg, Sodium Chloride BP 0.79% w/v, Water for Injection BP q.s.",
+    "packSizes": ["100 ml", "400 ml"],
+    "purpose": "Export"
+  },
+  {
+    "id": 71,
+    "name": "Mannitol Intravenous Infusion BP (10% w/v) - Secondary",
+    "composition": "Each 100 ml contains: Mannitol BP 10 gm, Water for Injection BP q.s.",
+    "packSizes": ["250 ml", "300 ml", "500 ml"],
+    "purpose": "Export"
+  }
+]
