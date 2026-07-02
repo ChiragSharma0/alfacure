@@ -1,513 +1,317 @@
-import React, { useState } from 'react';
-import { Compass, ShieldCheck, Cpu, Leaf, MapPin, ArrowRight } from 'lucide-react';
+import React from 'react';
+import { Target, Eye, Briefcase, Globe, Factory, ShieldCheck, CheckCircle, ArrowRight, MapPin, Phone, Building2, Award, Users, Truck } from 'lucide-react';
 
 export default function About({ setCurrentPage }) {
-  const [activeTab, setActiveTab] = useState('europe');
 
-  const timelineEvents = [
+  const whatWeDo = [
     {
-      year: '2012',
-      title: 'The Foundation',
-      desc: 'Founded with a single vision: to apply advanced sterile Blow-Fill-Seal (BFS) automation to the delicate requirements of parenteral infusions manufacturing.',
-      image: '/assets/Screenshot 2026-06-21 114234.png',
-      align: 'right'
+      icon: <Globe size={22} />,
+      title: 'International Distribution',
+      desc: 'Export of IV Fluids, antibiotic and antifungal injectables, and parenteral formulations to hospitals, distributors, and healthcare institutions worldwide.'
     },
     {
-      year: '2016',
-      title: 'First Sterile IV Line',
-      desc: 'Achieved WHO-GMP certification, launching our first fully automated, zero-contact IV fluid packaging line adopted by major clinical networks.',
-      image: '/assets/Screenshot 2026-06-21 114234.png',
-      align: 'left'
+      icon: <Briefcase size={22} />,
+      title: 'Regulatory & Documentation Support',
+      desc: 'Handling export documentation, product dossiers, country-specific registrations, and compliance requirements for seamless market entry.'
     },
     {
-      year: '2023',
-      title: 'Global Expansion',
-      desc: 'Opened strategic export channels, expanding our supply of life-saving infusions and injections to over 25 countries worldwide.',
-      image: '/assets/Screenshot 2026-06-21 114234.png',
-      align: 'right'
+      icon: <Factory size={22} />,
+      title: 'Contract Manufacturing',
+      desc: 'Facilitating overseas buyers to leverage Realcade\'s manufacturing capacity under private label or contract manufacturing agreements.'
+    },
+    {
+      icon: <Users size={22} />,
+      title: 'Global Business Development',
+      desc: 'Building and managing long-term partnerships with importers, distributors, and government procurement bodies internationally.'
     }
   ];
 
-  const stats = [
-    { value: '500+', label: 'CLINICAL PARTNERS', desc: 'Hospitals and distributors globally' },
-    { value: '99.9%', label: 'STERILITY ASSURANCE', desc: 'Guaranteed by automated BFS lines' },
-    { value: '14', label: 'APPROVED FORMULARY RANGES', desc: 'Therapeutic injection categories' },
-    { value: '24/7', label: 'LOGISTICS SUPPORT', desc: 'Secure temperature-controlled shipping' }
+  const whyAlfacure = [
+    { icon: <Award size={18} />, text: 'Backed by a WHO-GMP Certified Manufacturer with over a decade of proven excellence' },
+    { icon: <ShieldCheck size={18} />, text: 'State-of-the-art Aseptic FFS Technology ensuring sterility and precision in every product' },
+    { icon: <Factory size={18} />, text: 'Two modern manufacturing units in Gujarat with high production capacity' },
+    { icon: <Briefcase size={18} />, text: 'Strong product range across IV Fluids, antibiotics, and antifungal therapeutics' },
+    { icon: <Truck size={18} />, text: 'Commitment to quality, affordability, and timely delivery in every international order' },
+    { icon: <Users size={18} />, text: 'Experienced team handling global pharma trade, export compliance, and market development' }
   ];
 
-  const principles = [
-    {
-      icon: <span style={{ fontSize: '1.25rem', color: 'var(--primary)', fontWeight: 'bold' }}>💡</span>,
-      title: 'Innovation',
-      desc: 'Pioneering R&D to solve the next generation of pharma challenges.'
-    },
-    {
-      icon: <Compass size={20} style={{ color: 'var(--primary)' }} />,
-      title: 'Precision',
-      desc: 'Micron-level accuracy in every sterile formulation.'
-    },
-    {
-      icon: <ShieldCheck size={20} style={{ color: 'var(--primary)' }} />,
-      title: 'Quality',
-      desc: 'Rigorous testing exceeding all international standards.'
-    },
-    {
-      icon: <Cpu size={20} style={{ color: 'var(--primary)' }} />,
-      title: 'Reliability',
-      desc: 'Formulated for clinical trust and chemical stability.'
-    },
-    {
-      icon: <Leaf size={20} style={{ color: 'var(--primary)' }} />,
-      title: 'Sustainability',
-      desc: 'Eco-friendly Blow-Fill-Seal packaging with recyclable polymers.'
-    }
-  ];
-
-  const complianceItems = [
-    { name: 'ISO 9001', label: 'Quality Management' },
-    { name: 'GMP', label: 'Good Manufacturing Practice' },
-    { name: 'CE', label: 'European Conformity' },
-    { name: 'FDA 21', label: 'Part 11 Compliance' }
-  ];
-
-  const regions = {
-    europe: {
-      title: 'Europe Region',
-      locations: ['Zurich, CH (Global HQ)', 'Berlin, DE (Service)', 'Munich, DE (Logistics)']
-    },
-    americas: {
-      title: 'Americas Region',
-      locations: ['New Jersey, USA (Manufacturing)', 'São Paulo, BR (Field Support)']
-    },
-    apac: {
-      title: 'Asia Pacific Region',
-      locations: ['Singapore (R&D / Assembly)', 'Shanghai, CN (Support Hub)']
-    },
-    support: {
-      title: 'Global Support',
-      locations: ['24/7 Remote Telemetry Diagnostics', 'On-Demand Field Service (45 countries)']
-    }
-  };
-
-  const leaders = [
-    {
-      name: 'Dr. Markus Vögele',
-      role: 'CHIEF EXECUTIVE OFFICER',
-      desc: 'A doctorate in Mechanical Engineering with 25 years of experience leading global industrial manufacturing firms.',
-      image: '/assets/ceo_headshot.png'
-    },
-    {
-      name: 'Elena Rossi',
-      role: 'CHIEF TECHNOLOGY OFFICER',
-      desc: 'Pioneer in AI-driven predictive maintenance and automated sterilization systems for medical assembly lines.',
-      image: '/assets/cto_headshot.png'
-    },
-    {
-      name: 'Tan Wei Ming',
-      role: 'HEAD OF MANUFACTURING',
-      desc: 'Specializing in Lean Manufacturing and global supply chain logistics across APAC and European markets.',
-      image: '/assets/mfg_headshot.png'
-    }
+  const manufacturingSpecs = [
+    { label: 'Established', value: '2013' },
+    { label: 'Certification', value: 'WHO-GMP Certified' },
+    { label: 'Unit 1', value: 'Kadi, Mehsana, Gujarat' },
+    { label: 'Unit 2', value: 'Valod, Tapi, Gujarat' },
+    { label: 'Specialization', value: 'Sterile IV Fluids, Aseptic FFS Technology' },
+    { label: 'Product Range', value: 'IV Fluids (100ml–1000ml), Antibiotics, Antifungals, Fluid Therapy' }
   ];
 
   return (
-    <div className="page-container animate-fade-in" style={{ backgroundColor: '#ffffff' }}>
+    <div className="page-container animate-fade-in" style={{ backgroundColor: 'var(--white)' }}>
 
-      {/* 1. Hero Section */}
-      <section className="section" style={{ position: 'relative', overflow: 'hidden', padding: '140px 0 100px 0', borderBottom: '1px solid var(--border)', textAlign: 'left', minHeight: '520px', display: 'flex', alignItems: 'center' }}>
-        {/* Full-width Video Background */}
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          poster="/assets/production_floor.png"
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            zIndex: 0
-          }}
-        >
-          <source src="https://assets.mixkit.co/videos/preview/mixkit-medicine-dripping-from-a-pipette-40156-large.mp4" type="video/mp4" />
-        </video>
-
-        {/* Semi-transparent Light Overlay for maximum legibility */}
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            background: 'linear-gradient(90deg, rgba(255, 255, 255, 0.81) 0%, rgba(255, 255, 255, 0.28) 50%, rgba(255, 255, 255, 0.12) 100%)',
-            zIndex: 1
-          }}
-        >
-        </div>
-
-
-        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <div className="grid grid-cols-12">
-            <div style={{ gridColumn: 'span 7' }}>
-              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--primary)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '16px', display: 'inline-block' }}>
-                PIONEERING PRECISION
+      {/* ─── HERO ─── */}
+      <section
+        className="section"
+        style={{
+          backgroundColor: 'var(--bg-light)',
+          padding: '100px 0 60px 0',
+          borderBottom: '1px solid var(--border)',
+          textAlign: 'left'
+        }}
+      >
+        <div className="container">
+          <div className="grid grid-cols-2 align-center" style={{ gap: '48px' }}>
+            <div>
+              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--green-dark)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '12px', display: 'inline-block' }}>
+                ABOUT ALFACURE LIFESCIENCE
               </span>
-              <h1 style={{ fontSize: '3.125rem', fontWeight: 800, lineHeight: '1.15', color: 'var(--secondary)', marginBottom: '24px', letterSpacing: '-0.02em' }}>
-                Engineering Excellence in Medical Technology
+              <h1 style={{ fontSize: '2.5rem', fontWeight: 800, color: 'var(--blue-dark)', marginBottom: '20px', lineHeight: 1.15 }}>
+                Exclusive Export Company of{' '}
+                <span style={{ color: 'var(--green-dark)' }}>Realcade Lifescience</span>
               </h1>
-              <p style={{ fontSize: '1rem', color: 'var(--text-muted)', marginBottom: '36px', lineHeight: '1.6', maxWidth: '520px' }}>
-                Alfacure Lifescience formulates and supplies high-performance sterile parenterals for the world's leading healthcare systems, ensuring global health standards through formulation mastery.
+              <p style={{ fontSize: '1rem', color: 'var(--blue-light)', lineHeight: 1.65, marginBottom: '28px' }}>
+                Alfacure Lifescience is the exclusive export company of Realcade Lifescience Pvt. Ltd., one of India's leading WHO-GMP certified sterile pharmaceutical manufacturers based in Gujarat, India. We carry Realcade's world-class pharmaceutical products beyond India's borders and into the hands of healthcare providers, hospitals, distributors, and government institutions across global markets.
               </p>
-
-              <div className="flex" style={{ gap: '16px' }}>
-                <button className="btn btn-primary" onClick={() => setCurrentPage('products')}>
-                  OUR CAPABILITIES
+              <div className="flex" style={{ gap: '12px' }}>
+                <button className="btn btn-primary btn-shine" style={{ backgroundColor: 'var(--green-dark)', borderRadius: '6px' }} onClick={() => setCurrentPage('products')}>
+                  View Our Products
                 </button>
-                <button className="btn btn-outline" onClick={() => setCurrentPage('gallery')}>
-                  VIEW FACILITY
+                <button className="btn btn-outline" style={{ borderColor: 'var(--green-dark)', color: 'var(--green-dark)', borderRadius: '6px' }} onClick={() => setCurrentPage('support')}>
+                  Contact Us
                 </button>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* 2. Legacy of Innovation (Timeline) */}
-      <section className="section" style={{ backgroundColor: '#ffffff', borderBottom: '1px solid var(--border)' }}>
-        <div className="container">
-          <div className="section-title-wrapper" style={{ marginBottom: '64px' }}>
-            <h2 className="section-title" style={{ fontSize: '2.25rem', fontWeight: 700, color: 'var(--secondary)' }}>Our Legacy of Innovation</h2>
-            <div style={{ width: '40px', height: '3px', backgroundColor: 'var(--primary)', margin: '12px auto 0 auto' }}></div>
-          </div>
-
-          <div style={{ position: 'relative', maxWidth: '900px', margin: '0 auto', padding: '20px 0' }}>
-            {/* Center vertical line */}
-            <div
-              style={{
-                position: 'absolute',
-                top: 0,
-                bottom: 0,
-                left: '50%',
-                width: '1px',
-                background: 'var(--primary)',
-                transform: 'translateX(-50%)',
-                opacity: 0.3
-              }}
-            ></div>
-
-            {timelineEvents.map((event, idx) => (
-              <div
-                key={event.year}
-                className="grid grid-cols-2"
-                style={{
-                  marginBottom: '64px',
-                  position: 'relative',
-                  alignItems: 'center'
-                }}
-              >
-                {/* Center dot */}
-                <div
-                  style={{
-                    position: 'absolute',
-                    left: '50%',
-                    top: '50%',
-                    width: '10px',
-                    height: '10px',
-                    borderRadius: '50%',
-                    backgroundColor: '#ffffff',
-                    border: '2px solid var(--primary)',
-                    transform: 'translate(-50%, -50%)',
-                    zIndex: 2
-                  }}
-                ></div>
-
-                {/* Content Column */}
-                <div style={{ textAlign: event.align === 'right' ? 'right' : 'left', paddingRight: event.align === 'right' ? '48px' : '0', paddingLeft: event.align === 'right' ? '0' : '48px', gridColumn: event.align === 'right' ? 1 : 2 }}>
-                  <div style={{ fontSize: '2.5rem', fontWeight: 800, color: 'rgba(0, 91, 196, 0.15)', lineHeight: 1, marginBottom: '8px' }}>
-                    {event.year}
-                  </div>
-                  <h3 style={{ fontSize: '1.25rem', color: 'var(--secondary)', marginBottom: '10px', fontWeight: 700 }}>{event.title}</h3>
-                  <p style={{ fontSize: '0.875rem', lineHeight: 1.6, color: 'var(--text-muted)' }}>{event.desc}</p>
-                </div>
-
-                {/* Image Column */}
-                <div style={{ paddingLeft: event.align === 'right' ? '48px' : '0', paddingRight: event.align === 'right' ? '0' : '48px', gridColumn: event.align === 'right' ? 2 : 1 }}>
-                  <div style={{ height: '150px', borderRadius: '8px', overflow: 'hidden', border: '1px solid var(--border)' }}>
-                    <img
-                      src={event.image}
-                      alt={event.title}
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                    />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 3. Uncompromising Production Quality */}
-      <section className="section" style={{ backgroundColor: '#0a1931', color: '#e2e8f0', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '100px 0' }}>
-        <div className="container">
-          <div className="grid grid-cols-2 align-center" style={{ gap: '64px' }}>
-
-            {/* Left Image Stack */}
             <div style={{ position: 'relative' }}>
-              <div
-                style={{
-                  borderRadius: '8px',
-                  overflow: 'hidden',
-                  boxShadow: '0 20px 40px rgba(0,0,0,0.3)',
-                  height: '360px',
-                  border: '1px solid rgba(255,255,255,0.05)'
-                }}
-              >
-                <img
-                  src="/assets/production_floor.png"
-                  alt="Alfacure Sterile Production Floor"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                />
+              <div style={{ borderRadius: '12px', overflow: 'hidden', height: '340px', boxShadow: '0 20px 40px rgba(31,61,90,0.12)', border: '1px solid var(--border)' }}>
+                <img src="/assets/production_floor.png" alt="Alfacure Lifescience Manufacturing" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </div>
-
-              {/* Blue Overlay Card */}
               <div
                 style={{
                   position: 'absolute',
-                  bottom: '-24px',
+                  bottom: '-16px',
                   left: '24px',
-                  padding: '24px 36px',
-                  borderRadius: '6px',
-                  backgroundColor: 'var(--primary)',
-                  boxShadow: '0 10px 25px rgba(0,0,0,0.3)',
-                  textAlign: 'left',
-                  color: '#ffffff'
+                  padding: '16px 24px',
+                  borderRadius: '8px',
+                  backgroundColor: 'var(--blue-dark)',
+                  color: '#ffffff',
+                  boxShadow: '0 8px 20px rgba(31,61,90,0.3)'
                 }}
               >
-                <div style={{ fontSize: '2.5rem', fontWeight: 800, lineHeight: 1 }}>14+</div>
-                <div style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255, 255, 255, 0.7)', marginTop: '4px' }}>
-                  YEARS OF MASTERY
-                </div>
+                <div style={{ fontSize: '1.75rem', fontWeight: 800, lineHeight: 1, color: 'var(--green-light)' }}>2013</div>
+                <div style={{ fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.7)', marginTop: '4px' }}>EST. GUJARAT, INDIA</div>
               </div>
             </div>
-
-            {/* Right Stats and Details */}
-            <div style={{ textAlign: 'left' }}>
-              <h2 style={{ color: '#ffffff', fontSize: '2.25rem', fontWeight: 700, marginBottom: '20px', letterSpacing: '-0.01em' }}>
-                Uncompromising Production Quality
-              </h2>
-              <p style={{ color: '#94a3b8', fontSize: '0.95rem', lineHeight: '1.6', marginBottom: '36px' }}>
-                Our facilities operate at the highest tier of GMP compliance, utilizing automated quality control systems that check 1,200 data points per second.
-              </p>
-
-              {/* Stats Grid */}
-              <div className="grid grid-cols-2" style={{ gap: '24px 32px' }}>
-                {stats.map((stat, i) => (
-                  <div key={i}>
-                    <div style={{ fontSize: '2.25rem', fontWeight: 800, color: '#ffffff', lineHeight: 1.1 }}>
-                      {stat.value}
-                    </div>
-                    <div style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--primary-light)', textTransform: 'uppercase', letterSpacing: '0.05em', margin: '4px 0' }}>
-                      {stat.label}
-                    </div>
-                    <div style={{ fontSize: '0.75rem', color: '#64748b' }}>
-                      {stat.desc}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
           </div>
         </div>
       </section>
 
-      {/* 4. Principles of Performance */}
-      <section className="section" style={{ backgroundColor: '#ffffff', borderBottom: '1px solid var(--border)' }}>
+      {/* ─── VISION & MISSION ─── */}
+      <section className="section" style={{ backgroundColor: 'var(--white)', padding: '80px 0', borderBottom: '1px solid var(--border)' }}>
         <div className="container">
-          <div className="section-title-wrapper" style={{ marginBottom: '48px' }}>
-            <h2 className="section-title" style={{ fontSize: '2.25rem', color: 'var(--secondary)' }}>Principles of Performance</h2>
-            <p className="section-desc" style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginTop: '8px' }}>The five pillars that guide every formulation we mix and every sterile batch we release.</p>
+          <div className="grid grid-cols-2" style={{ gap: '40px' }}>
+            {/* Vision */}
+            <div
+              className="card"
+              style={{
+                padding: '40px 32px',
+                textAlign: 'left',
+                borderTop: '3px solid var(--green-dark)',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '16px'
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '52px', height: '52px', borderRadius: '10px', backgroundColor: 'var(--primary-light)', color: 'var(--green-dark)' }}>
+                <Eye size={24} />
+              </div>
+              <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--blue-dark)' }}>Our Vision</h2>
+              <p style={{ fontSize: '0.9rem', color: 'var(--blue-light)', lineHeight: 1.65 }}>
+                To be a globally recognized pharmaceutical export company, known for delivering safe, effective, and affordable medicines manufactured to the highest international standards — making quality healthcare accessible worldwide.
+              </p>
+            </div>
+
+            {/* Mission */}
+            <div
+              className="card"
+              style={{
+                padding: '40px 32px',
+                textAlign: 'left',
+                borderTop: '3px solid var(--blue-dark)',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '16px'
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '52px', height: '52px', borderRadius: '10px', backgroundColor: 'rgba(31,61,90,0.08)', color: 'var(--blue-dark)' }}>
+                <Target size={24} />
+              </div>
+              <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--blue-dark)' }}>Our Mission</h2>
+              <p style={{ fontSize: '0.9rem', color: 'var(--blue-light)', lineHeight: 1.65 }}>
+                To serve as the trusted global bridge for Realcade Lifescience Pvt. Ltd., ensuring that their WHO-GMP certified pharmaceutical products reach international markets with full regulatory compliance, reliability, and integrity.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── WHAT WE DO ─── */}
+      <section className="section" style={{ backgroundColor: 'var(--bg-light)', padding: '80px 0', borderBottom: '1px solid var(--border)' }}>
+        <div className="container">
+          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+            <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--green-dark)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '12px', display: 'inline-block' }}>
+              OUR SERVICES
+            </span>
+            <h2 style={{ fontSize: '2.25rem', fontWeight: 700, color: 'var(--blue-dark)', marginBottom: '12px' }}>What We Do</h2>
+            <p style={{ fontSize: '0.9rem', color: 'var(--blue-light)', maxWidth: '640px', margin: '0 auto' }}>
+              As the exclusive export arm of Realcade Lifescience, Alfacure Lifescience manages end-to-end international pharmaceutical business.
+            </p>
           </div>
 
-          <div className="grid grid-cols-5" style={{ gap: '20px' }}>
-            {principles.map((pr, i) => (
+          <div className="grid grid-cols-2" style={{ gap: '24px' }}>
+            {whatWeDo.map((item, i) => (
               <div
                 key={i}
                 className="card"
                 style={{
-                  padding: '24px 20px',
+                  padding: '32px 28px',
                   textAlign: 'left',
-                  height: '100%',
                   display: 'flex',
-                  flexDirection: 'column',
-                  border: '1px solid var(--border)',
-                  backgroundColor: '#ffffff',
-                  boxShadow: 'none'
+                  gap: '20px',
+                  alignItems: 'flex-start'
                 }}
               >
-                <div style={{ display: 'flex', padding: '10px', backgroundColor: 'var(--primary-light)', borderRadius: '6px', width: 'fit-content', marginBottom: '20px' }}>
-                  {pr.icon}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '48px', height: '48px', borderRadius: '10px', backgroundColor: 'var(--primary-light)', color: 'var(--green-dark)', flexShrink: 0 }}>
+                  {item.icon}
                 </div>
-                <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--secondary)', marginBottom: '8px' }}>{pr.title}</h3>
-                <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', lineHeight: '1.5' }}>{pr.desc}</p>
+                <div>
+                  <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--blue-dark)', marginBottom: '8px' }}>{item.title}</h3>
+                  <p style={{ fontSize: '0.85rem', color: 'var(--blue-light)', lineHeight: 1.55 }}>{item.desc}</p>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 5. Certified Compliance */}
-      <section className="section" style={{ backgroundColor: '#ffffff', borderBottom: '1px solid var(--border)', padding: '80px 0' }}>
-        <div className="container flex justify-between align-center" style={{ gap: '40px', flexWrap: 'wrap' }}>
-          <div style={{ textAlign: 'left', maxWidth: '400px' }}>
-            <h3 style={{ fontSize: '1.85rem', fontWeight: 700, color: 'var(--secondary)', marginBottom: '12px' }}>Certified Compliance</h3>
-            <p style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>
-              We adhere to the world's most stringent manufacturing and safety standards to protect your production integrity.
-            </p>
-          </div>
-
-          <div className="flex" style={{ gap: '24px', flexWrap: 'wrap', flexGrow: 1, justifyContent: 'flex-end' }}>
-            {complianceItems.map((c, i) => (
-              <div
-                key={i}
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  gap: '12px',
-                  width: '120px',
-                  textAlign: 'center'
-                }}
-              >
-                <div
-                  style={{
-                    width: '72px',
-                    height: '72px',
-                    borderRadius: '50%',
-                    border: '1px solid var(--border)',
-                    backgroundColor: '#ffffff',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontWeight: 700,
-                    fontSize: '0.85rem',
-                    color: 'var(--primary)'
-                  }}
-                >
-                  {c.name}
-                </div>
-                <div style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-muted)' }}>{c.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 6. Our Global Footprint */}
-      <section className="section" style={{ backgroundColor: '#ffffff', borderBottom: '1px solid var(--border)' }}>
+      {/* ─── WHY ALFACURE ─── */}
+      <section className="section" style={{ backgroundColor: 'var(--white)', padding: '80px 0', borderBottom: '1px solid var(--border)' }}>
         <div className="container">
-          <div className="section-title-wrapper" style={{ marginBottom: '48px' }}>
-            <h2 className="section-title" style={{ fontSize: '2.25rem', color: 'var(--secondary)' }}>Our Global Footprint</h2>
-            <p className="section-desc" style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Strategic centers across three continents to provide localized manufacturing and rapid technical response.</p>
-          </div>
+          <div className="grid grid-cols-2 align-center" style={{ gap: '64px' }}>
+            <div style={{ textAlign: 'left' }}>
+              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--green-dark)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '12px', display: 'inline-block' }}>
+                OUR STRENGTHS
+              </span>
+              <h2 style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--blue-dark)', marginBottom: '20px', lineHeight: 1.2 }}>
+                Why Alfacure Lifescience?
+              </h2>
+              <p style={{ fontSize: '0.9rem', color: 'var(--blue-light)', lineHeight: 1.6, marginBottom: '28px' }}>
+                With over a decade of manufacturing excellence and a clear commitment to quality and compliance, Alfacure Lifescience stands as a trusted partner for international pharmaceutical distribution.
+              </p>
 
-          {/* Footprint Box */}
-          <div style={{ border: '1px solid var(--border)', borderRadius: '8px', padding: '36px', maxWidth: '900px', margin: '0 auto', backgroundColor: '#ffffff' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-
-              {/* Graphic Map representing global footprint */}
-              <div style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '240px', backgroundColor: '#ffffff', borderRadius: '6px' }}>
-                <div style={{ position: 'absolute', width: '180px', height: '180px', borderRadius: '50%', border: '4px dashed rgba(0, 91, 196, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <span style={{ color: 'var(--text-light)', fontSize: '0.7rem', fontWeight: 600 }}>Interactive Map Representation</span>
-                </div>
-                {/* Dots mimicking the screenshot */}
-                <div style={{ position: 'absolute', top: '35%', left: '25%', width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--primary)' }}></div>
-                <div style={{ position: 'absolute', top: '25%', left: '30%', width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--primary)' }}></div>
-                <div style={{ position: 'absolute', top: '40%', left: '35%', width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--primary)' }}></div>
-                <div style={{ position: 'absolute', top: '50%', left: '72%', width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--primary)' }}></div>
-                <div style={{ position: 'absolute', top: '60%', left: '78%', width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--primary)' }}></div>
-              </div>
-
-              {/* Region Links */}
-              <div className="grid grid-cols-4" style={{ gap: '20px', borderTop: '1px solid var(--border)', paddingTop: '24px', textAlign: 'left' }}>
-                {Object.keys(regions).map((key) => (
-                  <div key={key}>
-                    <h4
-                      onClick={() => setActiveTab(key)}
-                      style={{
-                        fontSize: '0.85rem',
-                        fontWeight: 700,
-                        color: 'var(--primary)',
-                        textTransform: 'uppercase',
-                        marginBottom: '8px',
-                        cursor: 'pointer'
-                      }}
-                    >
-                      {regions[key].title.split(' ')[0]}
-                    </h4>
-                    <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                      {regions[key].locations.map((loc, i) => (
-                        <li key={i}>{loc}</li>
-                      ))}
-                    </ul>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                {whyAlfacure.map((item, i) => (
+                  <div key={i} className="flex" style={{ gap: '12px', alignItems: 'flex-start' }}>
+                    <div style={{ color: 'var(--green-dark)', flexShrink: 0, marginTop: '2px' }}>{item.icon}</div>
+                    <span style={{ fontSize: '0.85rem', color: 'var(--blue-dark)', lineHeight: 1.5 }}>{item.text}</span>
                   </div>
                 ))}
               </div>
+            </div>
 
+            {/* Right: Gallery mosaic */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+              <div style={{ borderRadius: '8px', overflow: 'hidden', height: '180px', border: '1px solid var(--border)' }}>
+                <img src="/assets/clean_hub.png" alt="Cleanroom Facility" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              </div>
+              <div style={{ borderRadius: '8px', overflow: 'hidden', height: '180px', border: '1px solid var(--border)' }}>
+                <img src="/assets/auto_capping.png" alt="Automated Capping" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              </div>
+              <div style={{ borderRadius: '8px', overflow: 'hidden', height: '180px', gridColumn: 'span 2', border: '1px solid var(--border)' }}>
+                <img src="/assets/spectrometric_lab.png" alt="Quality Control Laboratory" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 7. Executive Leadership */}
-      <section className="section" style={{ backgroundColor: '#ffffff', borderBottom: '1px solid var(--border)' }}>
+      {/* ─── MANUFACTURING BACKBONE ─── */}
+      <section className="section" style={{ backgroundColor: 'var(--blue-dark)', padding: '80px 0', color: '#ffffff' }}>
         <div className="container">
-          <div className="section-title-wrapper" style={{ marginBottom: '48px' }}>
-            <h2 className="section-title" style={{ fontSize: '2.25rem', color: 'var(--secondary)' }}>Executive Leadership</h2>
-            <p className="section-desc" style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Guided by decades of expertise in industrial automation and pharmaceutical science.</p>
+          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+            <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--green-light)', letterSpacing: '0.15em', textTransform: 'uppercase', display: 'inline-block', marginBottom: '12px' }}>
+              MANUFACTURING PARTNER
+            </span>
+            <h2 style={{ fontSize: '2.25rem', fontWeight: 700, color: '#ffffff', marginBottom: '16px' }}>
+              Realcade Lifescience Pvt. Ltd.
+            </h2>
+            <p style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.7)', maxWidth: '720px', margin: '0 auto' }}>
+              Established in 2013, Realcade operates advanced manufacturing facilities in Kadi (Mehsana) and Valod (Tapi), Gujarat — specializing in sterile liquids using cutting-edge Aseptic Form-Fill-Seal (FFS) Technology.
+            </p>
           </div>
 
-          <div className="grid grid-cols-3" style={{ gap: '24px' }}>
-            {leaders.map((leader, i) => (
-              <div key={i} style={{ display: 'flex', flexDirection: 'column', textAlign: 'left' }}>
-                <div style={{ height: '260px', overflow: 'hidden', borderRadius: '6px', marginBottom: '16px', border: '1px solid var(--border)' }}>
-                  <img
-                    src={leader.image}
-                    alt={leader.name}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  />
-                </div>
-                <h3 style={{ fontSize: '1rem', color: 'var(--secondary)', fontWeight: 700, marginBottom: '2px' }}>{leader.name}</h3>
-                <div style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '10px' }}>
-                  {leader.role}
-                </div>
-                <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', lineHeight: '1.5' }}>{leader.desc}</p>
-              </div>
-            ))}
+          {/* Specs Table */}
+          <div style={{ maxWidth: '700px', margin: '0 auto' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem' }}>
+              <tbody>
+                {manufacturingSpecs.map((spec, i) => (
+                  <tr key={i} style={{ borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+                    <td style={{ padding: '16px 20px', fontWeight: 700, color: 'var(--green-light)', textTransform: 'uppercase', fontSize: '0.75rem', letterSpacing: '0.05em', width: '180px' }}>
+                      {spec.label}
+                    </td>
+                    <td style={{ padding: '16px 20px', color: '#ffffff', fontWeight: 600 }}>
+                      {spec.value}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </section>
 
-      {/* 8. Optimize Your Supply Chain CTA */}
-      <section className="section" style={{ backgroundColor: '#ffffff', padding: '60px 0 100px 0' }}>
+      {/* ─── CONTACT INFO ─── */}
+      <section className="section" style={{ backgroundColor: 'var(--white)', padding: '80px 0' }}>
         <div className="container">
           <div
             style={{
-              background: 'var(--primary)',
-              color: '#ffffff',
+              background: 'linear-gradient(135deg, var(--green-dark) 0%, var(--blue-dark) 100%)',
               borderRadius: '16px',
-              padding: '60px 48px',
-              textAlign: 'center'
+              padding: '56px 48px',
+              color: '#ffffff',
+              position: 'relative',
+              overflow: 'hidden'
             }}
           >
-            <h2 style={{ color: '#ffffff', fontSize: '2.25rem', fontWeight: 700, marginBottom: '16px' }}>Optimize Your Supply Chain</h2>
-            <p style={{ color: 'rgba(255, 255, 255, 0.85)', fontSize: '0.95rem', marginBottom: '32px', maxWidth: '640px', margin: '0 auto' }}>
-              Consult with our relations team to design a custom supply cycle tailored to your specific pharmaceutical requirements.
-            </p>
-            <div className="flex" style={{ gap: '16px', justifyContent: 'center' }}>
-              <button className="btn btn-white" onClick={() => setCurrentPage('support')}>REQUEST A CONSULTATION</button>
-              <button className="btn btn-white-outline" onClick={() => setCurrentPage('products')}>DOWNLOAD TECHNICAL SPECS</button>
+            <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '160px', height: '160px', borderRadius: '50%', border: '1px solid rgba(255,255,255,0.1)' }} />
+
+            <div className="grid grid-cols-2 align-center" style={{ gap: '48px', position: 'relative', zIndex: 2 }}>
+              <div style={{ textAlign: 'left' }}>
+                <h2 style={{ color: '#ffffff', fontSize: '2rem', fontWeight: 700, marginBottom: '16px' }}>
+                  Get in Touch
+                </h2>
+                <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.95rem', lineHeight: 1.6, marginBottom: '24px' }}>
+                  For export inquiries, product information, and partnership opportunities, reach out to us.
+                </p>
+                <button
+                  className="btn btn-shine"
+                  style={{ backgroundColor: '#ffffff', color: 'var(--blue-dark)', fontWeight: 700, border: 'none', cursor: 'pointer', padding: '12px 28px', borderRadius: '6px' }}
+                  onClick={() => setCurrentPage('support')}
+                >
+                  Contact Our Team <ArrowRight size={14} style={{ marginLeft: '4px' }} />
+                </button>
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                <div className="flex align-center" style={{ gap: '12px' }}>
+                  <Phone size={18} style={{ color: 'var(--green-light)', flexShrink: 0 }} />
+                  <span style={{ fontWeight: 600 }}>+91 98795 00383</span>
+                </div>
+                <div className="flex" style={{ gap: '12px', alignItems: 'flex-start' }}>
+                  <MapPin size={18} style={{ color: 'var(--green-light)', flexShrink: 0, marginTop: '2px' }} />
+                  <span style={{ fontSize: '0.9rem', lineHeight: 1.5 }}>
+                    Office 1122, Satyamev Shivalik, Bopal Ambili Junction, Sardar Patel Ring Road, Ahmedabad – 380058, Gujarat, India
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>

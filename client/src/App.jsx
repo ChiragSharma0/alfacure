@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import Home from './pages/Home';
 import About from './pages/About';
 import Products from './pages/Products';
 import ProductDetail from './pages/ProductDetail';
@@ -9,19 +10,18 @@ import Support from './pages/Support';
 import './App.css';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('about');
-  const [selectedProductId, setSelectedProductId] = useState(1); // Default to first product
+  const [currentPage, setCurrentPage] = useState('home');
+  const [selectedProductId, setSelectedProductId] = useState(1);
 
   // Handle deep-linking via URL hash
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.replace('#', '');
-      const validPages = ['about', 'products', 'detail', 'gallery', 'support'];
+      const validPages = ['home', 'about', 'products', 'detail', 'gallery', 'support'];
       if (hash && validPages.includes(hash)) {
         setCurrentPage(hash);
       } else {
-        // Default route
-        setCurrentPage('about');
+        setCurrentPage('home');
       }
     };
 
@@ -34,6 +34,8 @@ function App() {
 
   const renderPage = () => {
     switch (currentPage) {
+      case 'home':
+        return <Home setCurrentPage={setCurrentPage} />;
       case 'about':
         return <About setCurrentPage={setCurrentPage} />;
       case 'products':
@@ -45,7 +47,7 @@ function App() {
       case 'support':
         return <Support setCurrentPage={setCurrentPage} />;
       default:
-        return <About setCurrentPage={setCurrentPage} />;
+        return <Home setCurrentPage={setCurrentPage} />;
     }
   };
 
