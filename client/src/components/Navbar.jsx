@@ -45,18 +45,18 @@ export default function Navbar({ currentPage, setCurrentPage }) {
         transition: 'all 0.3s ease'
       }}
     >
-      <div className="container flex justify-between align-center" style={{ position: 'relative', width: '100%' }}>
+      <div className="container flex justify-between align-center" style={{ position: 'relative', width: '100%',height:'100%' }}>
         {/* Brand */}
         <a
           href="#home"
           className="flex align-center"
-          style={{ gap: '10px' }}
+          style={{ gap: '10px',height:'100%' }}
           onClick={(e) => {
             e.preventDefault();
             handleNavClick('home');
           }}
         >
-          <Logo width="200" height="50" />
+          <img src="/assets/logo.png" alt="Logo"  style={{height:'100%'}}/>
         </a>
 
         {/* Desktop Navigation Links */}
