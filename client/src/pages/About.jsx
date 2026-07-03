@@ -1,7 +1,9 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Target, Eye, Briefcase, Globe, Factory, ShieldCheck, CheckCircle, ArrowRight, MapPin, Phone, Building2, Award, Users, Truck } from 'lucide-react';
 
-export default function About({ setCurrentPage }) {
+export default function About() {
+  const navigate = useNavigate();
 
   const whatWeDo = [
     {
@@ -71,10 +73,10 @@ export default function About({ setCurrentPage }) {
                 Alfacure Lifescience is the exclusive export company of Realcade Lifescience Pvt. Ltd., one of India's leading WHO-GMP certified sterile pharmaceutical manufacturers based in Gujarat, India. We carry Realcade's world-class pharmaceutical products beyond India's borders and into the hands of healthcare providers, hospitals, distributors, and government institutions across global markets.
               </p>
               <div className="flex" style={{ gap: '12px' }}>
-                <button className="btn btn-primary btn-shine" style={{ backgroundColor: 'var(--green-dark)', borderRadius: '6px' }} onClick={() => setCurrentPage('products')}>
+                <button className="btn btn-primary btn-shine" style={{ backgroundColor: 'var(--green-dark)', borderRadius: '6px' }} onClick={() => navigate('/products')}>
                   View Our Products
                 </button>
-                <button className="btn btn-outline" style={{ borderColor: 'var(--green-dark)', color: 'var(--green-dark)', borderRadius: '6px' }} onClick={() => setCurrentPage('support')}>
+                <button className="btn btn-outline" style={{ borderColor: 'var(--green-dark)', color: 'var(--green-dark)', borderRadius: '6px' }} onClick={() => navigate('/support')}>
                   Contact Us
                 </button>
               </div>
@@ -294,7 +296,7 @@ export default function About({ setCurrentPage }) {
                 <button
                   className="btn btn-shine"
                   style={{ backgroundColor: '#ffffff', color: 'var(--blue-dark)', fontWeight: 700, border: 'none', cursor: 'pointer', padding: '12px 28px', borderRadius: '6px' }}
-                  onClick={() => setCurrentPage('support')}
+                  onClick={() => navigate('/support')}
                 >
                   Contact Our Team <ArrowRight size={14} style={{ marginLeft: '4px' }} />
                 </button>

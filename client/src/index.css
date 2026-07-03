@@ -531,3 +531,208 @@ p {
 .animate-fade-in {
   animation: fadeInUp 0.5s ease-out forwards;
 }
+
+/* ===========================
+   NAVBAR RESPONSIVE
+=========================== */
+
+.mobile-nav-toggle{
+    display:none;
+    background:none;
+    border:none;
+    cursor:pointer;
+}
+
+@media (max-width:900px){
+
+    .header-wrapper{
+        height:70px;
+    }
+
+    .nav-links{
+        display:none !important;
+    }
+
+    .mobile-nav-toggle{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    }
+
+    .container{
+        padding:0 16px;
+    }
+
+    .header-wrapper img{
+        height:48px !important;
+        width:auto;
+    }
+
+    .btn{
+        padding:10px 18px;
+        font-size:.8rem;
+    }
+}
+
+@media (max-width:600px){
+
+    .header-wrapper{
+        height:64px;
+    }
+
+    .header-wrapper img{
+        height:40px !important;
+    }
+
+    .btn{
+        padding:8px 14px;
+        font-size:.75rem;
+    }
+}
+
+/* ===========================
+   HERO SECTION
+=========================== */
+
+.hero-title{
+    font-size:3.25rem;
+    font-weight:800;
+    line-height:1.12;
+    color:#ffffff;
+    letter-spacing:-0.02em;
+    margin-bottom:24px;
+}
+
+.hero-text{
+    font-size:1.1rem;
+    color:rgba(255,255,255,0.85);
+    line-height:1.65;
+    margin-bottom:40px;
+    max-width:560px;
+}
+
+@media(max-width:992px){
+    .hero-title{ font-size:2.6rem; }
+    .hero-text{ font-size:1rem; }
+}
+
+@media(max-width:768px){
+    .hero-title{ font-size:2rem; line-height:1.2; }
+    .hero-text{ font-size:.95rem; }
+}
+
+@media(max-width:480px){
+    .hero-title{ font-size:1.7rem; }
+}
+
+/* ===========================
+   HERO BUTTONS
+=========================== */
+
+.hero-buttons{
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+}
+
+@media(max-width:600px){
+    .hero-buttons{ flex-direction:column; }
+    .hero-buttons .btn{ width:100%; }
+}
+
+/* ===========================
+   STATS GRID
+=========================== */
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+}
+
+.stat-card{
+    text-align:center;
+    padding:32px 24px;
+}
+
+@media(max-width:900px){
+    .stats-grid{ grid-template-columns:repeat(2,1fr); }
+    .stat-card{
+        border-right:none !important;
+        border-bottom:1px solid rgba(255,255,255,.12);
+    }
+}
+
+@media(max-width:500px){
+    .stats-grid{ grid-template-columns:1fr; }
+    .stat-card{ padding:26px 18px; }
+}
+
+/* ===========================
+   CTA BANNER
+=========================== */
+
+.cta-banner{
+    padding:64px 48px;
+    background:linear-gradient(135deg,var(--green-dark) 0%,var(--blue-dark) 100%);
+    color:#ffffff;
+    border-radius:16px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+}
+
+@media(max-width:768px){
+    .cta-banner{ padding:40px 24px; }
+}
+
+@media(max-width:480px){
+    .cta-banner{ padding:30px 18px; }
+}
+
+/* ===========================
+   ABOUT IMAGE
+=========================== */
+
+.about-image{
+    height:380px;
+}
+
+@media(max-width:768px){
+    .about-image{ height:250px; }
+}
+@media(max-width:380px){
+    .contact-buttn{ flex-direction: column; }
+    .quotebtn{
+        display: none;
+    }
+    
+}
+
+/* ===========================
+   CERTIFICATIONS BADGE GRID
+=========================== */
+
+.cert-badges-grid{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+}
+
+@media(max-width:900px){
+    .cert-badges-grid{ grid-template-columns:repeat(3,1fr); }
+}
+
+@media(max-width:500px){
+    .cert-badges-grid{ grid-template-columns:repeat(2,1fr); }
+}
+
+/* ===========================
+   CERT CARD THUMBNAIL HOVER
+=========================== */
+
+.cert-thumb-overlay:hover{
+    background:rgba(13,3,68,0.45) !important;
+}
+
+.cert-thumb-overlay:hover .cert-zoom-icon{
+    opacity:1 !important;
+}

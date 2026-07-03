@@ -1,12 +1,24 @@
 import React from 'react';
-import { Globe, Phone, MapPin, Mail } from 'lucide-react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { Phone, MapPin } from 'lucide-react';
 
-export default function Footer({ setCurrentPage }) {
-  const handleLinkClick = (pageId, e) => {
-    e.preventDefault();
-    setCurrentPage(pageId);
+export default function Footer() {
+  const navigate = useNavigate();
+
+  const handleClick = (path) => {
+    navigate(path);
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    window.location.hash = pageId;
+  };
+
+  const linkStyle = {
+    color: '#94a3b8',
+    cursor: 'pointer',
+    background: 'none',
+    border: 'none',
+    padding: 0,
+    fontSize: 'inherit',
+    textAlign: 'left',
+    textDecoration: 'none',
   };
 
   return (
@@ -17,7 +29,7 @@ export default function Footer({ setCurrentPage }) {
         color: 'rgba(255,255,255,0.7)',
         padding: '60px 0 24px 0',
         marginTop: 'auto',
-        fontSize: '0.875rem'
+        fontSize: '0.875rem',
       }}
     >
       <div className="container">
@@ -30,7 +42,7 @@ export default function Footer({ setCurrentPage }) {
                 fontFamily: 'var(--font-heading)',
                 fontWeight: 800,
                 color: '#ffffff',
-                marginBottom: '4px'
+                marginBottom: '4px',
               }}
             >
               Alfacure Lifescience
@@ -51,10 +63,10 @@ export default function Footer({ setCurrentPage }) {
           <div className="footer-col">
             <h4 style={{ color: '#ffffff' }}>Company</h4>
             <ul>
-              <li><a href="#home" onClick={(e) => handleLinkClick('home', e)}>Home</a></li>
-              <li><a href="#about" onClick={(e) => handleLinkClick('about', e)}>About Us</a></li>
-              <li><a href="#gallery" onClick={(e) => handleLinkClick('gallery', e)}>Facility Gallery</a></li>
-              <li><a href="#about" onClick={(e) => handleLinkClick('about', e)}>Our Vision</a></li>
+              <li><a style={linkStyle} onClick={() => handleClick('/')}>Home</a></li>
+              <li><a style={linkStyle} onClick={() => handleClick('/about')}>About Us</a></li>
+              <li><a style={linkStyle} onClick={() => handleClick('/gallery')}>Facility Gallery</a></li>
+              <li><a style={linkStyle} onClick={() => handleClick('/certifications')}>Certifications</a></li>
             </ul>
           </div>
 
@@ -62,27 +74,53 @@ export default function Footer({ setCurrentPage }) {
           <div className="footer-col">
             <h4 style={{ color: '#ffffff' }}>Products</h4>
             <ul>
-              <li><a href="#products" onClick={(e) => handleLinkClick('products', e)}>IV Fluids</a></li>
-              <li><a href="#products" onClick={(e) => handleLinkClick('products', e)}>Antibiotic Injectables</a></li>
-              <li><a href="#products" onClick={(e) => handleLinkClick('products', e)}>Antifungal Infusions</a></li>
-              <li><a href="#products" onClick={(e) => handleLinkClick('products', e)}>Full Catalog</a></li>
+              <li><a style={linkStyle} onClick={() => handleClick('/products')}>IV Fluids</a></li>
+              <li><a style={linkStyle} onClick={() => handleClick('/products')}>Antibiotic Injectables</a></li>
+              <li><a style={linkStyle} onClick={() => handleClick('/products')}>Antifungal Infusions</a></li>
+              <li><a style={linkStyle} onClick={() => handleClick('/products')}>Full Catalog</a></li>
             </ul>
           </div>
 
           {/* Support Col */}
           <div className="footer-col">
-            <h4 style={{ color: '#ffffff' }}>Support</h4>
+            <h4 style={{ color: '#ffffff' }}>Legal & Support</h4>
             <ul>
-              <li><a href="#support" onClick={(e) => handleLinkClick('support', e)}>Contact Us</a></li>
-              <li><a href="#support" onClick={(e) => handleLinkClick('support', e)}>Export Inquiries</a></li>
-              <li><a href="#support" onClick={(e) => handleLinkClick('support', e)}>Request Quote</a></li>
-              <li><a href="#about" onClick={(e) => handleLinkClick('about', e)}>Certifications</a></li>
+              <li><a style={linkStyle} onClick={() => handleClick('/support')}>Contact Us</a></li>
+              <li><a style={linkStyle} onClick={() => handleClick('/support')}>Export Inquiries</a></li>
+              <li><a style={linkStyle} onClick={() => handleClick('/legal')}>Terms of Use</a></li>
+              <li><a style={linkStyle} onClick={() => handleClick('/legal')}>Privacy Policy</a></li>
             </ul>
           </div>
         </div>
 
         <div className="footer-bottom" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-          <p style={{ color: 'rgba(255,255,255,0.4)' }}>© 2025 Alfacure Lifescience Pvt. Ltd. All rights reserved.</p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+            <p style={{ color: 'rgba(255,255,255,0.4)', margin: 0 }}>
+              © 2025 Alfacure Lifescience Pvt. Ltd. All rights reserved.
+            </p>
+            <div style={{ display: 'flex', gap: '16px', fontSize: '0.78rem' }}>
+              <a
+                style={{ ...linkStyle, color: 'rgba(255,255,255,0.3)', fontSize: '0.78rem' }}
+                onClick={() => handleClick('/legal')}
+              >
+                Terms of Use
+              </a>
+              <span style={{ color: 'rgba(255,255,255,0.2)' }}>·</span>
+              <a
+                style={{ ...linkStyle, color: 'rgba(255,255,255,0.3)', fontSize: '0.78rem' }}
+                onClick={() => handleClick('/legal')}
+              >
+                Privacy Policy
+              </a>
+              <span style={{ color: 'rgba(255,255,255,0.2)' }}>·</span>
+              <a
+                style={{ ...linkStyle, color: 'rgba(255,255,255,0.3)', fontSize: '0.78rem' }}
+                onClick={() => handleClick('/certifications')}
+              >
+                Certifications
+              </a>
+            </div>
+          </div>
           <div className="flex align-center" style={{ gap: '16px', fontSize: '0.8rem', color: 'rgba(255,255,255,0.4)' }}>
             <div className="flex align-center" style={{ gap: '6px' }}>
               <Phone size={12} style={{ color: 'var(--green-light)' }} />
@@ -95,7 +133,7 @@ export default function Footer({ setCurrentPage }) {
                   height: '6px',
                   backgroundColor: 'var(--green-dark)',
                   borderRadius: '50%',
-                  display: 'inline-block'
+                  display: 'inline-block',
                 }}
               />
               <span>WHO-GMP Certified</span>

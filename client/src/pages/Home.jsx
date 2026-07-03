@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Shield, Globe, Beaker, Factory, CheckCircle, ChevronRight, Droplets, Pill, Syringe } from 'lucide-react';
 
-export default function Home({ setCurrentPage }) {
+export default function Home() {
+  const navigate = useNavigate();
   const [visibleStats, setVisibleStats] = useState(false);
 
   useEffect(() => {
@@ -112,38 +114,23 @@ export default function Home({ setCurrentPage }) {
             </div>
 
             <h1
-              className="animate-fade-in-up"
-              style={{
-                fontSize: '3.25rem',
-                fontWeight: 800,
-                lineHeight: 1.12,
-                color: '#ffffff',
-                letterSpacing: '-0.02em',
-                marginBottom: '24px',
-                animationDelay: '0.1s'
-              }}
+              className="hero-title animate-fade-in-up"
+              style={{ animationDelay: '0.1s' }}
             >
               World-Class Sterile <br />
-              <span style={{ color: '#7FA18A' }}>Pharmaceutical Solutions</span>
+              <span style={{ color: '#49a867ff' }}>Pharmaceutical Solutions</span>
             </h1>
 
             <p
-              className="animate-fade-in-up"
-              style={{
-                fontSize: '1.1rem',
-                color: 'rgba(255,255,255,0.85)',
-                lineHeight: 1.65,
-                marginBottom: '40px',
-                maxWidth: '560px',
-                animationDelay: '0.2s'
-              }}
+              className="hero-text animate-fade-in-up"
+              style={{ animationDelay: '0.2s' }}
             >
               Alfacure Lifescience is the exclusive export company of Realcade Lifescience Pvt. Ltd., delivering WHO-GMP certified parenteral formulations to healthcare providers across 25+ countries.
             </p>
 
             <div
-              className="animate-fade-in-up flex"
-              style={{ gap: '16px', flexWrap: 'wrap', animationDelay: '0.3s' }}
+              className="hero-buttons animate-fade-in-up"
+              style={{ animationDelay: '0.3s' }}
             >
               <button
                 className="btn btn-primary btn-shine"
@@ -154,7 +141,7 @@ export default function Home({ setCurrentPage }) {
                   borderRadius: '6px',
                   boxShadow: '0 4px 14px rgba(77, 111, 90, 0.4)'
                 }}
-                onClick={() => setCurrentPage('products')}
+                onClick={() => navigate('/products')}
               >
                 Explore Our Products <ArrowRight size={16} style={{ marginLeft: '4px' }} />
               </button>
@@ -168,7 +155,7 @@ export default function Home({ setCurrentPage }) {
                   fontSize: '0.9rem',
                   borderRadius: '6px'
                 }}
-                onClick={() => setCurrentPage('about')}
+                onClick={() => navigate('/about')}
               >
                 About Us
               </button>
@@ -188,19 +175,12 @@ export default function Home({ setCurrentPage }) {
         }}
       >
         <div className="container">
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(4, 1fr)',
-              gap: '0'
-            }}
-          >
+          <div className="stats-grid">
             {stats.map((stat, i) => (
               <div
                 key={i}
+                className="stat-card"
                 style={{
-                  padding: '32px 24px',
-                  textAlign: 'center',
                   borderRight: i < 3 ? '1px solid rgba(255,255,255,0.1)' : 'none',
                   opacity: visibleStats ? 1 : 0,
                   transform: visibleStats ? 'translateY(0)' : 'translateY(16px)',
@@ -251,7 +231,7 @@ export default function Home({ setCurrentPage }) {
                   borderTop: '3px solid var(--green-dark)',
                   cursor: 'pointer'
                 }}
-                onClick={() => setCurrentPage(cap.link)}
+                onClick={() => navigate('/products')}
               >
                 <div
                   style={{
@@ -299,10 +279,10 @@ export default function Home({ setCurrentPage }) {
             {/* Left — Image Stack */}
             <div style={{ position: 'relative' }}>
               <div
+                className="about-image"
                 style={{
                   borderRadius: '12px',
                   overflow: 'hidden',
-                  height: '380px',
                   border: '1px solid var(--border)',
                   boxShadow: '0 20px 40px rgba(31,61,90,0.12)'
                 }}
@@ -367,7 +347,7 @@ export default function Home({ setCurrentPage }) {
                   backgroundColor: 'var(--green-dark)',
                   borderRadius: '6px'
                 }}
-                onClick={() => setCurrentPage('about')}
+                onClick={() => navigate('/about')}
               >
                 Learn More About Us <ArrowRight size={14} style={{ marginLeft: '4px' }} />
               </button>
@@ -430,17 +410,7 @@ export default function Home({ setCurrentPage }) {
       {/* ─── CTA BANNER ─── */}
       <section className="section" style={{ backgroundColor: 'var(--white)', padding: '80px 0' }}>
         <div className="container">
-          <div
-            style={{
-              background: 'linear-gradient(135deg, var(--green-dark) 0%, var(--blue-dark) 100%)',
-              color: '#ffffff',
-              borderRadius: '16px',
-              padding: '64px 48px',
-              textAlign: 'center',
-              position: 'relative',
-              overflow: 'hidden'
-            }}
-          >
+          <div className="cta-banner">
             {/* Decorative circles */}
             <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '160px', height: '160px', borderRadius: '50%', border: '1px solid rgba(255,255,255,0.1)' }} />
             <div style={{ position: 'absolute', bottom: '-60px', left: '-60px', width: '200px', height: '200px', borderRadius: '50%', border: '1px solid rgba(255,255,255,0.08)' }} />
@@ -451,7 +421,7 @@ export default function Home({ setCurrentPage }) {
             <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: '1rem', marginBottom: '36px', maxWidth: '560px', margin: '0 auto 36px auto', position: 'relative', zIndex: 2 }}>
               For export inquiries, product information, and partnership opportunities — reach out to our global business development team.
             </p>
-            <div className="flex" style={{ gap: '16px', justifyContent: 'center', position: 'relative', zIndex: 2 }}>
+            <div className="flex contact-buttn" style={{ gap: '16px', justifyContent: 'center', position: 'relative', zIndex: 2 }}>
               <button
                 className="btn btn-shine"
                 style={{
@@ -463,7 +433,7 @@ export default function Home({ setCurrentPage }) {
                   border: 'none',
                   cursor: 'pointer'
                 }}
-                onClick={() => setCurrentPage('support')}
+                onClick={() => navigate('/support')}
               >
                 Contact Us
               </button>
@@ -478,7 +448,7 @@ export default function Home({ setCurrentPage }) {
                   borderRadius: '6px',
                   cursor: 'pointer'
                 }}
-                onClick={() => setCurrentPage('products')}
+                onClick={() => navigate('/products')}
               >
                 View Product Catalog
               </button>

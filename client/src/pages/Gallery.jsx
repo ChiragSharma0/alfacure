@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Play, X, Eye, Info, Share2, Globe } from 'lucide-react';
 
-export default function Gallery({ setCurrentPage }) {
+export default function Gallery() {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('all');
   const [videoModal, setVideoModal] = useState({ isOpen: false, title: '', videoUrl: '' });
 
@@ -277,7 +279,7 @@ export default function Gallery({ setCurrentPage }) {
               <h2 className="section-title" style={{ fontSize: '1.75rem', fontWeight: 700, color: 'var(--secondary)', marginBottom: '8px' }}>Operational Walkthroughs</h2>
               <p className="section-desc">Deep dives into our most complex system deployments. Each case study features an immersive video walkthrough.</p>
             </div>
-            <button className="btn btn-outline" onClick={() => setCurrentPage('products')}>
+            <button className="btn btn-outline" onClick={() => navigate('/products')}>
               Browse Product Range
             </button>
           </div>
@@ -349,7 +351,7 @@ export default function Gallery({ setCurrentPage }) {
                     className="btn-link"
                     style={{ fontSize: '0.8rem', background: 'none', border: 'none', cursor: 'pointer', padding: 0, justifyContent: 'flex-start', display: 'flex', alignItems: 'center', gap: '4px' }}
                     onClick={() => {
-                      setCurrentPage('support');
+                      navigate('/support');
                       window.location.hash = 'support';
                     }}
                   >
@@ -370,8 +372,8 @@ export default function Gallery({ setCurrentPage }) {
             Can't visit our facility in person? Join our next interactive virtual tour led by our Chief Engineers. Experience live demonstrations of our sterile formulations cleanroom.
           </p>
           <div className="flex" style={{ gap: '12px', justifyContent: 'center' }}>
-            <button className="btn btn-white" onClick={() => setCurrentPage('support')}>Schedule a Virtual Factory Tour</button>
-            <button className="btn btn-white-outline" onClick={() => setCurrentPage('support')}>Contact Sales Team</button>
+            <button className="btn btn-white" onClick={() => navigate('/support')}>Schedule a Virtual Factory Tour</button>
+            <button className="btn btn-white-outline" onClick={() => navigate('/support')}>Contact Sales Team</button>
           </div>
         </div>
       </section>
