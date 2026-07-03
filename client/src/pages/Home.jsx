@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 import { ArrowRight, Shield, Globe, Beaker, Factory, CheckCircle, ChevronRight, Droplets, Pill, Syringe } from 'lucide-react';
 
 export default function Home() {
@@ -125,7 +125,7 @@ export default function Home() {
               className="hero-text animate-fade-in-up"
               style={{ animationDelay: '0.2s' }}
             >
-              Alfacure Lifescience is the exclusive export company of Realcade Lifescience Pvt. Ltd., delivering WHO-GMP certified parenteral formulations to healthcare providers across 25+ countries.
+              Alfacure Lifescience is the exclusive export company of Realcade Lifescience Pvt. Ltd., delivering <Link to="/certifications">WHO-GMP certified </Link>parenteral formulations to healthcare providers across 25+ countries.
             </p>
 
             <div
