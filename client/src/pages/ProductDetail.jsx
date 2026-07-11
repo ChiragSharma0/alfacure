@@ -113,19 +113,53 @@ const machines = {
   }
 };
 
-const formulationStandards = ['WHO-GMP', 'ISO 9001:2015', 'CE Certified', 'FDA 21 CFR Part 11', 'Global Pharmacopeia', 'ISO 13485 (MD)'];
+const formulationStandards = [
+  'ISO Certified',
+  'CRISIL Certified',
+  'CTD / eCTD / ACTD Documentation',
+  'Certificate of Pharmaceutical Product (COPP)',
+  'Free Sale Certificate (FSC)',
+  'Certificate of Analysis (CoA)'
+];
+
 const formulationAdvantages = [
-  { title: 'High-Purity Formulation', desc: 'Prepared with pyrogen-free active ingredients and tested exhaustively via LAL gel clot methods.' },
-  { title: 'Batch Traceability', desc: 'Barcoded shipping containers and digital records ensure full compliance with global distribution networks.' },
-  { title: 'Aseptic BFS Process', desc: 'Constructed using modern Blow-Fill-Seal molding machines to achieve complete container hermetic isolation.' }
+  {
+    title: 'Comprehensive Product Portfolio',
+    desc: 'A complete range of Large Volume Parenterals including fluid replenishers, electrolytes, antimicrobials, antibiotics, antifungals, and critical care solutions.'
+  },
+  {
+    title: 'Regulatory Expertise',
+    desc: 'Dedicated Regulatory Affairs support with CTD, eCTD, ACTD dossiers, validation data, and country-specific registration assistance.'
+  },
+  {
+    title: 'Global Supply Network',
+    desc: 'Serving healthcare institutions, distributors, and international partners with reliable pharmaceutical solutions.'
+  }
 ];
+
 const formulationWorkflow = [
-  { step: 'Formulation Blending', desc: 'High-purity chemical reactions in sealed pressure vessels' },
-  { step: 'Laminar Filtration', desc: 'Grade A area HEPA filtration to eliminate micron particulates' },
-  { step: 'BFS Mold Forming', desc: 'Liquid molded and containerized in one continuous loop' },
-  { step: 'Verification', desc: 'Automated weight check and light-obscuration particle scan' },
-  { step: 'Logistics', desc: 'Temperature-controlled storage and logistics tracking' }
+  {
+    step: 'Manufacturing',
+    desc: 'Production of sterile Large Volume Parenteral solutions under strict quality standards.'
+  },
+  {
+    step: 'Quality Control',
+    desc: 'Comprehensive quality checks and batch verification processes.'
+  },
+  {
+    step: 'Regulatory Affairs',
+    desc: 'Preparation of CTD, eCTD, and ACTD dossiers for market authorization.'
+  },
+  {
+    step: 'Certification',
+    desc: 'Issuance of CoA, COPP, FSC, and other compliance documents.'
+  },
+  {
+    step: 'Distribution',
+    desc: 'Supply and export to healthcare institutions and global distribution partners.'
+  }
 ];
+
 const formulationFaqs = [
   { q: 'What is the expected shelf life and storage conditions?', a: 'All Alfacure parenteral solutions have a shelf life of 36 months when stored below 30°C. Protect from direct heat and do not freeze.' },
   { q: 'Does the formulation support electrolyte balancing?', a: 'Yes, our infusions (like Ringer Lactate and Saline) are specially balanced to match plasma osmolarity levels for clinical care.' },
@@ -164,17 +198,37 @@ export default function ProductDetail() {
 
   const dosageData = product ? parseComposition(product.composition) : { dosageUnit: '', ingredients: [] };
   const formulationSpecs = product ? [
-    { label: 'Formulation Standard', val: product.purpose === 'Domestic' ? 'IP Pharmacopeia' : 'BP/USP Compliant' },
-    { label: 'Packaging Format', val: 'Sterile BFS PE Container' },
-    { label: 'Sterility Assurance Level', val: 'SAL 10⁻⁶ (Guaranteed)' },
-    { label: 'pH Range Specification', val: product.name.toLowerCase().includes('dextrose') ? '3.5 - 5.5' : '4.5 - 7.0' },
-    { label: 'Osmolarity Class', val: product.name.toLowerCase().includes('dextrose') || product.name.toLowerCase().includes('0.9%') ? 'Isotonic' : 'Therapeutic Infusion' },
-    { label: 'Product Shelf Life', val: '36 Months' }
+    {
+      label: 'Therapeutic Category',
+      val: product.category || 'Large Volume Parenteral'
+    },
+    {
+      label: 'Available Volumes',
+      val: '100 mL, 250 mL, 300 mL, 400 mL, 500 mL, 1000 mL'
+    },
+    {
+      label: 'Regulatory Support',
+      val: 'CTD / eCTD / ACTD Documentation'
+    },
+    {
+      label: 'Certification Support',
+      val: 'COPP, FSC & CoA'
+    },
+    {
+      label: 'Market Coverage',
+      val: product.purpose === 'Domestic'
+        ? 'Domestic Distribution'
+        : 'Domestic & International Markets'
+    },
+    {
+      label: 'Manufacturer',
+      val: 'Alfacure Lifescience Pvt. Ltd.'
+    }
   ] : [];
 
   const activeName = isMachine ? machine.name : (product?.name || '');
-  const activeSubtitle = isMachine ? machine.subtitle : 'Sterile Parenteral Infusion';
-  const activeDesc = isMachine ? machine.desc : 'Alfacure Lifescience large-volume parenteral formulation prepared under absolute aseptic conditions. Formulated using pure USP/IP pharmaceutical ingredients, packaged in durable non-pyrogenic BFS containers.';
+  const activeSubtitle = isMachine ? machine.subtitle   : 'Large Volume Parenteral (LVP)';
+  const activeDesc = isMachine ? machine.desc : 'Premium Large Volume Parenteral formulation developed for modern healthcare institutions and supported by comprehensive regulatory documentation, quality assurance, and global distribution capabilities.';
   const activeSpecs = isMachine ? machine.specs : formulationSpecs;
   const activeStandards = isMachine ? machine.standards : formulationStandards;
   const activeAdvantages = isMachine ? machine.advantages : formulationAdvantages;
@@ -199,7 +253,7 @@ export default function ProductDetail() {
     { id: 'advantages', label: 'Core Advantages' },
     { id: 'workflow', label: 'Process Workflow' },
     { id: 'documentation', label: 'Documentation' },
-    { id: 'faq', label: 'Technical FAQ' },
+    { id: 'faq', label: 'FAQs' },
     { id: 'quote', label: 'Request Quote' }
   ];
 

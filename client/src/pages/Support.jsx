@@ -13,25 +13,25 @@ export default function Support({ setCurrentPage }) {
 
   const contactHubs = [
     {
-      city: 'Alfacure Zurich (Global HQ)',
-      address: 'Technologiepark 14, 8008 Zurich, Switzerland',
-      phone: '+41 44 202 00 00',
-      email: 'hq@alfacure.com',
-      sla: 'Global HQ'
+      name: 'Dhruvi Chavda',
+      role: 'Managing Director',
+      location: 'Ahmedabad, India',
+      phone: '+91 76219 30091',
+      email: 'example@gmail.com', // replace when client sends complete email
     },
     {
-      city: 'Alfacure Americas Hub',
-      address: '100 Main St, Woodbridge, NJ 07095, USA',
-      phone: '+1 732 555 0199',
-      email: 'americas@alfacure.com',
-      sla: 'Americas Support Desk'
+      name: 'Rahul Joshi',
+      role: 'Managing Director',
+      location: 'Ahmedabad, India',
+      phone: '+91 98795 00383',
+      email: 'example@gmail.com', // replace when client sends complete email
     },
     {
-      city: 'Alfacure APAC Hub',
-      address: '10 Biopolis Rd, Chromos, Singapore 138670',
-      phone: '+65 6777 8888',
-      email: 'apac@alfacure.com',
-      sla: 'Asia Pacific Desk'
+      name: 'Dhara Panchal',
+      role: 'Executive Manager',
+      location: 'United Arab Emirates',
+      phone: '+971 55 601 2891',
+      email: 'example@gmail.com', // replace when client sends complete email
     }
   ];
 
@@ -50,11 +50,10 @@ export default function Support({ setCurrentPage }) {
       {/* 1. Header */}
       <section className="section" style={{ backgroundColor: 'var(--bg-white)', padding: '100px 0 60px 0', borderBottom: '1px solid var(--border)', textAlign: 'left' }}>
         <div className="container">
-          <span className="badge badge-blue" style={{ marginBottom: '12px' }}>GLOBAL SUPPLY RELATIONS</span>
+          <span className="badge badge-blue" style={{ marginBottom: '12px' }}>GET IN TOUCH</span>
           <h1 style={{ fontSize: '2.5rem', fontWeight: 800, marginBottom: '20px', color: 'var(--secondary)' }}>Contact & Support</h1>
           <p style={{ fontSize: '1.05rem', maxWidth: '800px', color: 'var(--text-muted)', lineHeight: '1.6' }}>
-            Have questions about our sterile Large Volume Parenterals (LVP), formulations range, or export licensing guidelines? Send us a message or get in touch directly with our business development team.
-          </p>
+            Have questions about our product portfolio, export services, regulatory documentation, or international business opportunities? Get in touch with our team.          </p>
         </div>
       </section>
 
@@ -64,28 +63,40 @@ export default function Support({ setCurrentPage }) {
 
           {/* Left Column: Office Contacts */}
           <div style={{ textAlign: 'left', display: 'flex', flexDirection: 'column', gap: '24px' }}>
-            <h2 style={{ fontSize: '1.65rem', fontWeight: 700, color: 'var(--secondary)' }}>Our Global Hubs</h2>
+            <h2 style={{ fontSize: '1.65rem', fontWeight: 700, color: 'var(--secondary)' }}>Contact Information</h2>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
               {contactHubs.map((hub, idx) => (
                 <div key={idx} className="card" style={{ padding: '24px', backgroundColor: 'var(--bg-white)', display: 'flex', flexDirection: 'column', gap: '12px', border: '1px solid var(--border)', boxShadow: 'none', borderRadius: '8px' }}>
                   <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--primary)', borderBottom: '1px solid var(--border)', paddingBottom: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span>{hub.city}</span>
-                    <span style={{ fontSize: '0.65rem', fontWeight: 700, color: 'var(--primary)', backgroundColor: 'var(--primary-light)', padding: '4px 8px', borderRadius: '4px' }}>{hub.sla}</span>
+                    <span>{hub.name}</span>
+                    <span style={{ fontSize: '0.65rem', fontWeight: 700, color: 'var(--primary)', backgroundColor: 'var(--primary-light)', padding: '4px 8px', borderRadius: '4px' }}>{hub.role}</span>
                   </h3>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '0.85rem' }}>
                     <div className="flex align-center" style={{ gap: '10px' }}>
                       <MapPin size={14} style={{ color: 'var(--primary)', flexShrink: 0 }} />
-                      <span style={{ color: 'var(--text-muted)' }}>{hub.address}</span>
+                      <span style={{ color: 'var(--secondary)', fontWeight: 700 }}>{hub.location}</span>
                     </div>
                     <div className="flex align-center" style={{ gap: '10px' }}>
                       <Phone size={14} style={{ color: 'var(--primary)', flexShrink: 0 }} />
                       <span style={{ color: 'var(--secondary)', fontWeight: 700 }}>{hub.phone}</span>
                     </div>
-                    <div className="flex align-center" style={{ gap: '10px' }}>
-                      <Mail size={14} style={{ color: 'var(--primary)', flexShrink: 0 }} />
-                      <span style={{ color: 'var(--secondary)', fontWeight: 700 }}>{hub.email}</span>
-                    </div>
+                    {hub.email && (
+                      <div className="flex align-center" style={{ gap: '10px' }}>
+                        <Mail
+                          size={14}
+                          style={{ color: 'var(--primary)', flexShrink: 0 }}
+                        />
+                        <span
+                          style={{
+                            color: 'var(--secondary)',
+                            fontWeight: 700
+                          }}
+                        >
+                          {hub.email}
+                        </span>
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
@@ -99,8 +110,7 @@ export default function Support({ setCurrentPage }) {
               <div>
                 <h4 style={{ fontSize: '0.9375rem', color: 'var(--secondary)', fontWeight: 700, marginBottom: '4px' }}>Dossier & Documentation Support</h4>
                 <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', lineHeight: 1.4 }}>
-                  Alfacure provides complete regulatory support. Batch records, Certificates of Analysis (COA), stability data, and export CTD dossiers are provided within 24 hours of batch clearance.
-                </p>
+                  Alfacure provides regulatory and documentation support, including Certificates of Analysis (COA), export documentation, and product dossiers for international business requirements.                </p>
               </div>
             </div>
           </div>
@@ -170,9 +180,9 @@ export default function Support({ setCurrentPage }) {
                       style={{ padding: '8px 12px', fontSize: '0.8125rem' }}
                     >
                       <option value="general">General Business Inquiries</option>
-                      <option value="quote">Request Bulk Specs & Pricing</option>
-                      <option value="export">Export Registration dossiers</option>
-                      <option value="contract">Third-Party Manufacturing</option>
+                      <option value="quote">  Request Product Information & Pricing</option>
+                      <option value="export">  Export Documentation Support</option>
+                      <option value="contract">Contract Manufacturing Inquiry</option>
                     </select>
                   </div>
                 </div>
@@ -182,7 +192,7 @@ export default function Support({ setCurrentPage }) {
                   <textarea
                     required
                     className="form-control"
-                    placeholder="Specify the parenteral formulations you are interested in and details of your distribution network..."
+                    placeholder="Please share your requirements, product interests, and any additional details. Our team will get back to you shortly."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     style={{ padding: '8px 12px', fontSize: '0.8125rem', minHeight: '110px' }}

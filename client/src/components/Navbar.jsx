@@ -23,6 +23,7 @@ export default function Navbar() {
     { path: "/products", label: "Products" },
     { path: "/gallery", label: "Gallery" },
     { path: "/support", label: "Contact" },
+    { path: "/blog", label: "Blog" },
   ];
 
   const handleNavigate = (path) => {

@@ -13,6 +13,8 @@ import Gallery from "./pages/Gallery";
 import Support from "./pages/Support";
 import Certifications from "./pages/Certifications";
 import TermsPolicy from "./pages/TermsPolicy";
+import Blog from "./pages/Blogs";
+import BlogDetail from "./pages/BlogDetail";
 
 function App() {
   return (
@@ -33,6 +35,8 @@ function App() {
           <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/support" element={<Support />} />
+          <Route path="/blog" element={<Blog/>} />
+          <Route path="/blog/:slug" element={<BlogDetail />} />
           <Route path="/certifications" element={<Certifications />} />
           <Route path="/legal" element={<TermsPolicy />} />
         </Routes>
