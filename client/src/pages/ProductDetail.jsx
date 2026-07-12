@@ -236,7 +236,7 @@ export default function ProductDetail() {
       val: product.composition_details || product.composition
     },
     {
-      label: 'Manufacturer',
+      label: 'Exporter',
       val: 'Alfacure Lifescience Pvt. Ltd.'
     }
   ] : [];

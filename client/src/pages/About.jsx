@@ -312,7 +312,7 @@ export default function About() {
               >
                 To be a globally recognized pharmaceutical company, known for
                 delivering safe, effective, and affordable healthcare solutions
-                manufactured to the highest international standards — making quality
+                produced to the highest international standards — making quality
                 healthcare accessible worldwide.
               </p>
             </div>

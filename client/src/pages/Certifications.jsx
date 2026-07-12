@@ -31,7 +31,7 @@ const certificates = [
     certNo: 'ICB/ISO/9001/IN/2023/4421',
     issuedBy: 'ICB Global Certification',
     issuedTo: 'Realcade Lifescience Pvt. Ltd.',
-    scope: 'Manufacture & Export of Sterile Pharmaceuticals',
+    scope: 'Export of Sterile Pharmaceuticals',
     validFrom: '15 Mar 2023',
     validTo: '14 Mar 2026',
     tag: 'ISO 9001',

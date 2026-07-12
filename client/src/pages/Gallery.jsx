@@ -145,7 +145,7 @@ export default function Gallery() {
                   lineHeight: 1.2
                 }}
               >
-                {content?.gallery?.heroTitle || 'Inside Our Manufacturing & Quality Facilities'}
+                {content?.gallery?.heroTitle || 'Inside Our Export & Quality Facilities'}
               </h1>
 
               <p
@@ -158,7 +158,7 @@ export default function Gallery() {
                 }}
               >
                 {content?.gallery?.heroDesc ||
-                  'Explore our production units, quality-control laboratories, cleanroom environments, and manufacturing infrastructure through a curated collection of images.'}
+                  'Explore our partner production units, quality-control laboratories, cleanroom environments, and export infrastructure through a curated collection of images.'}
               </p>
 
               <div

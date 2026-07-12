@@ -92,9 +92,9 @@ export default function Products() {
     },
     {
       icon: <span style={{ fontSize: '1.25rem' }}>🏭</span>,
-      title: 'Contract Mfg.',
-      desc: 'Flexible third-party manufacturing services with modular packaging sizes and customizable active concentration levels.',
-      bullets: ['Custom formulation capabilities', 'Licensed manufacturing agreements', 'Scalable production batches']
+      title: 'Contract Export',
+      desc: 'Flexible third-party export services with modular packaging sizes and customizable active concentration levels.',
+      bullets: ['Custom formulation sourcing', 'Licensed export agreements', 'Scalable supply batches']
     }
   ];
 

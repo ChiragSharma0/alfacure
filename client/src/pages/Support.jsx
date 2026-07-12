@@ -191,7 +191,7 @@ export default function Support({ setCurrentPage }) {
                       <option value="general">General Business Inquiries</option>
                       <option value="quote">  Request Product Information & Pricing</option>
                       <option value="export">  Export Documentation Support</option>
-                      <option value="contract">Contract Manufacturing Inquiry</option>
+                      <option value="contract">Contract Export Inquiry</option>
                     </select>
                   </div>
                 </div>

@@ -129,12 +129,12 @@ function App() {
         industrySolutions: [
           { title: 'Pharmaceutical', desc: 'High-volume formulations and parenteral supply chains meeting international pharmacopeia guidelines for global markets.', bullets: ['WHO-GMP certified production', 'Comprehensive CTD export dossiers', 'Endotoxin-tested pyrogen-free liquids'] },
           { title: 'Hospitals', desc: 'Direct supply of critical large-volume infusions and sterile saline solutions for ICU, clinical wards, and surgery units.', bullets: ['Hanger-ready BFS plastic bottles', 'Double-port leak-proof closure caps', 'Compatible with automated infusion systems'] },
-          { title: 'Contract Mfg.', desc: 'Flexible third-party manufacturing services with modular packaging sizes and customizable active concentration levels.', bullets: ['Custom formulation capabilities', 'Licensed manufacturing agreements', 'Scalable production batches'] }
+          { title: 'Contract Export', desc: 'Flexible third-party export services with modular packaging sizes and customizable active concentration levels.', bullets: ['Custom formulation sourcing', 'Licensed export agreements', 'Scalable supply batches'] }
         ]
       },
       gallery: {
         heroBadge: 'FACILITY GALLERY',
-        heroTitle: 'Inside Our Manufacturing & Quality Facilities',
+        heroTitle: 'Inside Our Export & Quality Facilities',
         heroDesc: 'Take a virtual tour of our state-of-the-art Blow-Fill-Seal (BFS) production halls and spectrometry validation clean hubs.',
         galleryItems: [
           { title: 'Spectrometric Validation Lab', category: 'qc', description: 'Advanced spectrometry clean rooms.', image: 'spectrometric_lab.png', tag: 'QUALITY CONTROL', specs: ['ICP-MS Spectrometer', 'LAL Endotoxin Audits', 'ISO Class 5 Cleanhoods'], size: 'vertical' },
@@ -176,7 +176,7 @@ function App() {
             certNo: 'ICB/ISO/9001/IN/2023/4421',
             issuedBy: 'ICB Global Certification',
             issuedTo: 'Realcade Lifescience Pvt. Ltd.',
-            scope: 'Manufacture & Export of Sterile Pharmaceuticals',
+            scope: 'Export of Sterile Pharmaceuticals',
             validFrom: '15 Mar 2023',
             validTo: '14 Mar 2026',
             tag: 'ISO 9001',
@@ -906,7 +906,7 @@ function AboutSectionEditor({ content, setContent, token, r2PublicUrl }) {
   const whatWeDoLabels = [
     'Global Distribution Expertise',
     'Regulatory & Dossier Support Desk',
-    'Pharmaceutical BFS Manufacturing',
+    'Pharmaceutical BFS Export',
     'Strategic Partner Relations'
   ];
 
@@ -1022,7 +1022,7 @@ function AboutSectionEditor({ content, setContent, token, r2PublicUrl }) {
 
       <div className="section-panel">
         <div className="panel-header">
-          <h2>Manufacturing Technical Specs Table</h2>
+          <h2>Company Technical Specs Table</h2>
         </div>
         <div className="repeater-list">
           {content.about.manufacturingSpecs.map((item, idx) => (
@@ -1218,7 +1218,7 @@ function ProductsSectionEditor({ content, setContent, token, r2PublicUrl }) {
   const industrySolutionsLabels = [
     'Sector Category 1: Pharmaceutical Supply Chain',
     'Sector Category 2: ICU & Ward Direct Hospital Supply',
-    'Sector Category 3: Contract Licensing Manufacturing'
+    'Sector Category 3: Contract Licensing Export'
   ];
 
   return (
@@ -2360,7 +2360,7 @@ function ContactSectionEditor({ content, setContent, token, r2PublicUrl }) {
       </div>
 
       <div className="form-group">
-        <label className="form-label">Manufacturing Plant Address</label>
+        <label className="form-label">Partner Manufacturing Plant Address</label>
         <textarea rows={3} className="form-control" value={content.contact?.plantAddress || ''} onChange={e => updateContactField('plantAddress', e.target.value)} />
       </div>
 

@@ -70,12 +70,12 @@ const defaultContent = {
     industrySolutions: [
       { title: 'Pharmaceutical', desc: 'High-volume formulations and parenteral supply chains meeting international pharmacopeia guidelines for global markets.', bullets: ['WHO-GMP certified production', 'Comprehensive CTD export dossiers', 'Endotoxin-tested pyrogen-free liquids'] },
       { title: 'Hospitals', desc: 'Direct supply of critical large-volume infusions and sterile saline solutions for ICU, clinical wards, and surgery units.', bullets: ['Hanger-ready BFS plastic bottles', 'Double-port leak-proof closure caps', 'Compatible with automated infusion systems'] },
-      { title: 'Contract Mfg.', desc: 'Flexible third-party manufacturing services with modular packaging sizes and customizable active concentration levels.', bullets: ['Custom formulation capabilities', 'Licensed manufacturing agreements', 'Scalable production batches'] }
+      { title: 'Contract Export', desc: 'Flexible third-party export services with modular packaging sizes and customizable active concentration levels.', bullets: ['Custom formulation sourcing', 'Licensed export agreements', 'Scalable supply batches'] }
     ]
   },
   gallery: {
     heroBadge: 'FACILITY GALLERY',
-    heroTitle: 'Inside Our Manufacturing & Quality Facilities',
+    heroTitle: 'Inside Our Export & Quality Facilities',
     heroDesc: 'Take a virtual tour of our state-of-the-art Blow-Fill-Seal (BFS) production halls and spectrometry validation clean hubs.',
     galleryItems: [
       { title: 'Spectrometric Validation Lab', category: 'qc', description: 'Advanced spectrometry clean rooms.', image: 'spectrometric_lab.png', tag: 'QUALITY CONTROL', specs: ['ICP-MS Spectrometer', 'LAL Endotoxin Audits', 'ISO Class 5 Cleanhoods'], size: 'vertical' },
@@ -117,7 +117,7 @@ const defaultContent = {
         certNo: 'ICB/ISO/9001/IN/2023/4421',
         issuedBy: 'ICB Global Certification',
         issuedTo: 'Realcade Lifescience Pvt. Ltd.',
-        scope: 'Manufacture & Export of Sterile Pharmaceuticals',
+        scope: 'Export of Sterile Pharmaceuticals',
         validFrom: '15 Mar 2023',
         validTo: '14 Mar 2026',
         tag: 'ISO 9001',
