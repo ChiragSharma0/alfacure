@@ -1,18 +1,12 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { blogs } from '../data/blogs';
 import { ArrowLeft } from 'lucide-react';
 import { useCMS } from '../context/CMSContext';
 
 export default function BlogDetail() {
   const { slug } = useParams();
   const navigate = useNavigate();
-  const { content, R2_PUBLIC_URL } = useCMS();
-
-  const resolveImage = (img) => {
-    if (!img) return '';
-    if (img.startsWith('http') || img.startsWith('/')) return img;
-    return `${R2_PUBLIC_URL}/${img}`;
-  };
+  const { content, resolveImage } = useCMS();
+  const blogs = content?.blogs || [];
 
   const blog = blogs.find(
     (item) => item.slug === slug

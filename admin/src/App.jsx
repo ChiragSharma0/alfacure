@@ -14,8 +14,11 @@ import {
   Upload,
   Lock,
   Mail,
-  CheckCircle
+  CheckCircle,
+  BookOpen
 } from 'lucide-react';
+import productsData from '../../client/src/data/products.json';
+import { blogs as initialBlogs } from '../../client/src/data/blogs.js';
 import './App.css';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
@@ -62,6 +65,268 @@ function App() {
     }
   };
 
+  const sanitizeFetchedContent = (data) => {
+    const defaultContent = {
+      home: {
+        heroTitle1: 'Premium Large Volume',
+        heroTitle2: 'Parenteral Solutions',
+        heroDesc: 'Alfacure Lifescience Pvt. Ltd. is an Ahmedabad-based pharmaceutical export company specializing in the commercialization and global distribution of life-saving Large Volume Parenteral (LVP) formulations...',
+        stats: [
+          { value: '6', label: 'Pack Sizes', desc: '100 mL to 1000 mL' },
+          { value: 'Global', label: 'Export Markets', desc: 'Germany, UAE, EU & UN' },
+          { value: '2026', label: 'Established', desc: 'Ahmedabad-based enterprise' },
+          { value: 'ISO', label: 'Certified', desc: 'ISO & CRISIL certified' }
+        ],
+        capabilities: [
+          { title: 'Fluid & Electrolyte Solutions', desc: 'Comprehensive LVP solutions including Dextrose Injection, Sodium Chloride, DNS and Ringer Lactate infusions available in multiple volume configurations.' },
+          { title: 'Anti-Infective Infusions', desc: 'High-efficacy antibacterial formulations including Ciprofloxacin, Ofloxacin, Levofloxacin, Moxifloxacin and Linezolid infusions.' },
+          { title: 'Critical Care Products', desc: 'Mannitol, Paracetamol, Fluconazole, Metronidazole, Ornidazole and specialized electrolyte infusions for clinical applications.' }
+        ],
+        trustPoints: [
+          'Specialized LVP export expertise',
+          'Available in 100 mL to 1000 mL variants',
+          'CTD / eCTD / ACTD dossier support',
+          'Global regulatory documentation',
+          'Complete batch traceability & CoA',
+          'ISO & CRISIL certified'
+        ]
+      },
+      about: {
+        heroDesc: 'Alfacure Lifescience Pvt. Ltd. is a premier Ahmedabad-based pharmaceutical company specializing in the manufacturing, commercialization, and global distribution of life-saving therapeutics. With a strong focus on quality, sterility, and regulatory compliance, we deliver high-quality Large Volume Parenteral (LVP) solutions to healthcare institutions, distributors, and international partners across the world.',
+        whatWeDo: [
+          { title: 'Global Distribution', desc: 'Supplying Large Volume Parenterals (LVP), IV fluids, anti-infectives, and critical care formulations to healthcare institutions and distribution partners across domestic and international markets.' },
+          { title: 'Regulatory & Documentation Support', desc: 'Providing end-to-end regulatory assistance including CTD, eCTD, and ACTD dossiers, product registrations, and country-specific compliance documentation.' },
+          { title: 'Pharmaceutical Manufacturing', desc: 'Manufacturing premium sterile Large Volume Parenteral products under stringent quality control standards and advanced pharmaceutical protocols.' },
+          { title: 'Strategic Partnerships', desc: 'Building long-term relationships with importers, distributors, hospitals, and healthcare organizations worldwide.' }
+        ],
+        whyAlfacure: [
+          { title: 'Premium LVP Focus', desc: 'Premium Large Volume Parenteral (LVP) manufacturer established in Ahmedabad, Gujarat.' },
+          { title: 'Certified Organisation', desc: 'ISO and CRISIL certified organization committed to quality, safety, and regulatory compliance.' },
+          { title: 'Diverse Portfolio', desc: 'Comprehensive portfolio of sterile IV fluids, electrolytes, anti-infectives, and critical care products.' },
+          { title: 'Comprehensive Regulatory Support', desc: 'Dedicated Regulatory Affairs team supporting dossiers, registrations, and global market entry.' },
+          { title: 'Supply & Logistics', desc: 'Reliable domestic supply network with expanding international export operations.' },
+          { title: 'Global Mission', desc: 'Focused on delivering affordable, high-quality healthcare solutions worldwide.' }
+        ],
+        manufacturingSpecs: [
+          { label: 'Established', desc: '2026' },
+          { label: 'Certifications', desc: 'ISO & CRISIL Certified' },
+          { label: 'Head Office', desc: 'Office 1122, Satyamev Shivalik, Bopal Ambili Junction, SP Ring Road, Ahmedabad – 380058' },
+          { label: 'Specialization', desc: 'Large Volume Parenterals (LVP) & Sterile IV Solutions' },
+          { label: 'Volume Range', desc: '100 mL, 250 mL, 300 mL, 400 mL, 500 mL & 1000 mL' },
+          { label: 'Product Portfolio', desc: 'IV Fluids, Electrolytes, Mannitol, Antibiotics, Antifungals & Paracetamol Infusions' }
+        ]
+      },
+      products: {
+        heroTag: 'PRECISION FORMULATIONS & SYSTEMS',
+        heroTitle: 'Products & Solutions',
+        heroDesc: 'Explore our comprehensive range of sterile medical parenterals and high-precision Blow-Fill-Seal systems, engineered to meet the highest regulatory standards.',
+        productsData: productsData,
+        machineryItems: [
+          { id: 'pt9000', name: 'PharmaFill 5000 Series', capacity: '5000 units/hr', automation: 'Fully Automatic', isoClass: 'Class 5', image: 'auto_capping.png', status: 'Active' },
+          { id: 'sterilepack', name: 'SterilePack V3', capacity: '3200 units/hr', automation: 'Robotic Auto', isoClass: 'Class 5 (±0.01mm)', image: 'kinetic_sorting.png', status: 'Active' },
+          { id: 'mediflow', name: 'MediFlow IV-200', capacity: '1200 Bags/hr', automation: 'Semi-Automatic', isoClass: 'Class 5 (4.5 kW)', image: 'clean_hub.png', status: 'Active' }
+        ],
+        industrySolutions: [
+          { title: 'Pharmaceutical', desc: 'High-volume formulations and parenteral supply chains meeting international pharmacopeia guidelines for global markets.', bullets: ['WHO-GMP certified production', 'Comprehensive CTD export dossiers', 'Endotoxin-tested pyrogen-free liquids'] },
+          { title: 'Hospitals', desc: 'Direct supply of critical large-volume infusions and sterile saline solutions for ICU, clinical wards, and surgery units.', bullets: ['Hanger-ready BFS plastic bottles', 'Double-port leak-proof closure caps', 'Compatible with automated infusion systems'] },
+          { title: 'Contract Mfg.', desc: 'Flexible third-party manufacturing services with modular packaging sizes and customizable active concentration levels.', bullets: ['Custom formulation capabilities', 'Licensed manufacturing agreements', 'Scalable production batches'] }
+        ]
+      },
+      gallery: {
+        heroBadge: 'FACILITY GALLERY',
+        heroTitle: 'Inside Our Manufacturing & Quality Facilities',
+        heroDesc: 'Take a virtual tour of our state-of-the-art Blow-Fill-Seal (BFS) production halls and spectrometry validation clean hubs.',
+        galleryItems: [
+          { title: 'Spectrometric Validation Lab', category: 'qc', description: 'Advanced spectrometry clean rooms.', image: 'spectrometric_lab.png', tag: 'QUALITY CONTROL', specs: ['ICP-MS Spectrometer', 'LAL Endotoxin Audits', 'ISO Class 5 Cleanhoods'], size: 'vertical' },
+          { title: 'Auto-Capping Matrix v4', category: 'machinery', description: 'Robotic head welding filling machines.', image: 'auto_capping.png', tag: 'MACHINES', specs: ['BFS Technology', 'Robotic Head Welding', 'Grade A Aseptic Zone'], size: 'square' },
+          { title: 'HEPA-Integrated Clean Hub', category: 'cleanrooms', description: 'Modular HEPA filtration layouts.', image: 'clean_hub.png', tag: 'FACILITIES', specs: ['HEPA H14 Airflow', 'Positive Pressure', 'Aseptic Gowning Hub'], size: 'horizontal' }
+        ],
+        caseStudies: [
+          { title: 'BioSync Integrated Pipeline', desc: 'A full-stack automation project for a major biotech partner, integrating 12 robotic units with real-time AI quality checking.', tag: 'AUTOMATION', year: '2026', projCode: 'PROC-BFS-01', reduction: 'Reduced cycle time by 40%', sensors: 'Increased sterilization accuracy', thumbnail: 'biosync_video.png', videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4' },
+          { title: 'Cold-Chain Distribution Hub', desc: 'Design and implementation of a temperature-controlled logistics center. Featuring autonomous ground vehicles and continuous atmospheric monitoring sensors.', tag: 'LOGISTICS', year: '2025', projCode: 'PROC-DIST-03', reduction: '50,000 sq ft logistics', sensors: 'Continuous atmospheric sensors', thumbnail: 'cold_chain_video.png', videoUrl: 'https://www.w3schools.com/html/movie.mp4' }
+        ]
+      },
+      certifications: {
+        heroTitle1: 'Certifications &',
+        heroTitle2: 'Regulatory Approvals',
+        heroDesc: 'Every product we export is backed by internationally recognised certifications, rigorous quality controls, and full regulatory documentation.',
+        qualityBadges: [
+          { title: 'WHO-GMP', subtitle: 'Manufacturing Standard' },
+          { title: 'ISO 9001:2015', subtitle: 'Quality Management' }
+        ],
+        certificates: [
+          {
+            id: 1,
+            title: 'WHO-GMP Certificate',
+            certNo: 'GMP/IN/2024/0847',
+            issuedBy: 'World Health Organization',
+            issuedTo: 'Realcade Lifescience Pvt. Ltd.',
+            scope: 'Sterile Parenteral IV Fluids',
+            validFrom: '01 Jan 2024',
+            validTo: '31 Dec 2026',
+            tag: 'WHO-GMP',
+            tagColor: '#034e1c',
+            status: 'Active',
+            image: 'cert_who_gmp.png',
+            description: 'International WHO Good Manufacturing Practice certification for sterile parenteral manufacturing.',
+          },
+          {
+            id: 2,
+            title: 'ISO 9001:2015 Certificate',
+            certNo: 'ICB/ISO/9001/IN/2023/4421',
+            issuedBy: 'ICB Global Certification',
+            issuedTo: 'Realcade Lifescience Pvt. Ltd.',
+            scope: 'Manufacture & Export of Sterile Pharmaceuticals',
+            validFrom: '15 Mar 2023',
+            validTo: '14 Mar 2026',
+            tag: 'ISO 9001',
+            tagColor: '#1f3d5a',
+            status: 'Active',
+            image: 'cert_iso_9001.png',
+            description: 'Quality Management System certification confirming consistent product quality and continual improvement.',
+          },
+          {
+            id: 3,
+            title: 'Manufacturing Licence — Schedule M',
+            certNo: 'MFG/GJ/2022/STERILE/1047',
+            issuedBy: 'CDSCO — Govt. of India',
+            issuedTo: 'Realcade Lifescience Pvt. Ltd., Unit 1',
+            scope: 'Sterile Large Volume Parenterals',
+            validFrom: '22 Apr 2022',
+            validTo: 'Permanent (subject to renewal)',
+            tag: 'CDSCO',
+            tagColor: '#5a3d1f',
+            status: 'Active',
+            image: 'cert_schedule_m.png',
+            description: 'Central Drugs Standard Control Organisation manufacturing licence under the revised Schedule M.',
+          },
+          {
+            id: 4,
+            title: 'Export Licence — DGFT',
+            certNo: 'DGFT/EXP/PH/2023/GJ/0392',
+            issuedBy: 'DGFT — Ministry of Commerce, India',
+            issuedTo: 'Alfacure Lifescience Pvt. Ltd.',
+            scope: 'Sterile Parenteral Formulations — All Countries',
+            validFrom: '01 Jul 2023',
+            validTo: '30 Jun 2026',
+            tag: 'Export',
+            tagColor: '#3d1f5a',
+            status: 'Active',
+            image: 'cert_export_licence.png',
+            description: 'DGFT export licence authorising Alfacure to export sterile pharmaceutical products globally.',
+          },
+          {
+            id: 5,
+            title: 'Process Validation — Aseptic FFS',
+            certNo: 'PV/FFS/2024/RL/003',
+            issuedBy: 'QA Department — Realcade Lifescience',
+            issuedTo: 'Realcade Lifescience Pvt. Ltd.',
+            scope: 'Aseptic BFS Fill-Finish Lines — SAL 10⁻⁶',
+            validFrom: '08 Feb 2024',
+            validTo: '07 Feb 2027',
+            tag: 'Validation',
+            tagColor: '#1a5a4a',
+            status: 'Active',
+            image: 'cert_ffs_validation.png',
+            description: 'Internal process validation certificate for Aseptic Form-Fill-Seal manufacturing lines achieving SAL 10⁻⁶.',
+          },
+          {
+            id: 6,
+            title: 'Drug Manufacturing Licence — Unit 2',
+            certNo: 'MFG/GJ/TAPI/2023/0218',
+            issuedBy: 'Gujarat State Licensing Authority — FDCA',
+            issuedTo: 'Realcade Lifescience Pvt. Ltd., Unit 2',
+            scope: 'Antibiotic Injectables & Antifungal Infusions',
+            validFrom: '10 Jan 2023',
+            validTo: '09 Jan 2027',
+            tag: 'State Licence',
+            tagColor: '#1f3a5a',
+            status: 'Active',
+            image: 'cert_drug_licence_unit2.png',
+            description: 'Gujarat FDCA drug manufacturing licence for Unit 2 covering antibiotic and antifungal injectable formulations.',
+          }
+        ],
+        regulatoryApprovals: [
+          { region: 'India', body: 'CDSCO', status: 'Active', note: 'Manufacturing Licence' },
+          { region: 'West Africa', body: 'NAFDAC / FDFA', status: 'Active', note: 'Product Registration' },
+          { region: 'East Africa', body: 'KEBS / TMDA', status: 'Active', note: 'Product Registration' },
+          { region: 'Southeast Asia', body: 'FDA (PH) / HSA', status: 'Active', note: 'Dossier Submitted' },
+          { region: 'Middle East', body: 'MOH Gulf States', status: 'Active', note: 'Product Registration' },
+          { region: 'CIS / Central Asia', body: 'Various NRAs', status: 'Active', note: 'CTD Dossier Ready' }
+        ]
+      },
+      contact: {
+        phoneDomestic: '+91 79 4005 1047',
+        phoneExport: '+91 99099 26115',
+        emailGeneral: 'info@alfacure.com',
+        emailExport: 'export@alfacure.com',
+        headOffice: 'Office 1122, Satyamev Shivalik, Bopal Ambili Junction, SP Ring Road, Ahmedabad – 380058, Gujarat, India',
+        plantAddress: 'Realcade Lifescience Pvt. Ltd., Survey No. 248, Opp. GIDC, Kalol-Mehsana Highway, Chhatral, Gandhinagar - 382729, Gujarat, India',
+        mapLink: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.976077531766!2d72.44524451496738!3d23.02467368495204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e84af593f4fff%3A0xe54e3d368e7ec8d2!2sSatyamev%20Shivalik!5e0!3m2!1sen!2sin!4v1679901243102!5m2!1sen!2sin',
+        contactHubs: [
+          {
+            name: 'Dhruvi Chavda',
+            role: 'Managing Director',
+            location: 'Ahmedabad, India',
+            phone: '+91 76219 30091',
+            email: 'info@alfacure.com',
+          },
+          {
+            name: 'Rahul Joshi',
+            role: 'Managing Director',
+            location: 'Ahmedabad, India',
+            phone: '+91 98795 00383',
+            email: 'export@alfacure.com',
+          },
+          {
+            name: 'Dhara Panchal',
+            role: 'Executive Manager',
+            location: 'United Arab Emirates',
+            phone: '+971 55 601 2891',
+            email: 'export@alfacure.com',
+          }
+        ]
+      },
+      blogs: initialBlogs
+    };
+
+    const clean = {
+      home: { ...defaultContent.home, ...data.home },
+      about: { ...defaultContent.about, ...data.about },
+      products: { ...defaultContent.products, ...data.products },
+      gallery: { ...defaultContent.gallery, ...data.gallery },
+      certifications: { ...defaultContent.certifications, ...data.certifications },
+      contact: { ...defaultContent.contact, ...data.contact },
+      blogs: data.blogs || defaultContent.blogs
+    };
+
+    // Migrate strengths
+    if (data.about?.whyAlfacure) {
+      clean.about.whyAlfacure = defaultContent.about.whyAlfacure.map((defItem, idx) => {
+        const dbItem = data.about?.whyAlfacure?.[idx];
+        return {
+          title: dbItem?.title || defItem.title,
+          desc: dbItem?.desc || defItem.desc
+        };
+      });
+      if (clean.about.whyAlfacure[3] && (clean.about.whyAlfacure[3].title === 'Regulatory Desk' || clean.about.whyAlfacure[3].title === 'Regulatory Affairs')) {
+        clean.about.whyAlfacure[3].title = 'Comprehensive Regulatory Support';
+      }
+    }
+
+    // Verify certificates
+    if (!data.certifications?.certificates || data.certifications.certificates.length === 0) {
+      clean.certifications.certificates = defaultContent.certifications.certificates;
+    }
+
+    // Verify contact cards count
+    if (!data.contact?.contactHubs || data.contact.contactHubs.length < 3) {
+      clean.contact.contactHubs = defaultContent.contact.contactHubs;
+    }
+
+    return clean;
+  };
+
   const fetchContent = async () => {
     setLoading(true);
     let data = {};
@@ -78,100 +343,7 @@ function App() {
       setAlertMsg({ type: 'warning', text: 'Backend offline. Using local template.' });
     }
 
-    // Setup initial structure pre-populated with live site JSON data & defaults
-    const sanitized = {
-      home: {
-        heroTitle1: data?.home?.heroTitle1 || 'Premium Large Volume',
-        heroTitle2: data?.home?.heroTitle2 || 'Parenteral Solutions',
-        heroDesc: data?.home?.heroDesc || 'Alfacure Lifescience Pvt. Ltd. is an Ahmedabad-based pharmaceutical export company specializing in the commercialization and global distribution of life-saving Large Volume Parenteral (LVP) formulations...',
-        stats: data?.home?.stats || [
-          { value: '6', label: 'Pack Sizes', desc: '100 mL to 1000 mL' },
-          { value: 'Global', label: 'Export Markets', desc: 'Germany, UAE, EU & UN' },
-          { value: '2026', label: 'Established', desc: 'Ahmedabad-based enterprise' },
-          { value: 'ISO', label: 'Certified', desc: 'ISO & CRISIL certified' }
-        ],
-        capabilities: data?.home?.capabilities || [
-          { title: 'Fluid & Electrolyte Solutions', desc: 'Comprehensive LVP solutions including Dextrose Injection, Sodium Chloride, DNS and Ringer Lactate infusions available in multiple volume configurations.' },
-          { title: 'Anti-Infective Infusions', desc: 'High-efficacy antibacterial formulations including Ciprofloxacin, Ofloxacin, Levofloxacin, Moxifloxacin and Linezolid infusions.' },
-          { title: 'Critical Care Products', desc: 'Mannitol, Paracetamol, Fluconazole, Metronidazole, Ornidazole and specialized electrolyte infusions for clinical applications.' }
-        ],
-        trustPoints: data?.home?.trustPoints || [
-          'Specialized LVP export expertise',
-          'Available in 100 mL to 1000 mL variants',
-          'CTD / eCTD / ACTD dossier support',
-          'Global regulatory documentation',
-          'Complete batch traceability & CoA',
-          'ISO & CRISIL certified'
-        ]
-      },
-      about: {
-        heroDesc: data?.about?.heroDesc || 'Alfacure Lifescience Pvt. Ltd. is a premier Ahmedabad-based pharmaceutical company specializing in the manufacturing, commercialization, and global distribution of life-saving therapeutics. With a strong focus on quality, sterility, and regulatory compliance, we deliver high-quality Large Volume Parenteral (LVP) solutions to healthcare institutions, distributors, and international partners across the world.',
-        whatWeDo: data?.about?.whatWeDo || [
-          { title: 'Global Distribution', desc: 'Supplying Large Volume Parenterals (LVP), IV fluids, anti-infectives, and critical care formulations to healthcare institutions and distribution partners across domestic and international markets.' },
-          { title: 'Regulatory & Documentation Support', desc: 'Providing end-to-end regulatory assistance including CTD, eCTD, and ACTD dossiers, product registrations, and country-specific compliance documentation.' },
-          { title: 'Pharmaceutical Manufacturing', desc: 'Manufacturing premium sterile Large Volume Parenteral products under stringent quality control standards and advanced pharmaceutical protocols.' },
-          { title: 'Strategic Partnerships', desc: 'Building long-term relationships with importers, distributors, hospitals, and healthcare organizations worldwide.' }
-        ],
-        whyAlfacure: data?.about?.whyAlfacure || [
-          { title: 'Premium LVP Focus', desc: 'Premium Large Volume Parenteral (LVP) manufacturer established in Ahmedabad, Gujarat.' },
-          { title: 'Certified Organisation', desc: 'ISO and CRISIL certified organization committed to quality, safety, and regulatory compliance.' },
-          { title: 'Diverse Portfolio', desc: 'Comprehensive portfolio of sterile IV fluids, electrolytes, anti-infectives, and critical care products.' },
-          { title: 'Regulatory Desk', desc: 'Dedicated Regulatory Affairs team supporting dossiers, registrations, and global market entry.' },
-          { title: 'Supply & Logistics', desc: 'Reliable domestic supply network with expanding international export operations.' },
-          { title: 'Global Mission', desc: 'Focused on delivering affordable, high-quality healthcare solutions worldwide.' }
-        ],
-        manufacturingSpecs: data?.about?.manufacturingSpecs || [
-          { label: 'Established', desc: '2026' },
-          { label: 'Certifications', desc: 'ISO & CRISIL Certified' },
-          { label: 'Head Office', desc: 'Office 1122, Satyamev Shivalik, Bopal Ambili Junction, SP Ring Road, Ahmedabad – 380058' },
-          { label: 'Specialization', desc: 'Large Volume Parenterals (LVP) & Sterile IV Solutions' },
-          { label: 'Volume Range', desc: '100 mL, 250 mL, 300 mL, 400 mL, 500 mL & 1000 mL' },
-          { label: 'Product Portfolio', desc: 'IV Fluids, Electrolytes, Mannitol, Antibiotics, Antifungals & Paracetamol Infusions' }
-        ]
-      },
-      products: {
-        heroTag: data?.products?.heroTag || 'PRECISION FORMULATIONS & SYSTEMS',
-        heroTitle: data?.products?.heroTitle || 'Products & Solutions',
-        heroDesc: data?.products?.heroDesc || 'Explore our comprehensive range of sterile medical parenterals and high-precision Blow-Fill-Seal systems, engineered to meet the highest regulatory standards.',
-        productsData: data?.products?.productsData || [],
-        machineryItems: data?.products?.machineryItems || [
-          { id: 'pt9000', name: 'PharmaFill 5000 Series', capacity: '5000 units/hr', automation: 'Fully Automatic', isoClass: 'Class 5', image: 'auto_capping.png', status: 'Active' },
-          { id: 'sterilepack', name: 'SterilePack V3', capacity: '3200 units/hr', automation: 'Robotic Auto', isoClass: 'Class 5 (±0.01mm)', image: 'kinetic_sorting.png', status: 'Active' },
-          { id: 'mediflow', name: 'MediFlow IV-200', capacity: '1200 Bags/hr', automation: 'Semi-Automatic', isoClass: 'Class 5 (4.5 kW)', image: 'clean_hub.png', status: 'Active' }
-        ],
-        industrySolutions: data?.products?.industrySolutions || [
-          { title: 'Pharmaceutical', desc: 'High-volume formulations and parenteral supply chains meeting international pharmacopeia guidelines for global markets.', bullets: ['WHO-GMP certified production', 'Comprehensive CTD export dossiers', 'Endotoxin-tested pyrogen-free liquids'] },
-          { title: 'Hospitals', desc: 'Direct supply of critical large-volume infusions and sterile saline solutions for ICU, clinical wards, and surgery units.', bullets: ['Hanger-ready BFS plastic bottles', 'Double-port leak-proof closure caps', 'Compatible with automated infusion systems'] },
-          { title: 'Contract Mfg.', desc: 'Flexible third-party manufacturing services with modular packaging sizes and customizable active concentration levels.', bullets: ['Custom formulation capabilities', 'Licensed manufacturing agreements', 'Scalable production batches'] }
-        ]
-      },
-      gallery: {
-        heroBadge: data?.gallery?.heroBadge || 'FACILITY GALLERY',
-        heroTitle: data?.gallery?.heroTitle || 'Inside Our Manufacturing & Quality Facilities',
-        heroDesc: data?.gallery?.heroDesc || 'Take a virtual tour of our state-of-the-art Blow-Fill-Seal (BFS) production halls and spectrometry validation clean hubs.',
-        galleryItems: data?.gallery?.galleryItems || [
-          { title: 'Automated Packaging Line', category: 'Packaging', description: 'Advanced leak-detection and terminal sterilization packaging units.', image: 'packaging_floor.png' }
-        ],
-        caseStudies: data?.gallery?.caseStudies || [
-          { title: 'EU Infusion Batch Export', desc: 'Export validation process for 100,000 units of Paracetamol infusion.' }
-        ]
-      },
-      certifications: {
-        heroTitle1: data?.certifications?.heroTitle1 || 'Certifications &',
-        heroTitle2: data?.certifications?.heroTitle2 || 'Regulatory Approvals',
-        heroDesc: data?.certifications?.heroDesc || 'Every product we export is backed by internationally recognised certifications, rigorous quality controls, and full regulatory documentation.',
-        qualityBadges: data?.certifications?.qualityBadges || [
-          { title: 'WHO-GMP', subtitle: 'Manufacturing Standard' },
-          { title: 'ISO 9001:2015', subtitle: 'Quality Management' }
-        ],
-        certificates: data?.certifications?.certificates || [
-          { name: 'WHO GMP Certificate', authority: 'FDA Gujarat', type: 'GMP Compliance' }
-        ],
-        regulatoryApprovals: data?.certifications?.regulatoryApprovals || [
-          { country: 'Germany', standard: 'EU Compliance', status: 'Approved' }
-        ]
-      }
-    };
+    const sanitized = sanitizeFetchedContent(data);
     setContent(sanitized);
     setLoading(false);
   };
@@ -299,6 +471,12 @@ function App() {
           <button className={`sidebar-btn ${view === 'gallery' ? 'active' : ''}`} onClick={() => setView('gallery')}>
             <ImageIcon size={18} /> Facility Gallery
           </button>
+          <button className={`sidebar-btn ${view === 'contact' ? 'active' : ''}`} onClick={() => setView('contact')}>
+            <Mail size={18} /> Contact Page
+          </button>
+          <button className={`sidebar-btn ${view === 'blogs' ? 'active' : ''}`} onClick={() => setView('blogs')}>
+            <BookOpen size={18} /> Blog Articles
+          </button>
         </nav>
         <div className="sidebar-footer">
           <button onClick={handleLogout} className="sidebar-btn" style={{ color: '#f87171' }}>
@@ -341,6 +519,8 @@ function App() {
               {view === 'products' && <ProductsSectionEditor content={content} setContent={setContent} token={token} r2PublicUrl={r2PublicUrl} />}
               {view === 'certifications' && <CertificationsSectionEditor content={content} setContent={setContent} token={token} r2PublicUrl={r2PublicUrl} />}
               {view === 'gallery' && <GallerySectionEditor content={content} setContent={setContent} token={token} r2PublicUrl={r2PublicUrl} />}
+              {view === 'contact' && <ContactSectionEditor content={content} setContent={setContent} token={token} r2PublicUrl={r2PublicUrl} />}
+              {view === 'blogs' && <BlogsSectionEditor content={content} setContent={setContent} token={token} r2PublicUrl={r2PublicUrl} />}
             </>
           ) : (
             <div style={{ color: 'var(--text-muted)' }}>Loading site data...</div>
@@ -910,6 +1090,7 @@ function AboutSectionEditor({ content, setContent, token, r2PublicUrl }) {
 function ProductsSectionEditor({ content, setContent, token, r2PublicUrl }) {
   const [activeTab, setActiveTab] = useState('info'); 
   const [editingProduct, setEditingProduct] = useState(null);
+  const [modalTab, setModalTab] = useState('core');
 
   const updateHeader = (field, val) => {
     setContent({
@@ -953,9 +1134,25 @@ function ProductsSectionEditor({ content, setContent, token, r2PublicUrl }) {
       isNew: true,
       name: '',
       composition: '',
+      category: 'infusions',
       packSizes: ['500 ml'],
-      purpose: 'Export'
+      purpose: 'Export',
+      composition_details: '',
+      packaging: '',
+      markets: '',
+      active_ingredients: '',
+      image: '',
+      standards: [],
+      advantages: [],
+      workflow: [],
+      faqs: [],
+      factSheetPdf: '',
+      ctdDossierPdf: '',
+      quoteTitle: 'Request Technical Specs & Pricing',
+      quoteDesc: 'Speak with a product relations manager to discuss custom volumes, lead times, and regulatory dossier options.',
+      quoteBullets: ['Estimated Lead Time: 2-3 Weeks', 'WHO-GMP Dossier Support', '24/7 Supply Logistics']
     });
+    setModalTab('overview');
   };
 
   const updateMachinery = (index, field, val) => {
@@ -965,6 +1162,32 @@ function ProductsSectionEditor({ content, setContent, token, r2PublicUrl }) {
       ...content,
       products: { ...content.products, machineryItems: list }
     });
+  };
+
+  const addMachineryItem = () => {
+    const list = [...(content.products.machineryItems || []), {
+      id: 'mach_' + Date.now(),
+      name: 'New BFS Machinery System',
+      capacity: '3000 units/hr',
+      automation: 'Fully Automatic',
+      isoClass: 'Class 5',
+      image: '',
+      status: 'Active'
+    }];
+    setContent({
+      ...content,
+      products: { ...content.products, machineryItems: list }
+    });
+  };
+
+  const removeMachineryItem = (idx) => {
+    if (window.confirm('Delete this machinery unit?')) {
+      const list = content.products.machineryItems.filter((_, i) => i !== idx);
+      setContent({
+        ...content,
+        products: { ...content.products, machineryItems: list }
+      });
+    }
   };
 
   const updateSolution = (index, field, val) => {
@@ -984,12 +1207,6 @@ function ProductsSectionEditor({ content, setContent, token, r2PublicUrl }) {
       products: { ...content.products, industrySolutions: list }
     });
   };
-
-  const machineryLabels = [
-    'BFS Machine 1: Primary Capping Filler',
-    'BFS Machine 2: Sorting Robotic Package',
-    'BFS Machine 3: IV Bag Fluid Filler'
-  ];
 
   const industrySolutionsLabels = [
     'Sector Category 1: Pharmaceutical Supply Chain',
@@ -1023,6 +1240,18 @@ function ProductsSectionEditor({ content, setContent, token, r2PublicUrl }) {
             <label className="form-label">Hero Banner Description</label>
             <textarea rows={4} className="form-control" value={content.products.heroDesc} onChange={e => updateHeader('heroDesc', e.target.value)} />
           </div>
+
+          <div className="form-group" style={{ marginTop: '24px', borderTop: '1px solid var(--border)', paddingTop: '20px' }}>
+            <label className="form-label" style={{ fontWeight: 'bold' }}>Global Product Specification sheet (PDF)</label>
+            <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '10px' }}>Upload a PDF that visitors can download by clicking "Download Specs".</p>
+            <ImageUpload
+              token={token}
+              defaultKey="products_specs.pdf"
+              currentKey="products_specs.pdf"
+              onUploadSuccess={(key) => alert("Specification PDF uploaded successfully to CDN!")}
+              r2PublicUrl={r2PublicUrl}
+            />
+          </div>
         </div>
       )}
 
@@ -1038,17 +1267,19 @@ function ProductsSectionEditor({ content, setContent, token, r2PublicUrl }) {
                 <tr style={{ borderBottom: '2px solid var(--border)', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
                   <th style={{ padding: '12px' }}>Active Formulation Name</th>
                   <th style={{ padding: '12px' }}>Chemical Composition</th>
+                  <th style={{ padding: '12px' }}>Category</th>
                   <th style={{ padding: '12px' }}>Pack Configurations</th>
                   <th style={{ padding: '12px' }}>Market Scope</th>
                   <th style={{ padding: '12px', textAlign: 'right' }}>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {content.products.productsData.map((prod) => (
+                {(content.products.productsData || []).map((prod) => (
                   <tr key={prod.id} style={{ borderBottom: '1px solid var(--border)', fontSize: '0.9rem' }}>
                     <td style={{ padding: '12px', fontWeight: 600 }}>{prod.name}</td>
-                    <td style={{ padding: '12px', color: 'var(--text-muted)', maxWidth: '300px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{prod.composition}</td>
-                    <td style={{ padding: '12px' }}>{prod.packSizes.join(', ')}</td>
+                    <td style={{ padding: '12px', color: 'var(--text-muted)', maxWidth: '250px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{prod.composition}</td>
+                    <td style={{ padding: '12px', textTransform: 'capitalize' }}>{prod.category || 'infusions'}</td>
+                    <td style={{ padding: '12px' }}>{(prod.packSizes || []).join(', ')}</td>
                     <td style={{ padding: '12px' }}>
                       <span style={{ fontSize: '0.75rem', fontWeight: 700, padding: '2px 8px', borderRadius: '4px', backgroundColor: prod.purpose === 'Export' ? 'rgba(59, 130, 246, 0.15)' : 'rgba(16, 185, 129, 0.15)', color: prod.purpose === 'Export' ? '#60a5fa' : '#34d399' }}>
                         {prod.purpose}
@@ -1056,7 +1287,7 @@ function ProductsSectionEditor({ content, setContent, token, r2PublicUrl }) {
                     </td>
                     <td style={{ padding: '12px', textAlign: 'right' }}>
                       <div style={{ display: 'inline-flex', gap: '8px' }}>
-                        <button className="btn btn-secondary btn-icon-only" onClick={() => setEditingProduct(prod)}><Edit2 size={12} /></button>
+                        <button className="btn btn-secondary btn-icon-only" onClick={() => { setEditingProduct(prod); setModalTab('overview'); }}><Edit2 size={12} /></button>
                         <button className="btn btn-danger btn-icon-only" onClick={() => removeProduct(prod.id)}><Trash2 size={12} /></button>
                       </div>
                     </td>
@@ -1072,12 +1303,14 @@ function ProductsSectionEditor({ content, setContent, token, r2PublicUrl }) {
         <div className="section-panel">
           <div className="panel-header">
             <h2>Blow-Fill-Seal (BFS) Machinery Systems</h2>
+            <button className="btn btn-primary" onClick={addMachineryItem}><Plus size={16} /> Add Machine Unit</button>
           </div>
           <div className="repeater-list">
-            {content.products.machineryItems.map((mach, idx) => (
+            {(content.products.machineryItems || []).map((mach, idx) => (
               <div key={mach.id || idx} className="repeater-item" style={{ borderLeft: '3px solid var(--primary)' }}>
-                <div className="panel-sub-header" style={{ marginTop: 0, marginBottom: '12px' }}>
-                  {machineryLabels[idx] || `BFS Machine Unit ${idx + 1}`}
+                <div className="panel-sub-header" style={{ marginTop: 0, marginBottom: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span>BFS Machine Unit {idx + 1}</span>
+                  <button className="btn btn-danger" style={{ padding: '4px 10px', fontSize: '0.75rem' }} onClick={() => removeMachineryItem(idx)}><Trash2 size={12} /> Remove</button>
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
                   <div className="form-group" style={{ marginBottom: 0 }}>
@@ -1159,31 +1392,314 @@ function ProductsSectionEditor({ content, setContent, token, r2PublicUrl }) {
       {/* Edit formulation modal */}
       {editingProduct && (
         <div className="modal-overlay">
-          <div className="modal-content">
-            <h3>{editingProduct.isNew ? 'New Formulation Spec' : 'Edit Formulation'}</h3>
-            <form onSubmit={saveProduct}>
-              <div className="form-group">
-                <label className="form-label">Active Formulation Name</label>
-                <input type="text" className="form-control" value={editingProduct.name} onChange={e => setEditingProduct({ ...editingProduct, name: e.target.value })} required />
-              </div>
-              <div className="form-group">
-                <label className="form-label">Chemical Composition Description</label>
-                <textarea rows={3} className="form-control" value={editingProduct.composition} onChange={e => setEditingProduct({ ...editingProduct, composition: e.target.value })} required />
-              </div>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-                <div className="form-group">
-                  <label className="form-label">Market Scope Channel</label>
-                  <select className="form-control" value={editingProduct.purpose} onChange={e => setEditingProduct({ ...editingProduct, purpose: e.target.value })} style={{ background: 'var(--bg-input)' }}>
-                    <option value="Export">Export (BP/USP)</option>
-                    <option value="Domestic">Domestic (IP)</option>
-                  </select>
+          <div className="modal-content" style={{ maxWidth: '750px', width: '90%', maxHeight: '90vh', display: 'flex', flexDirection: 'column', overflow: 'hidden', padding: '24px 32px 32px 32px' }}>
+            <h3 style={{ margin: 0, paddingBottom: '12px' }}>{editingProduct.isNew ? 'New Formulation Spec' : 'Edit Formulation'}</h3>
+            
+            {/* Modal Tabs */}
+            <div style={{ display: 'flex', borderBottom: '1px solid var(--border)', marginBottom: '16px', gap: '8px', overflowX: 'auto', paddingBottom: '8px', flexShrink: 0 }}>
+              <button type="button" className={`btn ${modalTab === 'overview' ? 'btn-primary' : 'btn-secondary'}`} style={{ padding: '6px 12px', fontSize: '0.8rem' }} onClick={() => setModalTab('overview')}>Overview</button>
+              <button type="button" className={`btn ${modalTab === 'specs' ? 'btn-primary' : 'btn-secondary'}`} style={{ padding: '6px 12px', fontSize: '0.8rem' }} onClick={() => setModalTab('specs')}>Composition & Specs</button>
+              <button type="button" className={`btn ${modalTab === 'advantages' ? 'btn-primary' : 'btn-secondary'}`} style={{ padding: '6px 12px', fontSize: '0.8rem' }} onClick={() => setModalTab('advantages')}>Core Advantages</button>
+              <button type="button" className={`btn ${modalTab === 'workflow' ? 'btn-primary' : 'btn-secondary'}`} style={{ padding: '6px 12px', fontSize: '0.8rem' }} onClick={() => setModalTab('workflow')}>Process Workflow</button>
+              <button type="button" className={`btn ${modalTab === 'documentation' ? 'btn-primary' : 'btn-secondary'}`} style={{ padding: '6px 12px', fontSize: '0.8rem' }} onClick={() => setModalTab('documentation')}>Documentation</button>
+              <button type="button" className={`btn ${modalTab === 'faqs' ? 'btn-primary' : 'btn-secondary'}`} style={{ padding: '6px 12px', fontSize: '0.8rem' }} onClick={() => setModalTab('faqs')}>FAQs</button>
+              <button type="button" className={`btn ${modalTab === 'quote' ? 'btn-primary' : 'btn-secondary'}`} style={{ padding: '6px 12px', fontSize: '0.8rem' }} onClick={() => setModalTab('quote')}>Request Quote</button>
+            </div>
+
+            <form onSubmit={saveProduct} style={{ display: 'flex', flexDirection: 'column', flex: 1, overflow: 'hidden', margin: 0, gap: 0 }}>
+              <div style={{ flex: 1, overflowY: 'auto', paddingRight: '8px', paddingBottom: '12px' }}>
+              {modalTab === 'overview' && (
+                <>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+                    <div className="form-group">
+                      <label className="form-label">Formulation Name</label>
+                      <input type="text" className="form-control" value={editingProduct.name} onChange={e => setEditingProduct({ ...editingProduct, name: e.target.value })} required />
+                    </div>
+                    <div className="form-group">
+                      <label className="form-label">Therapeutic Category</label>
+                      <select className="form-control" value={editingProduct.category || 'infusions'} onChange={e => setEditingProduct({ ...editingProduct, category: e.target.value })} style={{ background: 'var(--bg-input)' }}>
+                        <option value="infusions">Intravenous Infusions</option>
+                        <option value="injections">Injectables</option>
+                        <option value="electrolytes">Electrolytes & Fluid Replacers</option>
+                        <option value="antimicrobials">Antimicrobials & Antibiotics</option>
+                        <option value="other">Other Specialties</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">Chemical Composition (Short Summary)</label>
+                    <textarea rows={2} className="form-control" value={editingProduct.composition} onChange={e => setEditingProduct({ ...editingProduct, composition: e.target.value })} required />
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">Market Scope (Export / Domestic)</label>
+                    <select className="form-control" value={editingProduct.purpose} onChange={e => setEditingProduct({ ...editingProduct, purpose: e.target.value })} style={{ background: 'var(--bg-input)' }}>
+                      <option value="Export">Export (BP/USP)</option>
+                      <option value="Domestic">Domestic (IP)</option>
+                    </select>
+                  </div>
+                  <div className="form-group" style={{ marginTop: '12px' }}>
+                    <label className="form-label">Product Image (Upload / Replace)</label>
+                    {!editingProduct.isNew ? (
+                      <ImageUpload
+                        token={token}
+                        defaultKey={`product_${editingProduct.id}.png`}
+                        currentKey={editingProduct.image}
+                        onUploadSuccess={(key) => setEditingProduct({ ...editingProduct, image: key })}
+                        r2PublicUrl={r2PublicUrl}
+                      />
+                    ) : (
+                      <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Save the formulation record first, then edit it to upload a custom image.</p>
+                    )}
+                  </div>
+                </>
+              )}
+
+              {modalTab === 'specs' && (
+                <>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+                    <div className="form-group">
+                      <label className="form-label">Active Ingredients (comma separated)</label>
+                      <input type="text" className="form-control" placeholder="e.g. Sodium Chloride, Water" value={editingProduct.active_ingredients || ''} onChange={e => setEditingProduct({ ...editingProduct, active_ingredients: e.target.value })} />
+                    </div>
+                    <div className="form-group">
+                      <label className="form-label">Primary Packaging</label>
+                      <input type="text" className="form-control" placeholder="e.g. Sterile PE Bottle" value={editingProduct.packaging || ''} onChange={e => setEditingProduct({ ...editingProduct, packaging: e.target.value })} />
+                    </div>
+                  </div>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+                    <div className="form-group">
+                      <label className="form-label">Export Markets</label>
+                      <input type="text" className="form-control" placeholder="e.g. Germany, West Africa, ASEAN" value={editingProduct.markets || ''} onChange={e => setEditingProduct({ ...editingProduct, markets: e.target.value })} />
+                    </div>
+                    <div className="form-group">
+                      <label className="form-label">Pack Sizes (comma separated)</label>
+                      <input type="text" className="form-control" value={(editingProduct.packSizes || []).join(', ')} onChange={e => setEditingProduct({ ...editingProduct, packSizes: e.target.value.split(',').map(s => s.trim()) })} required />
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">Detailed Composition (Detailed Breakdown)</label>
+                    <input type="text" className="form-control" placeholder="e.g. Each 100ml contains: Sodium Chloride 0.9 gm" value={editingProduct.composition_details || ''} onChange={e => setEditingProduct({ ...editingProduct, composition_details: e.target.value })} />
+                  </div>
+
+                  <div style={{ marginTop: '20px', borderTop: '1px solid var(--border)', paddingTop: '16px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                      <label className="form-label" style={{ marginBottom: 0 }}>Accreditation Standards & Compliance</label>
+                      <button type="button" className="btn btn-secondary" style={{ padding: '4px 10px', fontSize: '0.75rem', display: 'flex', gap: '4px', alignItems: 'center' }} onClick={() => setEditingProduct({ ...editingProduct, standards: [...(editingProduct.standards || []), 'New Standard'] })}><Plus size={10} /> Add Standard</button>
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                      {(editingProduct.standards || []).map((std, sIdx) => (
+                        <div key={sIdx} style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                          <input type="text" className="form-control" value={std} onChange={e => {
+                            const updated = [...editingProduct.standards];
+                            updated[sIdx] = e.target.value;
+                            setEditingProduct({ ...editingProduct, standards: updated });
+                          }} />
+                          <button type="button" className="btn btn-danger btn-icon-only" onClick={() => {
+                            const updated = editingProduct.standards.filter((_, i) => i !== sIdx);
+                            setEditingProduct({ ...editingProduct, standards: updated });
+                          }}><Trash2 size={12} /></button>
+                        </div>
+                      ))}
+                      {(editingProduct.standards || []).length === 0 && <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>No product-specific standards defined. Defaulting to global certifications list.</p>}
+                    </div>
+                  </div>
+                </>
+              )}
+
+              {modalTab === 'advantages' && (
+                <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                    <label className="form-label" style={{ marginBottom: 0 }}>Core Technical Advantages</label>
+                    <button type="button" className="btn btn-secondary" style={{ padding: '4px 10px', fontSize: '0.75rem', display: 'flex', gap: '4px', alignItems: 'center' }} onClick={() => setEditingProduct({ ...editingProduct, advantages: [...(editingProduct.advantages || []), { title: 'New Advantage Title', desc: 'Advantage Details' }] })}><Plus size={10} /> Add Advantage</button>
+                  </div>
+                  <div className="repeater-list" style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                    {(editingProduct.advantages || []).map((adv, aIdx) => (
+                      <div key={aIdx} className="repeater-item" style={{ borderLeft: '3px solid var(--primary)', padding: '12px' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                          <strong>Advantage #{aIdx + 1}</strong>
+                          <button type="button" className="btn btn-danger" style={{ padding: '2px 8px', fontSize: '0.7rem' }} onClick={() => {
+                            const updated = editingProduct.advantages.filter((_, i) => i !== aIdx);
+                            setEditingProduct({ ...editingProduct, advantages: updated });
+                          }}>Remove</button>
+                        </div>
+                        <div className="form-group" style={{ marginBottom: '8px' }}>
+                          <label className="form-label">Title / Caption</label>
+                          <input type="text" className="form-control" value={adv.title || ''} onChange={e => {
+                            const updated = [...editingProduct.advantages];
+                            updated[aIdx] = { ...updated[aIdx], title: e.target.value };
+                            setEditingProduct({ ...editingProduct, advantages: updated });
+                          }} />
+                        </div>
+                        <div className="form-group" style={{ marginBottom: 0 }}>
+                          <label className="form-label">Detail Description</label>
+                          <textarea rows={2} className="form-control" value={adv.desc || ''} onChange={e => {
+                            const updated = [...editingProduct.advantages];
+                            updated[aIdx] = { ...updated[aIdx], desc: e.target.value };
+                            setEditingProduct({ ...editingProduct, advantages: updated });
+                          }} />
+                        </div>
+                      </div>
+                    ))}
+                    {(editingProduct.advantages || []).length === 0 && <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>No product-specific advantages defined. Defaulting to global benefits list.</p>}
+                  </div>
                 </div>
-                <div className="form-group">
-                  <label className="form-label">Volume Configurations (comma separated)</label>
-                  <input type="text" className="form-control" value={editingProduct.packSizes.join(', ')} onChange={e => setEditingProduct({ ...editingProduct, packSizes: e.target.value.split(',').map(s => s.trim()) })} required />
+              )}
+
+              {modalTab === 'workflow' && (
+                <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                    <label className="form-label" style={{ marginBottom: 0 }}>Automated Production Workflow Stages</label>
+                    <button type="button" className="btn btn-secondary" style={{ padding: '4px 10px', fontSize: '0.75rem', display: 'flex', gap: '4px', alignItems: 'center' }} onClick={() => setEditingProduct({ ...editingProduct, workflow: [...(editingProduct.workflow || []), { step: 'Stage Title', desc: 'Stage Details' }] })}><Plus size={10} /> Add Stage</button>
+                  </div>
+                  <div className="repeater-list" style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                    {(editingProduct.workflow || []).map((wf, wIdx) => (
+                      <div key={wIdx} className="repeater-item" style={{ borderLeft: '3px solid var(--success)', padding: '12px' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                          <strong>Workflow Stage #{wIdx + 1}</strong>
+                          <button type="button" className="btn btn-danger" style={{ padding: '2px 8px', fontSize: '0.7rem' }} onClick={() => {
+                            const updated = editingProduct.workflow.filter((_, i) => i !== wIdx);
+                            setEditingProduct({ ...editingProduct, workflow: updated });
+                          }}>Remove</button>
+                        </div>
+                        <div className="form-group" style={{ marginBottom: '8px' }}>
+                          <label className="form-label">Stage Title / Label</label>
+                          <input type="text" className="form-control" value={wf.step || ''} onChange={e => {
+                            const updated = [...editingProduct.workflow];
+                            updated[wIdx] = { ...updated[wIdx], step: e.target.value };
+                            setEditingProduct({ ...editingProduct, workflow: updated });
+                          }} />
+                        </div>
+                        <div className="form-group" style={{ marginBottom: 0 }}>
+                          <label className="form-label">Stage Action Description</label>
+                          <textarea rows={2} className="form-control" value={wf.desc || ''} onChange={e => {
+                            const updated = [...editingProduct.workflow];
+                            updated[wIdx] = { ...updated[wIdx], desc: e.target.value };
+                            setEditingProduct({ ...editingProduct, workflow: updated });
+                          }} />
+                        </div>
+                      </div>
+                    ))}
+                    {(editingProduct.workflow || []).length === 0 && <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>No product-specific workflow defined. Defaulting to global processing walkthrough.</p>}
+                  </div>
                 </div>
+              )}
+
+              {modalTab === 'documentation' && (
+                <div>
+                  <label className="form-label" style={{ marginBottom: '16px' }}>Technical Documentation & Fact Sheets</label>
+                  <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '16px' }}>Upload custom PDF specifications sheet and regulatory CTD dossier specifically for this formulation (Optional):</p>
+                  
+                  <div className="form-group" style={{ marginBottom: '20px' }}>
+                    <label className="form-label">Formulation Fact Sheet PDF</label>
+                    {!editingProduct.isNew ? (
+                      <ImageUpload
+                        token={token}
+                        defaultKey={`factsheet_${editingProduct.id}.pdf`}
+                        currentKey={editingProduct.factSheetPdf}
+                        onUploadSuccess={(key) => setEditingProduct({ ...editingProduct, factSheetPdf: key })}
+                        r2PublicUrl={r2PublicUrl}
+                      />
+                    ) : (
+                      <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Save the formulation first to unlock custom PDF uploads.</p>
+                    )}
+                  </div>
+
+                  <div className="form-group">
+                    <label className="form-label">Regulatory CTD Dossier PDF</label>
+                    {!editingProduct.isNew ? (
+                      <ImageUpload
+                        token={token}
+                        defaultKey={`dossier_${editingProduct.id}.pdf`}
+                        currentKey={editingProduct.ctdDossierPdf}
+                        onUploadSuccess={(key) => setEditingProduct({ ...editingProduct, ctdDossierPdf: key })}
+                        r2PublicUrl={r2PublicUrl}
+                      />
+                    ) : (
+                      <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Save the formulation first to unlock custom PDF uploads.</p>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {modalTab === 'faqs' && (
+                <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                    <label className="form-label" style={{ marginBottom: 0 }}>Frequently Asked Questions (FAQs)</label>
+                    <button type="button" className="btn btn-secondary" style={{ padding: '4px 10px', fontSize: '0.75rem', display: 'flex', gap: '4px', alignItems: 'center' }} onClick={() => setEditingProduct({ ...editingProduct, faqs: [...(editingProduct.faqs || []), { q: 'Question?', a: 'Answer.' }] })}><Plus size={10} /> Add FAQ</button>
+                  </div>
+                  <div className="repeater-list" style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                    {(editingProduct.faqs || []).map((faq, fIdx) => (
+                      <div key={fIdx} className="repeater-item" style={{ borderLeft: '3px solid var(--secondary)', padding: '12px' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                          <strong>FAQ #{fIdx + 1}</strong>
+                          <button type="button" className="btn btn-danger" style={{ padding: '2px 8px', fontSize: '0.7rem' }} onClick={() => {
+                            const updated = editingProduct.faqs.filter((_, i) => i !== fIdx);
+                            setEditingProduct({ ...editingProduct, faqs: updated });
+                          }}>Remove</button>
+                        </div>
+                        <div className="form-group" style={{ marginBottom: '8px' }}>
+                          <label className="form-label">Question</label>
+                          <input type="text" className="form-control" value={faq.q || ''} onChange={e => {
+                            const updated = [...editingProduct.faqs];
+                            updated[fIdx] = { ...updated[fIdx], q: e.target.value };
+                            setEditingProduct({ ...editingProduct, faqs: updated });
+                          }} />
+                        </div>
+                        <div className="form-group" style={{ marginBottom: 0 }}>
+                          <label className="form-label">Answer Description</label>
+                          <textarea rows={2} className="form-control" value={faq.a || ''} onChange={e => {
+                            const updated = [...editingProduct.faqs];
+                            updated[fIdx] = { ...updated[fIdx], a: e.target.value };
+                            setEditingProduct({ ...editingProduct, faqs: updated });
+                          }} />
+                        </div>
+                      </div>
+                    ))}
+                    {(editingProduct.faqs || []).length === 0 && <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>No product-specific FAQs defined. Defaulting to global list.</p>}
+                  </div>
+                </div>
+              )}
+
+              {modalTab === 'quote' && (
+                <div>
+                  <label className="form-label" style={{ marginBottom: '16px' }}>Request Quote Settings</label>
+                  <div className="form-group">
+                    <label className="form-label">Custom Tab Title</label>
+                    <input type="text" className="form-control" placeholder="e.g. Request Technical Specs & Pricing" value={editingProduct.quoteTitle || ''} onChange={e => setEditingProduct({ ...editingProduct, quoteTitle: e.target.value })} />
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">Request Quote Description</label>
+                    <textarea rows={3} className="form-control" placeholder="e.g. Speak with a product relations manager to discuss custom volumes..." value={editingProduct.quoteDesc || ''} onChange={e => setEditingProduct({ ...editingProduct, quoteDesc: e.target.value })} />
+                  </div>
+                  
+                  <div style={{ marginTop: '20px', borderTop: '1px solid var(--border)', paddingTop: '16px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                      <label className="form-label" style={{ marginBottom: 0 }}>Technical Support Highlight Bullets</label>
+                      <button type="button" className="btn btn-secondary" style={{ padding: '4px 10px', fontSize: '0.75rem', display: 'flex', gap: '4px', alignItems: 'center' }} onClick={() => setEditingProduct({ ...editingProduct, quoteBullets: [...(editingProduct.quoteBullets || []), 'New Bullet Point'] })}><Plus size={10} /> Add Bullet</button>
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                      {(editingProduct.quoteBullets || []).map((blt, bIdx) => (
+                        <div key={bIdx} style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                          <input type="text" className="form-control" value={blt} onChange={e => {
+                            const updated = [...editingProduct.quoteBullets];
+                            updated[bIdx] = e.target.value;
+                            setEditingProduct({ ...editingProduct, quoteBullets: updated });
+                          }} />
+                          <button type="button" className="btn btn-danger btn-icon-only" onClick={() => {
+                            const updated = editingProduct.quoteBullets.filter((_, i) => i !== bIdx);
+                            setEditingProduct({ ...editingProduct, quoteBullets: updated });
+                          }}><Trash2 size={12} /></button>
+                        </div>
+                      ))}
+                      {(editingProduct.quoteBullets || []).length === 0 && <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>No product-specific quote highlights defined. Defaulting to general logistics details.</p>}
+                    </div>
+                  </div>
+                </div>
+              )}
+
               </div>
-              <div className="modal-footer">
+
+              <div className="modal-footer" style={{ marginTop: '16px', borderTop: '1px solid var(--border)', paddingTop: '16px', flexShrink: 0 }}>
                 <button type="button" className="btn btn-secondary" onClick={() => setEditingProduct(null)}>Cancel</button>
                 <button type="submit" className="btn btn-success">Apply Changes</button>
               </div>
@@ -1226,6 +1742,38 @@ function CertificationsSectionEditor({ content, setContent, token, r2PublicUrl }
     });
   };
 
+  const addCertificate = () => {
+    const list = [...(content.certifications.certificates || []), {
+      id: Date.now(),
+      title: 'New Certificate Document',
+      certNo: 'CERT-NEW-',
+      issuedBy: 'Accreditation Agency',
+      issuedTo: 'Realcade Lifescience Pvt. Ltd.',
+      scope: 'Sterile Parenterals',
+      validFrom: '01 Jan 2026',
+      validTo: '31 Dec 2029',
+      tag: 'New Standard',
+      tagColor: '#005bc4',
+      status: 'Active',
+      image: '',
+      description: 'New official quality approval dossier certificate.'
+    }];
+    setContent({
+      ...content,
+      certifications: { ...content.certifications, certificates: list }
+    });
+  };
+
+  const removeCertificate = (idx) => {
+    if (window.confirm('Delete this certificate?')) {
+      const list = content.certifications.certificates.filter((_, i) => i !== idx);
+      setContent({
+        ...content,
+        certifications: { ...content.certifications, certificates: list }
+      });
+    }
+  };
+
   const updateApproval = (index, field, val) => {
     const list = [...content.certifications.regulatoryApprovals];
     list[index][field] = val;
@@ -1233,6 +1781,29 @@ function CertificationsSectionEditor({ content, setContent, token, r2PublicUrl }
       ...content,
       certifications: { ...content.certifications, regulatoryApprovals: list }
     });
+  };
+
+  const addApproval = () => {
+    const list = [...(content.certifications.regulatoryApprovals || []), {
+      region: 'New Market Country',
+      body: 'CDSCO / NRA Authority',
+      status: 'Active',
+      note: 'Dossier Filed'
+    }];
+    setContent({
+      ...content,
+      certifications: { ...content.certifications, regulatoryApprovals: list }
+    });
+  };
+
+  const removeApproval = (idx) => {
+    if (window.confirm('Delete this regulatory filing record?')) {
+      const list = content.certifications.regulatoryApprovals.filter((_, i) => i !== idx);
+      setContent({
+        ...content,
+        certifications: { ...content.certifications, regulatoryApprovals: list }
+      });
+    }
   };
 
   const badgeLabels = [
@@ -1298,28 +1869,84 @@ function CertificationsSectionEditor({ content, setContent, token, r2PublicUrl }
 
       {activeTab === 'certificates' && (
         <div className="section-panel">
-          <div className="panel-header">
+          <div className="panel-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
             <h2>Official Dossier Certificates</h2>
+            <button className="btn btn-secondary" style={{ padding: '8px 16px', fontSize: '0.8rem', display: 'flex', gap: '4px', alignItems: 'center' }} onClick={addCertificate}>
+              <Plus size={14} /> Add Certificate Card
+            </button>
           </div>
           <div className="repeater-list">
-            {content.certifications.certificates.map((cert, idx) => (
-              <div key={idx} className="repeater-item" style={{ borderLeft: '3px solid var(--success)' }}>
-                <div className="panel-sub-header" style={{ marginTop: 0, marginBottom: '12px' }}>
-                  Dossier Certificate File {idx + 1}
+            {(content.certifications.certificates || []).map((cert, idx) => (
+              <div key={cert.id || idx} className="repeater-item" style={{ borderLeft: '3px solid var(--success)', marginBottom: '30px' }}>
+                <div className="panel-sub-header" style={{ marginTop: 0, marginBottom: '16px', fontWeight: 'bold', fontSize: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span>Certificate Card #{idx + 1}: {cert.title || 'Untitled Document'}</span>
+                  <button className="btn btn-danger" style={{ padding: '4px 10px', fontSize: '0.75rem', display: 'flex', gap: '4px', alignItems: 'center' }} onClick={() => removeCertificate(idx)}>
+                    <Trash2 size={12} /> Remove
+                  </button>
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '20px' }}>
-                  <div className="form-group" style={{ marginBottom: 0 }}>
-                    <label className="form-label">Document Name</label>
-                    <input type="text" className="form-control" value={cert.name} onChange={e => updateCertificate(idx, 'name', e.target.value)} />
+                  <div className="form-group">
+                    <label className="form-label">Certificate Title</label>
+                    <input type="text" className="form-control" value={cert.title || ''} onChange={e => updateCertificate(idx, 'title', e.target.value)} />
                   </div>
-                  <div className="form-group" style={{ marginBottom: 0 }}>
-                    <label className="form-label">Licensing Authority</label>
-                    <input type="text" className="form-control" value={cert.authority} onChange={e => updateCertificate(idx, 'authority', e.target.value)} />
+                  <div className="form-group">
+                    <label className="form-label">Certificate Number</label>
+                    <input type="text" className="form-control" value={cert.certNo || ''} onChange={e => updateCertificate(idx, 'certNo', e.target.value)} />
                   </div>
-                  <div className="form-group" style={{ marginBottom: 0 }}>
-                    <label className="form-label">Compliance Category</label>
-                    <input type="text" className="form-control" value={cert.type} onChange={e => updateCertificate(idx, 'type', e.target.value)} />
+                  <div className="form-group">
+                    <label className="form-label">Issued By Authority</label>
+                    <input type="text" className="form-control" value={cert.issuedBy || ''} onChange={e => updateCertificate(idx, 'issuedBy', e.target.value)} />
                   </div>
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '20px', marginTop: '12px' }}>
+                  <div className="form-group">
+                    <label className="form-label">Issued To Entity</label>
+                    <input type="text" className="form-control" value={cert.issuedTo || ''} onChange={e => updateCertificate(idx, 'issuedTo', e.target.value)} />
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">Valid From Date</label>
+                    <input type="text" className="form-control" value={cert.validFrom || ''} onChange={e => updateCertificate(idx, 'validFrom', e.target.value)} />
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">Valid To Date</label>
+                    <input type="text" className="form-control" value={cert.validTo || ''} onChange={e => updateCertificate(idx, 'validTo', e.target.value)} />
+                  </div>
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '15px', marginTop: '12px' }}>
+                  <div className="form-group">
+                    <label className="form-label">Scope Area</label>
+                    <input type="text" className="form-control" value={cert.scope || ''} onChange={e => updateCertificate(idx, 'scope', e.target.value)} />
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">Tag Badge Text</label>
+                    <input type="text" className="form-control" value={cert.tag || ''} onChange={e => updateCertificate(idx, 'tag', e.target.value)} />
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">Tag Color Hex</label>
+                    <input type="text" className="form-control" value={cert.tagColor || ''} onChange={e => updateCertificate(idx, 'tagColor', e.target.value)} />
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">Verification Status</label>
+                    <input type="text" className="form-control" value={cert.status || ''} onChange={e => updateCertificate(idx, 'status', e.target.value)} />
+                  </div>
+                </div>
+
+                <div className="form-group" style={{ marginTop: '12px' }}>
+                  <label className="form-label">Short Description</label>
+                  <textarea rows={2} className="form-control" value={cert.description || ''} onChange={e => updateCertificate(idx, 'description', e.target.value)} />
+                </div>
+
+                <div className="form-group" style={{ marginTop: '12px', marginBottom: 0 }}>
+                  <label className="form-label" style={{ fontWeight: 'bold' }}>Upload Official Certificate Copy Image</label>
+                  <ImageUpload
+                    token={token}
+                    defaultKey={`cert_${cert.id || idx}.png`}
+                    currentKey={cert.image}
+                    onUploadSuccess={(key) => updateCertificate(idx, 'image', key)}
+                    r2PublicUrl={r2PublicUrl}
+                  />
                 </div>
               </div>
             ))}
@@ -1329,27 +1956,37 @@ function CertificationsSectionEditor({ content, setContent, token, r2PublicUrl }
 
       {activeTab === 'approvals' && (
         <div className="section-panel">
-          <div className="panel-header">
+          <div className="panel-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
             <h2>Global Regulatory Countries Filing Matrix</h2>
+            <button className="btn btn-secondary" style={{ padding: '8px 16px', fontSize: '0.8rem', display: 'flex', gap: '4px', alignItems: 'center' }} onClick={addApproval}>
+              <Plus size={14} /> Add Matrix Country
+            </button>
           </div>
           <div className="repeater-list">
-            {content.certifications.regulatoryApprovals.map((appr, idx) => (
+            {(content.certifications.regulatoryApprovals || []).map((appr, idx) => (
               <div key={idx} className="repeater-item" style={{ borderLeft: '3px solid var(--primary)' }}>
-                <div className="panel-sub-header" style={{ marginTop: 0, marginBottom: '12px' }}>
-                  Matrix Country Record {idx + 1}
+                <div className="panel-sub-header" style={{ marginTop: 0, marginBottom: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span>Matrix Country Record {idx + 1}</span>
+                  <button className="btn btn-danger" style={{ padding: '4px 10px', fontSize: '0.75rem', display: 'flex', gap: '4px', alignItems: 'center' }} onClick={() => removeApproval(idx)}>
+                    <Trash2 size={12} /> Remove
+                  </button>
                 </div>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '20px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '20px' }}>
                   <div className="form-group" style={{ marginBottom: 0 }}>
                     <label className="form-label">Importing Region Country</label>
-                    <input type="text" className="form-control" value={appr.country} onChange={e => updateApproval(idx, 'country', e.target.value)} />
+                    <input type="text" className="form-control" value={appr.region || ''} onChange={e => updateApproval(idx, 'region', e.target.value)} />
                   </div>
                   <div className="form-group" style={{ marginBottom: 0 }}>
-                    <label className="form-label">Filing Pharmacopeia Standard</label>
-                    <input type="text" className="form-control" value={appr.standard} onChange={e => updateApproval(idx, 'standard', e.target.value)} />
+                    <label className="form-label">Filing Pharmacopeia / Body</label>
+                    <input type="text" className="form-control" value={appr.body || ''} onChange={e => updateApproval(idx, 'body', e.target.value)} />
                   </div>
                   <div className="form-group" style={{ marginBottom: 0 }}>
-                    <label className="form-label">Registration status</label>
-                    <input type="text" className="form-control" value={appr.status} onChange={e => updateApproval(idx, 'status', e.target.value)} />
+                    <label className="form-label">Registration Status</label>
+                    <input type="text" className="form-control" value={appr.status || ''} onChange={e => updateApproval(idx, 'status', e.target.value)} />
+                  </div>
+                  <div className="form-group" style={{ marginBottom: 0 }}>
+                    <label className="form-label">Filing Note / Type</label>
+                    <input type="text" className="form-control" value={appr.note || ''} onChange={e => updateApproval(idx, 'note', e.target.value)} />
                   </div>
                 </div>
               </div>
@@ -1561,20 +2198,436 @@ function GallerySectionEditor({ content, setContent, token, r2PublicUrl }) {
           </div>
           <div className="repeater-list">
             {content.gallery.caseStudies.map((cs, idx) => (
-              <div key={idx} className="repeater-item" style={{ borderLeft: '3px solid var(--success)' }}>
-                <div className="panel-sub-header" style={{ marginTop: 0, marginBottom: '12px' }}>
-                  Technical Case Record {idx + 1}
+              <div key={idx} className="repeater-item" style={{ borderLeft: '3px solid var(--success)', marginBottom: '30px' }}>
+                <div className="panel-sub-header" style={{ marginTop: 0, marginBottom: '16px', fontWeight: 'bold', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span>Technical Case Study #{idx + 1}: {cs.title || 'Untitled Case'}</span>
                 </div>
-                <div className="form-group">
-                  <label className="form-label">Technical Validation Study Title</label>
-                  <input type="text" className="form-control" value={cs.title} onChange={e => updateCaseStudy(idx, 'title', e.target.value)} />
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+                  <div className="form-group">
+                    <label className="form-label">Validation Study Title</label>
+                    <input type="text" className="form-control" value={cs.title || ''} onChange={e => updateCaseStudy(idx, 'title', e.target.value)} />
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">Category Tag (e.g. AUTOMATION, LOGISTICS)</label>
+                    <input type="text" className="form-control" value={cs.tag || ''} onChange={e => updateCaseStudy(idx, 'tag', e.target.value)} />
+                  </div>
                 </div>
-                <div className="form-group" style={{ marginBottom: 0 }}>
-                  <label className="form-label">Detailed Validation Summary</label>
-                  <textarea rows={3} className="form-control" value={cs.desc} onChange={e => updateCaseStudy(idx, 'desc', e.target.value)} />
+                
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '20px', marginTop: '12px' }}>
+                  <div className="form-group">
+                    <label className="form-label">Year</label>
+                    <input type="text" className="form-control" value={cs.year || ''} onChange={e => updateCaseStudy(idx, 'year', e.target.value)} />
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">Project Code Reference</label>
+                    <input type="text" className="form-control" value={cs.projCode || ''} onChange={e => updateCaseStudy(idx, 'projCode', e.target.value)} />
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">Main Metric (e.g. Reduced cycle by 40%)</label>
+                    <input type="text" className="form-control" value={cs.reduction || ''} onChange={e => updateCaseStudy(idx, 'reduction', e.target.value)} />
+                  </div>
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '20px', marginTop: '12px' }}>
+                  <div className="form-group">
+                    <label className="form-label">Secondary Metric / Sensor Stat (e.g. Continuous atmospheric sensors)</label>
+                    <input type="text" className="form-control" value={cs.sensors || ''} onChange={e => updateCaseStudy(idx, 'sensors', e.target.value)} />
+                  </div>
+                </div>
+
+                <div className="form-group" style={{ marginTop: '12px' }}>
+                  <label className="form-label">Detailed Validation Summary Description</label>
+                  <textarea rows={3} className="form-control" value={cs.desc || ''} onChange={e => updateCaseStudy(idx, 'desc', e.target.value)} />
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginTop: '16px' }}>
+                  <div className="form-group" style={{ marginBottom: 0 }}>
+                    <label className="form-label" style={{ fontWeight: 'bold' }}>Thumbnail Cover Image (Upload / Replace)</label>
+                    <ImageUpload
+                      token={token}
+                      defaultKey={`case_thumb_${idx}.png`}
+                      currentKey={cs.thumbnail}
+                      onUploadSuccess={(key) => updateCaseStudy(idx, 'thumbnail', key)}
+                      r2PublicUrl={r2PublicUrl}
+                    />
+                  </div>
+                  <div className="form-group" style={{ marginBottom: 0 }}>
+                    <label className="form-label" style={{ fontWeight: 'bold' }}>Walkthrough Video File (Upload / Replace)</label>
+                    <ImageUpload
+                      token={token}
+                      defaultKey={`case_video_${idx}.mp4`}
+                      currentKey={cs.videoUrl}
+                      onUploadSuccess={(key) => updateCaseStudy(idx, 'videoUrl', key)}
+                      r2PublicUrl={r2PublicUrl}
+                    />
+                  </div>
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ==========================================================================
+   Contact Page Editor
+   ========================================================================== */
+function ContactSectionEditor({ content, setContent, token, r2PublicUrl }) {
+  const updateContactField = (field, val) => {
+    setContent({
+      ...content,
+      contact: {
+        ...(content.contact || {}),
+        [field]: val
+      }
+    });
+  };
+
+  const updateContactHub = (idx, field, val) => {
+    const updated = [...(content.contact?.contactHubs || [])];
+    updated[idx] = { ...updated[idx], [field]: val };
+    setContent({
+      ...content,
+      contact: {
+        ...(content.contact || {}),
+        contactHubs: updated
+      }
+    });
+  };
+
+  const addContactHub = () => {
+    const newCard = { name: 'New Contact Person', role: 'Sales Specialist', location: 'Ahmedabad, India', phone: '+91 ', email: 'info@alfacure.com' };
+    setContent({
+      ...content,
+      contact: {
+        ...(content.contact || {}),
+        contactHubs: [...(content.contact?.contactHubs || []), newCard]
+      }
+    });
+  };
+
+  const removeContactHub = (idx) => {
+    const updated = (content.contact?.contactHubs || []).filter((_, i) => i !== idx);
+    setContent({
+      ...content,
+      contact: {
+        ...(content.contact || {}),
+        contactHubs: updated
+      }
+    });
+  };
+
+  return (
+    <div className="section-panel">
+      <div className="panel-header">
+        <h2>Contact Details & Offices</h2>
+      </div>
+      
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+        <div className="form-group">
+          <label className="form-label">Domestic Phone Line</label>
+          <input type="text" className="form-control" value={content.contact?.phoneDomestic || ''} onChange={e => updateContactField('phoneDomestic', e.target.value)} />
+        </div>
+        <div className="form-group">
+          <label className="form-label">Export Phone Line</label>
+          <input type="text" className="form-control" value={content.contact?.phoneExport || ''} onChange={e => updateContactField('phoneExport', e.target.value)} />
+        </div>
+      </div>
+
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+        <div className="form-group">
+          <label className="form-label">General Info Email</label>
+          <input type="email" className="form-control" value={content.contact?.emailGeneral || ''} onChange={e => updateContactField('emailGeneral', e.target.value)} />
+        </div>
+        <div className="form-group">
+          <label className="form-label">Export Dept Email</label>
+          <input type="email" className="form-control" value={content.contact?.emailExport || ''} onChange={e => updateContactField('emailExport', e.target.value)} />
+        </div>
+      </div>
+
+      <div className="form-group">
+        <label className="form-label">Head Office Address</label>
+        <textarea rows={3} className="form-control" value={content.contact?.headOffice || ''} onChange={e => updateContactField('headOffice', e.target.value)} />
+      </div>
+
+      <div className="form-group">
+        <label className="form-label">Manufacturing Plant Address</label>
+        <textarea rows={3} className="form-control" value={content.contact?.plantAddress || ''} onChange={e => updateContactField('plantAddress', e.target.value)} />
+      </div>
+
+      <div className="form-group">
+        <label className="form-label">Google Maps Embed Link (src attribute)</label>
+        <input type="text" className="form-control" value={content.contact?.mapLink || ''} onChange={e => updateContactField('mapLink', e.target.value)} />
+      </div>
+
+      <hr style={{ margin: '30px 0', borderColor: 'var(--border)' }} />
+      
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+        <h3>Direct Team / Contact Cards ({ (content.contact?.contactHubs || []).length })</h3>
+        <button className="btn btn-secondary" style={{ padding: '8px 16px', fontSize: '0.8rem', display: 'flex', gap: '4px', alignItems: 'center' }} onClick={addContactHub}>
+          <Plus size={14} /> Add Contact Card
+        </button>
+      </div>
+
+      <div className="repeater-list">
+        {(content.contact?.contactHubs || []).map((hub, idx) => (
+          <div key={idx} className="repeater-item" style={{ borderLeft: '3px solid var(--success)', padding: '20px', marginBottom: '16px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+              <strong style={{ fontSize: '0.9rem', color: 'var(--primary)' }}>Contact Card #{idx + 1}</strong>
+              <button className="btn btn-danger" style={{ padding: '4px 10px', fontSize: '0.75rem', display: 'flex', gap: '4px', alignItems: 'center' }} onClick={() => removeContactHub(idx)}>
+                <Trash2 size={12} /> Remove
+              </button>
+            </div>
+            
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+              <div className="form-group">
+                <label className="form-label">Full Name</label>
+                <input type="text" className="form-control" value={hub.name || ''} onChange={e => updateContactHub(idx, 'name', e.target.value)} />
+              </div>
+              <div className="form-group">
+                <label className="form-label">Role Designation</label>
+                <input type="text" className="form-control" value={hub.role || ''} onChange={e => updateContactHub(idx, 'role', e.target.value)} />
+              </div>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px', marginTop: '12px' }}>
+              <div className="form-group">
+                <label className="form-label">Office / Region Location</label>
+                <input type="text" className="form-control" value={hub.location || ''} onChange={e => updateContactHub(idx, 'location', e.target.value)} />
+              </div>
+              <div className="form-group">
+                <label className="form-label">Phone Line</label>
+                <input type="text" className="form-control" value={hub.phone || ''} onChange={e => updateContactHub(idx, 'phone', e.target.value)} />
+              </div>
+              <div className="form-group">
+                <label className="form-label">Email Address</label>
+                <input type="email" className="form-control" value={hub.email || ''} onChange={e => updateContactHub(idx, 'email', e.target.value)} />
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ==========================================================================
+   Blogs Section Editor Component
+   ========================================================================== */
+function BlogsSectionEditor({ content, setContent, token, r2PublicUrl }) {
+  const [editingBlog, setEditingBlog] = useState(null);
+  const [modalTab, setModalTab] = useState('core'); // 'core' or 'content'
+
+  const blogsList = content.blogs || [];
+
+  const updateBlogField = (field, value) => {
+    if (!editingBlog) return;
+    setEditingBlog({ ...editingBlog, [field]: value });
+  };
+
+  const addContentBlock = () => {
+    const updatedContent = [...(editingBlog.content || []), { heading: 'New Heading', body: 'Paragraph text' }];
+    setEditingBlog({ ...editingBlog, content: updatedContent });
+  };
+
+  const removeContentBlock = (index) => {
+    const updatedContent = (editingBlog.content || []).filter((_, idx) => idx !== index);
+    setEditingBlog({ ...editingBlog, content: updatedContent });
+  };
+
+  const updateContentBlock = (index, field, value) => {
+    const updatedContent = [...(editingBlog.content || [])];
+    updatedContent[index] = { ...updatedContent[index], [field]: value };
+    setEditingBlog({ ...editingBlog, content: updatedContent });
+  };
+
+  const openNewBlogModal = () => {
+    setEditingBlog({
+      isNew: true,
+      id: Date.now(),
+      slug: 'new-blog-post-' + Math.floor(Math.random() * 1000),
+      title: '',
+      category: 'Product Insights',
+      date: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }),
+      author: 'Alfacure Lifescience',
+      image: '',
+      excerpt: '',
+      content: []
+    });
+    setModalTab('core');
+  };
+
+  const saveBlogEdit = (e) => {
+    e.preventDefault();
+    if (!editingBlog) return;
+
+    let updatedBlogs;
+    if (editingBlog.isNew) {
+      const { isNew, ...cleanBlog } = editingBlog;
+      updatedBlogs = [...blogsList, cleanBlog];
+    } else {
+      updatedBlogs = blogsList.map(b => b.id === editingBlog.id ? editingBlog : b);
+    }
+
+    setContent({
+      ...content,
+      blogs: updatedBlogs
+    });
+    setEditingBlog(null);
+  };
+
+  const removeBlog = (id) => {
+    if (!window.confirm('Are you sure you want to delete this blog post?')) return;
+    const updatedBlogs = blogsList.filter(b => b.id !== id);
+    setContent({
+      ...content,
+      blogs: updatedBlogs
+    });
+  };
+
+  return (
+    <div className="section-editor">
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+        <div>
+          <h2 style={{ margin: 0 }}>Blog Articles Management</h2>
+          <p style={{ margin: '4px 0 0 0', fontSize: '0.85rem', color: 'var(--text-muted)' }}>Create, update, and manage your articles on the Alfacure news portal</p>
+        </div>
+        <button type="button" className="btn btn-success" onClick={openNewBlogModal}>
+          <Plus size={16} style={{ marginRight: '4px' }} /> Add New Article
+        </button>
+      </div>
+
+      <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
+        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+          <thead>
+            <tr style={{ background: 'var(--bg-table-header)', borderBottom: '1px solid var(--border)' }}>
+              <th style={{ padding: '12px 16px', fontSize: '0.85rem', fontWeight: 600 }}>Title</th>
+              <th style={{ padding: '12px 16px', fontSize: '0.85rem', fontWeight: 600 }}>Category</th>
+              <th style={{ padding: '12px 16px', fontSize: '0.85rem', fontWeight: 600 }}>Publication Date</th>
+              <th style={{ padding: '12px 16px', fontSize: '0.85rem', fontWeight: 600, textAlign: 'right' }}>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {blogsList.map((blog) => (
+              <tr key={blog.id} style={{ borderBottom: '1px solid var(--border)' }}>
+                <td style={{ padding: '14px 16px', fontSize: '0.85rem', fontWeight: 600, color: 'var(--primary)' }}>{blog.title || 'Untitled Article'}</td>
+                <td style={{ padding: '14px 16px', fontSize: '0.85rem' }}>
+                  <span className="badge badge-blue" style={{ fontSize: '0.7rem', padding: '3px 8px', borderRadius: '4px' }}>{blog.category}</span>
+                </td>
+                <td style={{ padding: '14px 16px', fontSize: '0.85rem', color: 'var(--text-muted)' }}>{blog.date}</td>
+                <td style={{ padding: '14px 16px', textAlign: 'right' }}>
+                  <div style={{ display: 'inline-flex', gap: '8px' }}>
+                    <button className="btn btn-secondary btn-icon-only" onClick={() => { setEditingBlog(blog); setModalTab('core'); }}><Edit2 size={12} /></button>
+                    <button className="btn btn-danger btn-icon-only" onClick={() => removeBlog(blog.id)}><Trash2 size={12} /></button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+            {blogsList.length === 0 && (
+              <tr>
+                <td colSpan="4" style={{ padding: '32px', textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.85rem' }}>No blog articles defined yet.</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+
+      {editingBlog && (
+        <div className="modal-overlay">
+          <div className="modal-content" style={{ maxWidth: '750px', width: '90%', maxHeight: '90vh', display: 'flex', flexDirection: 'column', overflow: 'hidden', padding: '24px 32px 32px 32px' }}>
+            <h3 style={{ margin: 0, paddingBottom: '12px' }}>{editingBlog.isNew ? 'New Blog Article' : 'Edit Blog Article'}</h3>
+            
+            {/* Modal Tabs */}
+            <div style={{ display: 'flex', borderBottom: '1px solid var(--border)', marginBottom: '16px', gap: '8px', overflowX: 'auto', paddingBottom: '8px', flexShrink: 0 }}>
+              <button type="button" className={`btn ${modalTab === 'core' ? 'btn-primary' : 'btn-secondary'}`} style={{ padding: '6px 12px', fontSize: '0.8rem' }} onClick={() => setModalTab('core')}>Core Details</button>
+              <button type="button" className={`btn ${modalTab === 'content' ? 'btn-primary' : 'btn-secondary'}`} style={{ padding: '6px 12px', fontSize: '0.8rem' }} onClick={() => setModalTab('content')}>Body Content</button>
+            </div>
+
+            <form onSubmit={saveBlogEdit} style={{ display: 'flex', flexDirection: 'column', flex: 1, overflow: 'hidden', margin: 0, gap: 0 }}>
+              <div style={{ flex: 1, overflowY: 'auto', paddingRight: '8px', paddingBottom: '12px' }}>
+                {modalTab === 'core' && (
+                  <>
+                    <div className="form-group">
+                      <label className="form-label">Article Title</label>
+                      <input type="text" className="form-control" value={editingBlog.title} onChange={e => updateBlogField('title', e.target.value)} required />
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+                      <div className="form-group">
+                        <label className="form-label">Slug Link (URL Name)</label>
+                        <input type="text" className="form-control" value={editingBlog.slug} onChange={e => updateBlogField('slug', e.target.value.toLowerCase().replace(/[^a-z0-9-_]/g, '-'))} required />
+                      </div>
+                      <div className="form-group">
+                        <label className="form-label">Category</label>
+                        <input type="text" className="form-control" value={editingBlog.category || 'Product Insights'} onChange={e => updateBlogField('category', e.target.value)} required />
+                      </div>
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+                      <div className="form-group">
+                        <label className="form-label">Publication Date</label>
+                        <input type="text" className="form-control" value={editingBlog.date} onChange={e => updateBlogField('date', e.target.value)} required />
+                      </div>
+                      <div className="form-group">
+                        <label className="form-label">Author Name</label>
+                        <input type="text" className="form-control" value={editingBlog.author || 'Alfacure Lifescience'} onChange={e => updateBlogField('author', e.target.value)} required />
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <label className="form-label">Excerpt / Short Summary</label>
+                      <textarea rows={3} className="form-control" value={editingBlog.excerpt} onChange={e => updateBlogField('excerpt', e.target.value)} required />
+                    </div>
+                    <div className="form-group" style={{ marginTop: '12px' }}>
+                      <label className="form-label">Cover Image (Upload / Replace)</label>
+                      {!editingBlog.isNew ? (
+                        <ImageUpload
+                          token={token}
+                          defaultKey={`blog_${editingBlog.id}.png`}
+                          currentKey={editingBlog.image}
+                          onUploadSuccess={(key) => updateBlogField('image', key)}
+                          r2PublicUrl={r2PublicUrl}
+                        />
+                      ) : (
+                        <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Save the article first, then edit it to upload a cover image.</p>
+                      )}
+                    </div>
+                  </>
+                )}
+
+                {modalTab === 'content' && (
+                  <div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                      <label className="form-label" style={{ marginBottom: 0 }}>Article Paragraph Sections</label>
+                      <button type="button" className="btn btn-secondary" style={{ padding: '4px 10px', fontSize: '0.75rem', display: 'flex', gap: '4px', alignItems: 'center' }} onClick={addContentBlock}><Plus size={10} /> Add Section</button>
+                    </div>
+                    <div className="repeater-list" style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                      {(editingBlog.content || []).map((sec, sIdx) => (
+                        <div key={sIdx} className="repeater-item" style={{ borderLeft: '3px solid var(--primary)', padding: '12px' }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                            <strong>Section #{sIdx + 1}</strong>
+                            <button type="button" className="btn btn-danger" style={{ padding: '2px 8px', fontSize: '0.7rem' }} onClick={() => removeContentBlock(sIdx)}>Remove</button>
+                          </div>
+                          <div className="form-group" style={{ marginBottom: '8px' }}>
+                            <label className="form-label">Section Heading</label>
+                            <input type="text" className="form-control" value={sec.heading || ''} onChange={e => updateContentBlock(sIdx, 'heading', e.target.value)} />
+                          </div>
+                          <div className="form-group" style={{ marginBottom: 0 }}>
+                            <label className="form-label">Section Body Text</label>
+                            <textarea rows={4} className="form-control" value={sec.body || ''} onChange={e => updateContentBlock(sIdx, 'body', e.target.value)} />
+                          </div>
+                        </div>
+                      ))}
+                      {(editingBlog.content || []).length === 0 && <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>No content paragraphs defined. Click Add Section above.</p>}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <div className="modal-footer" style={{ marginTop: '16px', borderTop: '1px solid var(--border)', paddingTop: '16px', flexShrink: 0 }}>
+                <button type="button" className="btn btn-secondary" onClick={() => setEditingBlog(null)}>Cancel</button>
+                <button type="submit" className="btn btn-success">Apply Changes</button>
+              </div>
+            </form>
           </div>
         </div>
       )}

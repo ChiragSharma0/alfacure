@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, CheckCircle, ShieldCheck } from 'lucide-react';
+import { useCMS } from '../context/CMSContext';
 
 export default function Support({ setCurrentPage }) {
+  const { content } = useCMS();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -11,27 +13,27 @@ export default function Support({ setCurrentPage }) {
   });
   const [submitted, setSubmitted] = useState(false);
 
-  const contactHubs = [
+  const contactHubs = content?.contact?.contactHubs || [
     {
       name: 'Dhruvi Chavda',
       role: 'Managing Director',
       location: 'Ahmedabad, India',
       phone: '+91 76219 30091',
-      email: 'example@gmail.com', // replace when client sends complete email
+      email: 'info@alfacure.com',
     },
     {
       name: 'Rahul Joshi',
       role: 'Managing Director',
       location: 'Ahmedabad, India',
       phone: '+91 98795 00383',
-      email: 'example@gmail.com', // replace when client sends complete email
+      email: 'export@alfacure.com',
     },
     {
       name: 'Dhara Panchal',
       role: 'Executive Manager',
       location: 'United Arab Emirates',
       phone: '+971 55 601 2891',
-      email: 'example@gmail.com', // replace when client sends complete email
+      email: 'export@alfacure.com',
     }
   ];
 

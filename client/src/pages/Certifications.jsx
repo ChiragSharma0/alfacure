@@ -124,6 +124,7 @@ const regulatoryApprovals = [
 
 function CertModal({ cert, onClose }) {
   if (!cert) return null;
+  const { resolveImage } = useCMS();
 
   return (
     <div
@@ -225,7 +226,7 @@ function CertModal({ cert, onClose }) {
           }}
         >
           <img
-            src={cert.image}
+            src={resolveImage(cert.image)}
             alt={cert.title}
             style={{
               maxWidth: '100%',
@@ -273,7 +274,7 @@ function CertModal({ cert, onClose }) {
 
 export default function Certifications() {
   const navigate = useNavigate();
-  const { content } = useCMS();
+  const { content, resolveImage } = useCMS();
   const [selectedCert, setSelectedCert] = useState(null);
 
   return (
@@ -367,7 +368,7 @@ export default function Certifications() {
                   onClick={() => setSelectedCert(cert)}
                 >
                   <img
-                    src={cert.image}
+                    src={resolveImage(cert.image)}
                     alt={cert.title}
                     style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', transition: 'transform 0.4s ease' }}
                     onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.04)'; }}

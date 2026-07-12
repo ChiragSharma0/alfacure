@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ChevronRight, CheckCircle, Shield, Phone, ArrowUpRight, Check, ChevronDown, ChevronUp } from 'lucide-react';
 import productsData from '../data/products.json';
+import { useCMS } from '../context/CMSContext';
 
 /* ─── MACHINE DATA ── */
 const machines = {
@@ -192,9 +193,13 @@ export default function ProductDetail() {
   const [formData, setFormData] = useState({ name: '', email: '', volume: 'low', notes: '' });
   const [formSubmitted, setFormSubmitted] = useState(false);
 
-  const isMachine = ['pt9000', 'sterilepack', 'mediflow'].includes(id);
-  const product = !isMachine ? productsData.find(p => p.id === Number(id)) || productsData[0] : null;
-  const machine = isMachine ? machines[id] : null;
+  const { content, resolveImage } = useCMS();
+  const activeProductsData = content?.products?.productsData || productsData;
+  const activeMachineryList = content?.products?.machineryItems || [];
+
+  const isMachine = ['pt9000', 'sterilepack', 'mediflow'].includes(id) || activeMachineryList.some(m => m.id === id);
+  const product = !isMachine ? activeProductsData.find(p => p.id === Number(id)) || activeProductsData[0] : null;
+  const machine = isMachine ? (activeMachineryList.find(m => m.id === id) || machines[id] || machines.pt9000) : null;
 
   const dosageData = product ? parseComposition(product.composition) : { dosageUnit: '', ingredients: [] };
   const formulationSpecs = product ? [
@@ -204,7 +209,15 @@ export default function ProductDetail() {
     },
     {
       label: 'Available Volumes',
-      val: '100 mL, 250 mL, 300 mL, 400 mL, 500 mL, 1000 mL'
+      val: (product.packSizes || []).join(', ')
+    },
+    {
+      label: 'Active Ingredients',
+      val: product.active_ingredients || 'Refer to Chemical Composition'
+    },
+    {
+      label: 'Primary Packaging Spec',
+      val: product.packaging || 'Sterile PE Bottle'
     },
     {
       label: 'Regulatory Support',
@@ -216,9 +229,11 @@ export default function ProductDetail() {
     },
     {
       label: 'Market Coverage',
-      val: product.purpose === 'Domestic'
-        ? 'Domestic Distribution'
-        : 'Domestic & International Markets'
+      val: product.markets || (product.purpose === 'Domestic' ? 'Domestic Distribution' : 'Domestic & International Markets')
+    },
+    {
+      label: 'Composition Details',
+      val: product.composition_details || product.composition
     },
     {
       label: 'Manufacturer',
@@ -227,14 +242,22 @@ export default function ProductDetail() {
   ] : [];
 
   const activeName = isMachine ? machine.name : (product?.name || '');
-  const activeSubtitle = isMachine ? machine.subtitle   : 'Large Volume Parenteral (LVP)';
-  const activeDesc = isMachine ? machine.desc : 'Premium Large Volume Parenteral formulation developed for modern healthcare institutions and supported by comprehensive regulatory documentation, quality assurance, and global distribution capabilities.';
-  const activeSpecs = isMachine ? machine.specs : formulationSpecs;
-  const activeStandards = isMachine ? machine.standards : formulationStandards;
-  const activeAdvantages = isMachine ? machine.advantages : formulationAdvantages;
-  const activeWorkflow = isMachine ? machine.workflow : formulationWorkflow;
-  const activeFaqs = isMachine ? machine.faqs : formulationFaqs;
-  const relatedFormulations = product ? productsData.filter(p => p.purpose === product.purpose && p.id !== product.id).slice(0, 3) : [];
+  const activeSubtitle = isMachine ? (machine.subtitle || 'BFS Machinery System') : 'Large Volume Parenteral (LVP)';
+  const activeDesc = isMachine ? (machine.desc || 'Premium automated Blow-Fill-Seal system for sterile container fluid packaging.') : 'Premium Large Volume Parenteral formulation developed for modern healthcare institutions and supported by comprehensive regulatory documentation, quality assurance, and global distribution capabilities.';
+
+  const customMachineSpecs = machine ? [
+    { label: 'Flow Capacity', val: machine.capacity || 'N/A' },
+    { label: 'Automation Level', val: machine.automation || 'N/A' },
+    { label: 'Accuracy & ISO Class', val: machine.isoClass || 'N/A' },
+    { label: 'Operational Status', val: machine.status || 'Active' }
+  ] : [];
+
+  const activeSpecs = isMachine ? (machine.specs || customMachineSpecs) : formulationSpecs;
+  const activeStandards = isMachine ? (machine.standards || ['ISO 14644-1', 'CE Listed', 'GMP Compliant']) : (product?.standards && product.standards.length > 0 ? product.standards : formulationStandards);
+  const activeAdvantages = isMachine ? (machine.advantages || formulationAdvantages) : (product?.advantages && product.advantages.length > 0 ? product.advantages : formulationAdvantages);
+  const activeWorkflow = isMachine ? (machine.workflow || formulationWorkflow) : (product?.workflow && product.workflow.length > 0 ? product.workflow : formulationWorkflow);
+  const activeFaqs = isMachine ? (machine.faqs || formulationFaqs) : (product?.faqs && product.faqs.length > 0 ? product.faqs : formulationFaqs);
+  const relatedFormulations = product ? activeProductsData.filter(p => p.purpose === product.purpose && p.id !== product.id).slice(0, 3) : [];
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -303,28 +326,36 @@ export default function ProductDetail() {
               </p>
             </div>
 
-            {/* Right — SVG illustration */}
+            {/* Right — Custom image or SVG illustration */}
             <div>
               <div className="card" style={{ padding: '24px', border: '1px solid var(--border)', backgroundColor: '#ffffff', boxShadow: 'none' }}>
-                <div style={{ padding: '32px', backgroundColor: '#f8fafc', borderRadius: '6px', textAlign: 'center' }}>
+                <div style={{ padding: '32px', backgroundColor: '#f8fafc', borderRadius: '6px', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
                   {isMachine ? (
-                    <svg width="100" height="160" viewBox="0 0 100 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="15" y="40" width="70" height="110" rx="4" fill="#005bc4" fillOpacity="0.1" stroke="#005bc4" strokeWidth="2.5" />
-                      <circle cx="50" cy="95" r="25" fill="white" stroke="#005bc4" strokeWidth="2" />
-                      <line x1="35" y1="95" x2="65" y2="95" stroke="#005bc4" strokeWidth="2" />
-                      <line x1="50" y1="80" x2="50" y2="110" stroke="#005bc4" strokeWidth="2" />
-                      <rect x="30" y="20" width="40" height="20" rx="2" fill="#005bc4" fillOpacity="0.2" stroke="#005bc4" strokeWidth="2" />
-                    </svg>
+                    machine?.image ? (
+                      <img src={resolveImage(machine.image)} alt={machine.name} style={{ maxWidth: '100%', maxHeight: '160px', objectFit: 'contain', borderRadius: '4px' }} />
+                    ) : (
+                      <svg width="100" height="160" viewBox="0 0 100 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="15" y="40" width="70" height="110" rx="4" fill="#005bc4" fillOpacity="0.1" stroke="#005bc4" strokeWidth="2.5" />
+                        <circle cx="50" cy="95" r="25" fill="white" stroke="#005bc4" strokeWidth="2" />
+                        <line x1="35" y1="95" x2="65" y2="95" stroke="#005bc4" strokeWidth="2" />
+                        <line x1="50" y1="80" x2="50" y2="110" stroke="#005bc4" strokeWidth="2" />
+                        <rect x="30" y="20" width="40" height="20" rx="2" fill="#005bc4" fillOpacity="0.2" stroke="#005bc4" strokeWidth="2" />
+                      </svg>
+                    )
                   ) : (
-                    <svg width="100" height="160" viewBox="0 0 100 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="35" y="10" width="30" height="20" rx="3" fill="#005bc4" fillOpacity="0.2" stroke="#005bc4" strokeWidth="2" />
-                      <rect x="42" y="30" width="16" height="20" fill="#005bc4" fillOpacity="0.1" stroke="#005bc4" strokeWidth="2" />
-                      <path d="M20 70C20 58.9543 28.9543 50 40 50H60C71.0457 50 80 58.9543 80 70V160C80 165.523 75.5228 170 70 170H30C24.4772 170 20 165.523 20 160V70Z" fill="white" stroke="#005bc4" strokeWidth="2.5" />
-                      <line x1="30" y1="120" x2="70" y2="120" stroke="#005bc4" strokeWidth="1.5" strokeDasharray="3 3" />
-                    </svg>
+                    product?.image ? (
+                      <img src={resolveImage(product.image)} alt={product.name} style={{ maxWidth: '100%', maxHeight: '160px', objectFit: 'contain', borderRadius: '4px' }} />
+                    ) : (
+                      <svg width="100" height="160" viewBox="0 0 100 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="35" y="10" width="30" height="20" rx="3" fill="#005bc4" fillOpacity="0.2" stroke="#005bc4" strokeWidth="2" />
+                        <rect x="42" y="30" width="16" height="20" fill="#005bc4" fillOpacity="0.1" stroke="#005bc4" strokeWidth="2" />
+                        <path d="M20 70C20 58.9543 28.9543 50 40 50H60C71.0457 50 80 58.9543 80 70V160C80 165.523 75.5228 170 70 170H30C24.4772 170 20 165.523 20 160V70Z" fill="white" stroke="#005bc4" strokeWidth="2.5" />
+                        <line x1="30" y1="120" x2="70" y2="120" stroke="#005bc4" strokeWidth="1.5" strokeDasharray="3 3" />
+                      </svg>
+                    )
                   )}
                   <div style={{ marginTop: '16px', fontSize: '0.75rem', fontWeight: 800, color: 'var(--text-light)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                    {isMachine ? 'Fully Enclosed BFS Unit' : 'Sterile PE Container'}
+                    {isMachine ? 'BFS Machinery Unit' : 'Sterile Parenteral Fluid'}
                   </div>
                 </div>
               </div>
@@ -505,18 +536,49 @@ export default function ProductDetail() {
             <section id="documentation" style={{ textAlign: 'left', backgroundColor: '#f8fafc', padding: '28px', border: '1px solid var(--border)', borderRadius: '6px' }}>
               <h2 style={{ fontSize: '1.4rem', fontWeight: 700, color: 'var(--secondary)', marginBottom: '18px' }}>Technical Documentation</h2>
               <div className="flex" style={{ gap: '20px', flexWrap: 'wrap' }}>
-                {[
-                  isMachine ? 'Product Brochure 2024' : 'Formulation Fact Sheet',
-                  isMachine ? 'Technical Datasheet' : 'Regulatory CTD Dossier'
-                ].map((doc, i) => (
-                  <div key={i} style={{ flex: '1 1 calc(50% - 10px)', minWidth: '200px', display: 'flex', alignItems: 'center', gap: '14px', padding: '16px', border: '1px solid var(--border)', borderRadius: '4px', backgroundColor: '#ffffff' }}>
-                    <div style={{ color: 'var(--primary)' }}><CheckCircle size={28} /></div>
-                    <div>
-                      <h4 style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--secondary)', marginBottom: '4px' }}>{doc}</h4>
-                      <span style={{ fontSize: '0.75rem', color: 'var(--text-light)' }}>PDF — Available on request</span>
+                {!isMachine ? (
+                  <>
+                    <div style={{ flex: '1 1 calc(50% - 10px)', minWidth: '200px', display: 'flex', alignItems: 'center', gap: '14px', padding: '16px', border: '1px solid var(--border)', borderRadius: '4px', backgroundColor: '#ffffff' }}>
+                      <div style={{ color: 'var(--primary)' }}><CheckCircle size={28} /></div>
+                      <div style={{ flexGrow: 1 }}>
+                        <h4 style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--secondary)', marginBottom: '4px' }}>Formulation Fact Sheet</h4>
+                        {product?.factSheetPdf ? (
+                          <a href={resolveImage(product.factSheetPdf)} download className="btn-link" style={{ fontSize: '0.75rem', color: 'var(--primary)', fontWeight: 700, textDecoration: 'none' }} target="_blank" rel="noreferrer">
+                            Download PDF Document
+                          </a>
+                        ) : (
+                          <span style={{ fontSize: '0.75rem', color: 'var(--text-light)' }}>PDF — Available on request</span>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                    <div style={{ flex: '1 1 calc(50% - 10px)', minWidth: '200px', display: 'flex', alignItems: 'center', gap: '14px', padding: '16px', border: '1px solid var(--border)', borderRadius: '4px', backgroundColor: '#ffffff' }}>
+                      <div style={{ color: 'var(--primary)' }}><CheckCircle size={28} /></div>
+                      <div style={{ flexGrow: 1 }}>
+                        <h4 style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--secondary)', marginBottom: '4px' }}>Regulatory CTD Dossier</h4>
+                        {product?.ctdDossierPdf ? (
+                          <a href={resolveImage(product.ctdDossierPdf)} download className="btn-link" style={{ fontSize: '0.75rem', color: 'var(--primary)', fontWeight: 700, textDecoration: 'none' }} target="_blank" rel="noreferrer">
+                            Download PDF Document
+                          </a>
+                        ) : (
+                          <span style={{ fontSize: '0.75rem', color: 'var(--text-light)' }}>PDF — Available on request</span>
+                        )}
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  [
+                    'Product Brochure 2024',
+                    'Technical Datasheet'
+                  ].map((doc, i) => (
+                    <div key={i} style={{ flex: '1 1 calc(50% - 10px)', minWidth: '200px', display: 'flex', alignItems: 'center', gap: '14px', padding: '16px', border: '1px solid var(--border)', borderRadius: '4px', backgroundColor: '#ffffff' }}>
+                      <div style={{ color: 'var(--primary)' }}><CheckCircle size={28} /></div>
+                      <div>
+                        <h4 style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--secondary)', marginBottom: '4px' }}>{doc}</h4>
+                        <span style={{ fontSize: '0.75rem', color: 'var(--text-light)' }}>PDF — Available on request</span>
+                      </div>
+                    </div>
+                  ))
+                )}
               </div>
             </section>
 
@@ -547,14 +609,18 @@ export default function ProductDetail() {
             <section id="quote" style={{ textAlign: 'left', background: 'var(--primary)', color: '#ffffff', padding: '36px', borderRadius: '8px' }}>
               <div className="product-quote-grid">
                 <div>
-                  <h2 style={{ color: '#ffffff', fontSize: '1.6rem', marginBottom: '14px', fontWeight: 700 }}>Request Technical Specs & Pricing</h2>
+                  <h2 style={{ color: '#ffffff', fontSize: '1.6rem', marginBottom: '14px', fontWeight: 700 }}>
+                    {!isMachine ? (product?.quoteTitle || 'Request Technical Specs & Pricing') : 'Request Technical Specs & Pricing'}
+                  </h2>
                   <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '0.9rem', lineHeight: 1.6, marginBottom: '20px' }}>
-                    Speak with a product relations manager to discuss custom volumes, lead times, and regulatory dossier options.
+                    {!isMachine ? (product?.quoteDesc || 'Speak with a product relations manager to discuss custom volumes, lead times, and regulatory dossier options.') : 'Speak with a product relations manager to discuss custom volumes, lead times, and regulatory dossier options.'}
                   </p>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.8rem', fontWeight: 600 }}>
-                    <div className="flex align-center" style={{ gap: '8px' }}><Check size={14} /> <span>Estimated Lead Time: 2-3 Weeks</span></div>
-                    <div className="flex align-center" style={{ gap: '8px' }}><Check size={14} /> <span>WHO-GMP Dossier Support</span></div>
-                    <div className="flex align-center" style={{ gap: '8px' }}><Check size={14} /> <span>24/7 Supply Logistics</span></div>
+                    {(!isMachine && product?.quoteBullets && product.quoteBullets.length > 0 ? product.quoteBullets : ['Estimated Lead Time: 2-3 Weeks', 'WHO-GMP Dossier Support', '24/7 Supply Logistics']).map((blt, idx) => (
+                      <div key={idx} className="flex align-center" style={{ gap: '8px' }}>
+                        <Check size={14} /> <span>{blt}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
                 <div style={{ backgroundColor: '#ffffff', borderRadius: '6px', padding: '24px', color: 'var(--secondary)' }}>

@@ -193,119 +193,7 @@ export default function Gallery() {
             </div>
 
             {/* Right Side */}
-            <div>
-              <div
-                className="card"
-                style={{
-                  padding: '24px',
-                  backgroundColor: '#ffffff',
-                  border: '1px solid var(--border)',
-                  boxShadow: 'none',
-                  borderRadius: '12px'
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: '0.75rem',
-                    fontWeight: 700,
-                    color: 'var(--primary)',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.08em',
-                    marginBottom: '18px'
-                  }}
-                >
-                  Facility Snapshot
-                </div>
-
-                <div
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: '1fr 1fr',
-                    gap: '16px'
-                  }}
-                >
-                  <div>
-                    <div
-                      style={{
-                        fontSize: '1.6rem',
-                        fontWeight: 800,
-                        color: 'var(--secondary)'
-                      }}
-                    >
-                      25+
-                    </div>
-                    <div
-                      style={{
-                        fontSize: '0.85rem',
-                        color: 'var(--text-muted)'
-                      }}
-                    >
-                      Product Variants
-                    </div>
-                  </div>
-
-                  <div>
-                    <div
-                      style={{
-                        fontSize: '1.6rem',
-                        fontWeight: 800,
-                        color: 'var(--secondary)'
-                      }}
-                    >
-                      WHO-GMP
-                    </div>
-                    <div
-                      style={{
-                        fontSize: '0.85rem',
-                        color: 'var(--text-muted)'
-                      }}
-                    >
-                      Manufacturing
-                    </div>
-                  </div>
-
-                  <div>
-                    <div
-                      style={{
-                        fontSize: '1.6rem',
-                        fontWeight: 800,
-                        color: 'var(--secondary)'
-                      }}
-                    >
-                      BFS
-                    </div>
-                    <div
-                      style={{
-                        fontSize: '0.85rem',
-                        color: 'var(--text-muted)'
-                      }}
-                    >
-                      Technology
-                    </div>
-                  </div>
-
-                  <div>
-                    <div
-                      style={{
-                        fontSize: '1.6rem',
-                        fontWeight: 800,
-                        color: 'var(--secondary)'
-                      }}
-                    >
-                      Global
-                    </div>
-                    <div
-                      style={{
-                        fontSize: '0.85rem',
-                        color: 'var(--text-muted)'
-                      }}
-                    >
-                      Distribution
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+           
           </div>
         </div>
       </section>
@@ -392,7 +280,7 @@ export default function Gallery() {
 
                     {/* Specs labels */}
                     <div className="flex" style={{ gap: '6px', flexWrap: 'wrap', marginTop: '4px' }}>
-                      {item.specs.map((sp, idx) => (
+                      {(item.specs || []).map((sp, idx) => (
                         <span key={idx} style={{ fontSize: '0.6rem', fontWeight: 600, backgroundColor: 'rgba(255, 255, 255, 0.15)', color: 'var(--primary-light)', padding: '2px 6px', borderRadius: '3px' }}>
                           {sp}
                         </span>

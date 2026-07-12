@@ -555,15 +555,22 @@ export default function About() {
                       {i === 5 && <Users size={18} />}
                     </div>
 
-                    <span
-                      style={{
-                        fontSize: '0.85rem',
-                        color: 'var(--blue-dark)',
-                        lineHeight: 1.5
-                      }}
-                    >
-                      {item.text}
-                    </span>
+                    <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'left' }}>
+                      {item.title ? (
+                        <>
+                          <strong style={{ fontSize: '0.88rem', color: 'var(--blue-dark)', fontWeight: 700 }}>
+                            {item.title}
+                          </strong>
+                          <span style={{ fontSize: '0.82rem', color: 'var(--blue-light)', lineHeight: 1.5, marginTop: '2px' }}>
+                            {item.desc}
+                          </span>
+                        </>
+                      ) : (
+                        <span style={{ fontSize: '0.85rem', color: 'var(--blue-dark)', lineHeight: 1.5 }}>
+                          {item.text}
+                        </span>
+                      )}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -784,12 +791,12 @@ export default function About() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 <div className="flex align-center" style={{ gap: '12px' }}>
                   <Phone size={18} style={{ color: 'var(--green-light)', flexShrink: 0 }} />
-                  <span style={{ fontWeight: 600 }}>+91 98795 00383</span>
+                  <span style={{ fontWeight: 600 }}>{content?.contact?.phoneExport || '+91 98795 00383'}</span>
                 </div>
                 <div className="flex" style={{ gap: '12px', alignItems: 'flex-start' }}>
                   <MapPin size={18} style={{ color: 'var(--green-light)', flexShrink: 0, marginTop: '2px' }} />
                   <span style={{ fontSize: '0.9rem', lineHeight: 1.5 }}>
-                    Office 1122, Satyamev Shivalik, Bopal Ambili Junction, Sardar Patel Ring Road, Ahmedabad – 380058, Gujarat, India
+                    {content?.contact?.headOffice || 'Office 1122, Satyamev Shivalik, Bopal Ambili Junction, Sardar Patel Ring Road, Ahmedabad – 380058, Gujarat, India'}
                   </span>
                 </div>
               </div>

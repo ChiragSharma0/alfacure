@@ -6,13 +6,11 @@ import { useCMS } from '../context/CMSContext';
 
 export default function Products() {
   const navigate = useNavigate();
-  const { content, R2_PUBLIC_URL } = useCMS();
+  const { content, getAssetUrl, resolveImage } = useCMS();
 
-  const resolveImage = (img) => {
-    if (!img) return '';
-    if (img.startsWith('http') || img.startsWith('/')) return img;
-    return `${R2_PUBLIC_URL}/${img}`;
-  };
+  const activeProductsData = content?.products?.productsData || productsData;
+  const activeMachineryItems = content?.products?.machineryItems || [];
+
   const [catalogTab, setCatalogTab] = useState('formulations');
   const [selectedPurpose, setSelectedPurpose] = useState('all');
   const [selectedTherapeutic, setSelectedTherapeutic] = useState('all');
@@ -28,6 +26,9 @@ export default function Products() {
   ];
 
   const getTherapeuticCategory = (product) => {
+    // If the category is explicitly saved on the product in the CMS, use it!
+    if (product.category) return product.category;
+
     const name = product.name.toLowerCase();
     if (
       name.includes('metronidazole') || name.includes('ciprofloxacin') ||
@@ -48,31 +49,33 @@ export default function Products() {
     return 'other';
   };
 
-  const filteredProducts = productsData.filter(prod => {
+  const filteredProducts = activeProductsData.filter(prod => {
     if (selectedPurpose !== 'all' && prod.purpose !== selectedPurpose) return false;
     if (selectedTherapeutic !== 'all') {
       const cat = getTherapeuticCategory(prod);
-      if (selectedTherapeutic === 'infusions' && !prod.name.toLowerCase().includes('infusion') && !prod.name.toLowerCase().includes('irrigation')) return false;
-      if (selectedTherapeutic === 'injections' && !prod.name.toLowerCase().includes('injection')) return false;
+      if (selectedTherapeutic === 'infusions' && !prod.name.toLowerCase().includes('infusion') && !prod.name.toLowerCase().includes('irrigation') && cat !== 'infusions') return false;
+      if (selectedTherapeutic === 'injections' && !prod.name.toLowerCase().includes('injection') && cat !== 'injections') return false;
       if (selectedTherapeutic === 'electrolytes' && cat !== 'electrolytes') return false;
       if (selectedTherapeutic === 'antimicrobials' && cat !== 'antimicrobials') return false;
     }
     if (selectedPackSize !== 'all') {
-      const hasSize = prod.packSizes.some(size => size.toLowerCase().includes(selectedPackSize.toLowerCase()));
+      const hasSize = (prod.packSizes || []).some(size => size.toLowerCase().includes(selectedPackSize.toLowerCase()));
       if (!hasSize) return false;
     }
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
-      if (!prod.name.toLowerCase().includes(query) && !prod.composition.toLowerCase().includes(query)) return false;
+      if (!prod.name.toLowerCase().includes(query) && !(prod.composition || '').toLowerCase().includes(query)) return false;
     }
     return true;
   });
 
-  const machineryItems = [
-    { id: 'pt9000', name: 'PharmaFill 5000 Series', capacity: '5000 units/hr', automation: 'Fully Automatic', isoClass: 'Class 5', image: '/assets/auto_capping.png', status: 'Active' },
-    { id: 'sterilepack', name: 'SterilePack V3', capacity: '3200 units/hr', automation: 'Robotic Auto', isoClass: 'Class 5 (±0.01mm)', image: '/assets/kinetic_sorting.png', status: 'Active' },
-    { id: 'mediflow', name: 'MediFlow IV-200', capacity: '1200 Bags/hr', automation: 'Semi-Automatic', isoClass: 'Class 5 (4.5 kW)', image: '/assets/clean_hub.png', status: 'Active' }
+  const fallbackMachineryItems = [
+    { id: 'pt9000', name: 'PharmaFill 5000 Series', capacity: '5000 units/hr', automation: 'Fully Automatic', isoClass: 'Class 5', image: 'auto_capping.png', status: 'Active' },
+    { id: 'sterilepack', name: 'SterilePack V3', capacity: '3200 units/hr', automation: 'Robotic Auto', isoClass: 'Class 5 (±0.01mm)', image: 'kinetic_sorting.png', status: 'Active' },
+    { id: 'mediflow', name: 'MediFlow IV-200', capacity: '1200 Bags/hr', automation: 'Semi-Automatic', isoClass: 'Class 5 (4.5 kW)', image: 'clean_hub.png', status: 'Active' }
   ];
+
+  const actualMachineryItems = activeMachineryItems.length > 0 ? activeMachineryItems : fallbackMachineryItems;
 
   const industrySolutions = [
     {
@@ -117,7 +120,7 @@ export default function Products() {
             }}>
               View Catalog →
             </button>
-            <button className="btn btn-outline" onClick={() => navigate('/support')}>
+            <button className="btn btn-outline" onClick={() => window.open(getAssetUrl('products_specs.pdf', '/assets/brochure.pdf'), '_blank')}>
               Download Specs
             </button>
           </div>
@@ -131,8 +134,8 @@ export default function Products() {
           {/* Catalog Tabs */}
           <div style={{ display: 'flex', borderBottom: '1px solid var(--border)', marginBottom: '40px', gap: '0', overflowX: 'auto' }}>
             {[
-              { id: 'formulations', label: `Parenteral Formulations (${productsData.length})` },
-              { id: 'machinery', label: `BFS Machinery Systems (${(content?.products?.machineryItems || machineryItems).length})` }
+              { id: 'formulations', label: `Parenteral Formulations (${activeProductsData.length})` },
+              { id: 'machinery', label: `BFS Machinery Systems (${actualMachineryItems.length})` }
             ].map(tab => (
               <button
                 key={tab.id}
@@ -249,13 +252,17 @@ export default function Products() {
                     </span>
                   </div>
 
-                  <div style={{ height: '180px', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f8fafc', borderBottom: '1px solid var(--border)' }}>
-                    <svg width="60" height="110" viewBox="0 0 100 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="35" y="10" width="30" height="20" rx="3" fill="#005bc4" fillOpacity="0.2" stroke="#005bc4" strokeWidth="2" />
-                      <rect x="42" y="30" width="16" height="20" fill="#005bc4" fillOpacity="0.1" stroke="#005bc4" strokeWidth="2" />
-                      <path d="M20 70C20 58.9543 28.9543 50 40 50H60C71.0457 50 80 58.9543 80 70V160C80 165.523 75.5228 170 70 170H30C24.4772 170 20 165.523 20 160V70Z" fill="white" stroke="#005bc4" strokeWidth="2" />
-                      <line x1="30" y1="120" x2="70" y2="120" stroke="#005bc4" strokeWidth="1.5" strokeDasharray="3 3" />
-                    </svg>
+                  <div style={{ height: '180px', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f8fafc', borderBottom: '1px solid var(--border)', overflow: 'hidden' }}>
+                    {product.image ? (
+                      <img src={resolveImage(product.image)} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '12px' }} />
+                    ) : (
+                      <svg width="60" height="110" viewBox="0 0 100 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="35" y="10" width="30" height="20" rx="3" fill="#005bc4" fillOpacity="0.2" stroke="#005bc4" strokeWidth="2" />
+                        <rect x="42" y="30" width="16" height="20" fill="#005bc4" fillOpacity="0.1" stroke="#005bc4" strokeWidth="2" />
+                        <path d="M20 70C20 58.9543 28.9543 50 40 50H60C71.0457 50 80 58.9543 80 70V160C80 165.523 75.5228 170 70 170H30C24.4772 170 20 165.523 20 160V70Z" fill="white" stroke="#005bc4" strokeWidth="2" />
+                        <line x1="30" y1="120" x2="70" y2="120" stroke="#005bc4" strokeWidth="1.5" strokeDasharray="3 3" />
+                      </svg>
+                    )}
                   </div>
 
                   <div style={{ padding: '20px', flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
@@ -266,7 +273,7 @@ export default function Products() {
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', borderTop: '1px solid var(--border)', paddingTop: '12px', marginBottom: '16px' }}>
                         <div className="flex justify-between" style={{ fontSize: '0.78rem', paddingBottom: '5px', borderBottom: '1px solid #f1f5f9' }}>
                           <span style={{ color: 'var(--text-light)', fontWeight: 600 }}>Packaging</span>
-                          <span style={{ color: 'var(--secondary)', fontWeight: 700 }}>{product.packSizes.join(', ')}</span>
+                          <span style={{ color: 'var(--secondary)', fontWeight: 700 }}>{(product.packSizes || []).join(', ')}</span>
                         </div>
                         <div className="flex justify-between" style={{ fontSize: '0.78rem', paddingBottom: '5px', borderBottom: '1px solid #f1f5f9' }}>
                           <span style={{ color: 'var(--text-light)', fontWeight: 600 }}>Standard</span>
@@ -289,7 +296,7 @@ export default function Products() {
                 </div>
               ))
             ) : (
-              (content?.products?.machineryItems || machineryItems).map(mach => (
+              actualMachineryItems.map(mach => (
                 <div
                   key={mach.id}
                   className="card"
@@ -300,7 +307,7 @@ export default function Products() {
                       ● {mach.status}
                     </span>
                   </div>
-                  <div style={{ height: '180px', overflow: 'hidden', borderBottom: '1px solid var(--border)' }}>
+                  <div style={{ height: '180px', overflow: 'hidden', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f8fafc' }}>
                     <img src={resolveImage(mach.image)} alt={mach.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   </div>
                   <div style={{ padding: '20px', flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
@@ -351,36 +358,42 @@ export default function Products() {
           </div>
 
           <div className="grid grid-cols-3" style={{ gap: '24px' }}>
-            {(content?.products?.industrySolutions || industrySolutions).map((sol, i) => (
-              <div
-                key={i}
-                className="card"
-                style={{ padding: '32px 24px', textAlign: 'left', borderTop: '4px solid var(--primary)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', backgroundColor: '#ffffff', boxShadow: 'none', border: '1px solid var(--border)', borderTop: '4px solid var(--primary)' }}
-              >
-                <div>
-                  <div style={{ display: 'flex', padding: '10px', backgroundColor: 'var(--primary-light)', borderRadius: '50%', width: 'fit-content', marginBottom: '16px' }}>
-                    {sol.icon}
-                  </div>
-                  <h3 style={{ fontSize: '1.1rem', color: 'var(--secondary)', marginBottom: '10px', fontWeight: 700 }}>{sol.title}</h3>
-                  <p style={{ fontSize: '0.85rem', lineHeight: 1.5, color: 'var(--text-muted)', marginBottom: '16px' }}>{sol.desc}</p>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '7px', marginBottom: '20px', borderTop: '1px solid var(--border)', paddingTop: '14px' }}>
-                    {sol.bullets.map((b, bIdx) => (
-                      <div key={bIdx} className="flex align-center" style={{ gap: '6px', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                        <span style={{ color: 'var(--success)' }}>✔</span>
-                        <span>{b}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                <button
-                  className="btn-link"
-                  style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, justifyContent: 'flex-start', fontSize: '0.8rem', fontWeight: 700 }}
-                  onClick={() => navigate('/support')}
+            {(content?.products?.industrySolutions || industrySolutions).map((sol, i) => {
+              const displayIcon = (sol.icon && typeof sol.icon !== 'string')
+                ? sol.icon
+                : (i === 0 ? <span style={{ fontSize: '1.25rem' }}>🔬</span> : i === 1 ? <span style={{ fontSize: '1.25rem' }}>🏥</span> : <span style={{ fontSize: '1.25rem' }}>🏭</span>);
+
+              return (
+                <div
+                  key={i}
+                  className="card"
+                  style={{ padding: '32px 24px', textAlign: 'left', borderTop: '4px solid var(--primary)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', backgroundColor: '#ffffff', boxShadow: 'none', border: '1px solid var(--border)', borderTop: '4px solid var(--primary)' }}
                 >
-                  Explore Sector →
-                </button>
-              </div>
-            ))}
+                  <div>
+                    <div style={{ display: 'flex', padding: '10px', backgroundColor: 'var(--primary-light)', borderRadius: '50%', width: 'fit-content', marginBottom: '16px' }}>
+                      {displayIcon}
+                    </div>
+                    <h3 style={{ fontSize: '1.1rem', color: 'var(--secondary)', marginBottom: '10px', fontWeight: 700 }}>{sol.title}</h3>
+                    <p style={{ fontSize: '0.85rem', lineHeight: 1.5, color: 'var(--text-muted)', marginBottom: '16px' }}>{sol.desc}</p>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '7px', marginBottom: '20px', borderTop: '1px solid var(--border)', paddingTop: '14px' }}>
+                      {sol.bullets.map((b, bIdx) => (
+                        <div key={bIdx} className="flex align-center" style={{ gap: '6px', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                          <span style={{ color: 'var(--success)' }}>✔</span>
+                          <span>{b}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <button
+                    className="btn-link"
+                    style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, justifyContent: 'flex-start', fontSize: '0.8rem', fontWeight: 700 }}
+                    onClick={() => navigate('/support')}
+                  >
+                    Explore Sector →
+                  </button>
+                </div>
+              )
+            })}
           </div>
         </div>
       </section>
