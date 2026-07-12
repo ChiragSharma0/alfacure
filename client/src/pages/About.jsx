@@ -4,9 +4,18 @@ import {
   Target, Eye, Briefcase, Globe, Factory, ShieldCheck,
   ArrowRight, MapPin, Phone, Award, Users, Truck
 } from 'lucide-react';
+import { useCMS } from '../context/CMSContext';
 
 export default function About() {
   const navigate = useNavigate();
+  const { content, R2_PUBLIC_URL } = useCMS();
+
+  const getAssetUrl = (fileName, defaultPath) => {
+    if (content && Object.keys(content).length > 0) {
+      return `${R2_PUBLIC_URL}/${fileName}`;
+    }
+    return defaultPath;
+  };
 
   const whatWeDo = [
     {
@@ -129,12 +138,7 @@ export default function About() {
                   marginBottom: '28px'
                 }}
               >
-                Alfacure Lifescience Pvt. Ltd. is a premier Ahmedabad-based pharmaceutical
-                company specializing in the manufacturing, commercialization, and global
-                distribution of life-saving therapeutics. With a strong focus on quality,
-                sterility, and regulatory compliance, we deliver high-quality Large Volume
-                Parenteral (LVP) solutions to healthcare institutions, distributors, and
-                international partners across the world.
+                {content?.about?.heroDesc || 'Alfacure Lifescience Pvt. Ltd. is a premier Ahmedabad-based pharmaceutical company specializing in the manufacturing, commercialization, and global distribution of life-saving therapeutics. With a strong focus on quality, sterility, and regulatory compliance, we deliver high-quality Large Volume Parenteral (LVP) solutions to healthcare institutions, distributors, and international partners across the world.'}
               </p>
 
               <div className="flex" style={{ gap: '12px' }}>
@@ -174,7 +178,11 @@ export default function About() {
                 }}
               >
                 <img
-                  src="/assets/production_floor.png"
+                  src={getAssetUrl('about_hero.png', '/assets/production_floor.png')}
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = '/assets/production_floor.png';
+                  }}
                   alt="Alfacure Lifescience"
                   style={{
                     width: '100%',
@@ -414,7 +422,7 @@ export default function About() {
           </div>
 
           <div className="grid grid-cols-2" style={{ gap: '24px' }}>
-            {whatWeDo.map((item, i) => (
+            {(content?.about?.whatWeDo || whatWeDo).map((item, i) => (
               <div
                 key={i}
                 className="card"
@@ -439,7 +447,10 @@ export default function About() {
                     flexShrink: 0
                   }}
                 >
-                  {item.icon}
+                  {i === 0 && <Globe size={22} />}
+                  {i === 1 && <Briefcase size={22} />}
+                  {i === 2 && <Factory size={22} />}
+                  {i === 3 && <Users size={22} />}
                 </div>
 
                 <div>
@@ -472,254 +483,271 @@ export default function About() {
 
       {/* ─── WHY ALFACURE ─── */}
       <section
-  className="section"
-  style={{
-    backgroundColor: 'var(--white)',
-    padding: '80px 0',
-    borderBottom: '1px solid var(--border)'
-  }}
->
-  <div className="container">
-    <div className="grid grid-cols-2 align-center" style={{ gap: '64px' }}>
-      <div style={{ textAlign: 'left' }}>
-        <span
-          style={{
-            fontSize: '0.75rem',
-            fontWeight: 700,
-            color: 'var(--green-dark)',
-            letterSpacing: '0.15em',
-            textTransform: 'uppercase',
-            marginBottom: '12px',
-            display: 'inline-block'
-          }}
-        >
-          OUR STRENGTHS
-        </span>
+        className="section"
+        style={{
+          backgroundColor: 'var(--white)',
+          padding: '80px 0',
+          borderBottom: '1px solid var(--border)'
+        }}
+      >
+        <div className="container">
+          <div className="grid grid-cols-2 align-center" style={{ gap: '64px' }}>
+            <div style={{ textAlign: 'left' }}>
+              <span
+                style={{
+                  fontSize: '0.75rem',
+                  fontWeight: 700,
+                  color: 'var(--green-dark)',
+                  letterSpacing: '0.15em',
+                  textTransform: 'uppercase',
+                  marginBottom: '12px',
+                  display: 'inline-block'
+                }}
+              >
+                OUR STRENGTHS
+              </span>
 
-        <h2
-          style={{
-            fontSize: '2rem',
-            fontWeight: 700,
-            color: 'var(--blue-dark)',
-            marginBottom: '20px',
-            lineHeight: 1.2
-          }}
-        >
-          Why Alfacure Lifescience?
-        </h2>
+              <h2
+                style={{
+                  fontSize: '2rem',
+                  fontWeight: 700,
+                  color: 'var(--blue-dark)',
+                  marginBottom: '20px',
+                  lineHeight: 1.2
+                }}
+              >
+                Why Alfacure Lifescience?
+              </h2>
 
-        <p
-          style={{
-            fontSize: '0.9rem',
-            color: 'var(--blue-light)',
-            lineHeight: 1.6,
-            marginBottom: '28px'
-          }}
-        >
-          Alfacure Lifescience combines pharmaceutical expertise, regulatory
-          excellence, and a diverse portfolio of Large Volume Parenteral
-          solutions to support healthcare institutions and business partners
-          across domestic and international markets.
-        </p>
+              <p
+                style={{
+                  fontSize: '0.9rem',
+                  color: 'var(--blue-light)',
+                  lineHeight: 1.6,
+                  marginBottom: '28px'
+                }}
+              >
+                Alfacure Lifescience combines pharmaceutical expertise, regulatory
+                excellence, and a diverse portfolio of Large Volume Parenteral
+                solutions to support healthcare institutions and business partners
+                across domestic and international markets.
+              </p>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          {whyAlfacure.map((item, i) => (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                {(content?.about?.whyAlfacure || whyAlfacure).map((item, i) => (
+                  <div
+                    key={i}
+                    className="flex"
+                    style={{ gap: '12px', alignItems: 'flex-start' }}
+                  >
+                    <div
+                      style={{
+                        color: 'var(--green-dark)',
+                        flexShrink: 0,
+                        marginTop: '2px'
+                      }}
+                    >
+                      {i === 0 && <Award size={18} />}
+                      {i === 1 && <ShieldCheck size={18} />}
+                      {i === 2 && <Factory size={18} />}
+                      {i === 3 && <Briefcase size={18} />}
+                      {i === 4 && <Truck size={18} />}
+                      {i === 5 && <Users size={18} />}
+                    </div>
+
+                    <span
+                      style={{
+                        fontSize: '0.85rem',
+                        color: 'var(--blue-dark)',
+                        lineHeight: 1.5
+                      }}
+                    >
+                      {item.text}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right: Gallery mosaic */}
             <div
-              key={i}
-              className="flex"
-              style={{ gap: '12px', alignItems: 'flex-start' }}
+              style={{
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr',
+                gap: '12px'
+              }}
             >
               <div
                 style={{
-                  color: 'var(--green-dark)',
-                  flexShrink: 0,
-                  marginTop: '2px'
+                  borderRadius: '8px',
+                  overflow: 'hidden',
+                  height: '180px',
+                  border: '1px solid var(--border)'
                 }}
               >
-                {item.icon}
+                <img
+                  src={getAssetUrl('clean_hub.png', '/assets/clean_hub.png')}
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = '/assets/clean_hub.png';
+                  }}
+                  alt="Sterile Pharmaceutical Operations"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover'
+                  }}
+                />
               </div>
 
-              <span
+              <div
                 style={{
-                  fontSize: '0.85rem',
-                  color: 'var(--blue-dark)',
-                  lineHeight: 1.5
+                  borderRadius: '8px',
+                  overflow: 'hidden',
+                  height: '180px',
+                  border: '1px solid var(--border)'
                 }}
               >
-                {item.text}
-              </span>
+                <img
+                  src={getAssetUrl('auto_capping.png', '/assets/auto_capping.png')}
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = '/assets/auto_capping.png';
+                  }}
+                  alt="Pharmaceutical Manufacturing Process"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover'
+                  }}
+                />
+              </div>
+
+              <div
+                style={{
+                  borderRadius: '8px',
+                  overflow: 'hidden',
+                  height: '180px',
+                  gridColumn: 'span 2',
+                  border: '1px solid var(--border)'
+                }}
+              >
+                <img
+                  src={getAssetUrl('spectrometric_lab.png', '/assets/spectrometric_lab.png')}
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = '/assets/spectrometric_lab.png';
+                  }}
+                  alt="Quality Assurance and Regulatory Standards"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover'
+                  }}
+                />
+              </div>
             </div>
-          ))}
+          </div>
         </div>
-      </div>
-
-      {/* Right: Gallery mosaic */}
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: '12px'
-        }}
-      >
-        <div
-          style={{
-            borderRadius: '8px',
-            overflow: 'hidden',
-            height: '180px',
-            border: '1px solid var(--border)'
-          }}
-        >
-          <img
-            src="/assets/clean_hub.png"
-            alt="Sterile Pharmaceutical Operations"
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover'
-            }}
-          />
-        </div>
-
-        <div
-          style={{
-            borderRadius: '8px',
-            overflow: 'hidden',
-            height: '180px',
-            border: '1px solid var(--border)'
-          }}
-        >
-          <img
-            src="/assets/auto_capping.png"
-            alt="Pharmaceutical Manufacturing Process"
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover'
-            }}
-          />
-        </div>
-
-        <div
-          style={{
-            borderRadius: '8px',
-            overflow: 'hidden',
-            height: '180px',
-            gridColumn: 'span 2',
-            border: '1px solid var(--border)'
-          }}
-        >
-          <img
-            src="/assets/spectrometric_lab.png"
-            alt="Quality Assurance and Regulatory Standards"
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover'
-            }}
-          />
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+      </section>
 
       {/* ─── MANUFACTURING BACKBONE ─── */}
       <section
-  className="section"
-  style={{
-    backgroundColor: 'var(--blue-dark)',
-    padding: '80px 0',
-    color: '#ffffff'
-  }}
->
-  <div className="container">
-    <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-      <span
+        className="section"
         style={{
-          fontSize: '0.75rem',
-          fontWeight: 700,
-          color: 'var(--green-light)',
-          letterSpacing: '0.15em',
-          textTransform: 'uppercase',
-          display: 'inline-block',
-          marginBottom: '12px'
+          backgroundColor: 'var(--blue-dark)',
+          padding: '80px 0',
+          color: '#ffffff'
         }}
       >
-        REGULATORY EXCELLENCE
-      </span>
-
-      <h2
-        style={{
-          fontSize: '2.25rem',
-          fontWeight: 700,
-          color: '#ffffff',
-          marginBottom: '16px'
-        }}
-      >
-        Comprehensive Regulatory Support
-      </h2>
-
-      <p
-        style={{
-          fontSize: '0.95rem',
-          color: 'rgba(255,255,255,0.7)',
-          maxWidth: '720px',
-          margin: '0 auto'
-        }}
-      >
-        Alfacure Lifescience provides complete regulatory and documentation
-        support to ensure smooth product registration and faster market entry
-        across domestic and international markets.
-      </p>
-    </div>
-
-    {/* Specs Table */}
-    <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-      <table
-        style={{
-          width: '100%',
-          borderCollapse: 'collapse',
-          fontSize: '0.9rem'
-        }}
-      >
-        <tbody>
-          {manufacturingSpecs.map((spec, i) => (
-            <tr
-              key={i}
+        <div className="container">
+          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+            <span
               style={{
-                borderBottom: '1px solid rgba(255,255,255,0.1)'
+                fontSize: '0.75rem',
+                fontWeight: 700,
+                color: 'var(--green-light)',
+                letterSpacing: '0.15em',
+                textTransform: 'uppercase',
+                display: 'inline-block',
+                marginBottom: '12px'
               }}
             >
-              <td
-                style={{
-                  padding: '16px 20px',
-                  fontWeight: 700,
-                  color: 'var(--green-light)',
-                  textTransform: 'uppercase',
-                  fontSize: '0.75rem',
-                  letterSpacing: '0.05em',
-                  width: '220px'
-                }}
-              >
-                {spec.label}
-              </td>
+              REGULATORY EXCELLENCE
+            </span>
 
-              <td
-                style={{
-                  padding: '16px 20px',
-                  color: '#ffffff',
-                  fontWeight: 600
-                }}
-              >
-                {spec.value}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
+            <h2
+              style={{
+                fontSize: '2.25rem',
+                fontWeight: 700,
+                color: '#ffffff',
+                marginBottom: '16px'
+              }}
+            >
+              Comprehensive Regulatory Support
+            </h2>
+
+            <p
+              style={{
+                fontSize: '0.95rem',
+                color: 'rgba(255,255,255,0.7)',
+                maxWidth: '720px',
+                margin: '0 auto'
+              }}
+            >
+              Alfacure Lifescience provides complete regulatory and documentation
+              support to ensure smooth product registration and faster market entry
+              across domestic and international markets.
+            </p>
+          </div>
+
+          {/* Specs Table */}
+          <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+            <table
+              style={{
+                width: '100%',
+                borderCollapse: 'collapse',
+                fontSize: '0.9rem'
+              }}
+            >
+              <tbody>
+                {(content?.about?.manufacturingSpecs || manufacturingSpecs).map((spec, i) => (
+                  <tr
+                    key={i}
+                    style={{
+                      borderBottom: '1px solid rgba(255,255,255,0.1)'
+                    }}
+                  >
+                    <td
+                      style={{
+                        padding: '16px 20px',
+                        fontWeight: 700,
+                        color: 'var(--green-light)',
+                        textTransform: 'uppercase',
+                        fontSize: '0.75rem',
+                        letterSpacing: '0.05em',
+                        width: '220px'
+                      }}
+                    >
+                      {spec.label}
+                    </td>
+
+                    <td
+                      style={{
+                        padding: '16px 20px',
+                        color: '#ffffff',
+                        fontWeight: 600
+                      }}
+                    >
+                      {spec.value}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
 
       {/* ─── CONTACT INFO ─── */}
       <section className="section" style={{ backgroundColor: 'var(--white)', padding: '80px 0' }}>

@@ -5,6 +5,7 @@ import {
   ArrowRight, Star, Microscope, Building2, ClipboardList,
   X, ZoomIn, Download, ExternalLink
 } from 'lucide-react';
+import { useCMS } from '../context/CMSContext';
 
 /* ─── CERTIFICATE DATA ──────────────────────────────────────────────── */
 
@@ -272,6 +273,7 @@ function CertModal({ cert, onClose }) {
 
 export default function Certifications() {
   const navigate = useNavigate();
+  const { content } = useCMS();
   const [selectedCert, setSelectedCert] = useState(null);
 
   return (
@@ -300,11 +302,11 @@ export default function Certifications() {
             </span>
           </div>
           <h1 className="animate-fade-in-up" style={{ fontSize: '3rem', fontWeight: 800, color: '#ffffff', lineHeight: 1.12, letterSpacing: '-0.02em', marginBottom: '20px' }}>
-            Certifications &<br />
-            <span style={{ color: '#49a867ff' }}>Regulatory Approvals</span>
+            {content?.certifications?.heroTitle1 || 'Certifications &'}<br />
+            <span style={{ color: '#49a867ff' }}>{content?.certifications?.heroTitle2 || 'Regulatory Approvals'}</span>
           </h1>
           <p className="animate-fade-in-up" style={{ fontSize: '1.05rem', color: 'rgba(255,255,255,0.78)', maxWidth: '600px', lineHeight: 1.65 }}>
-            Every product we export is backed by internationally recognised certifications, rigorous quality controls, and full regulatory documentation.
+            {content?.certifications?.heroDesc || 'Every product we export is backed by internationally recognised certifications, rigorous quality controls, and full regulatory documentation.'}
           </p>
         </div>
       </section>
@@ -313,7 +315,7 @@ export default function Certifications() {
       <section style={{ backgroundColor: 'var(--blue-dark)', padding: '0' }}>
         <div className="container">
           <div className="cert-badges-grid">
-            {qualityBadges.map((b, i) => (
+            {(content?.certifications?.qualityBadges || qualityBadges).map((b, i) => (
               <div
                 key={i}
                 style={{
@@ -347,7 +349,7 @@ export default function Certifications() {
           </div>
 
           <div className="grid grid-cols-3" style={{ gap: '24px' }}>
-            {certificates.map((cert) => (
+            {(content?.certifications?.certificates || certificates).map((cert) => (
               <div
                 key={cert.id}
                 className="card"
@@ -501,7 +503,7 @@ export default function Certifications() {
                 </tr>
               </thead>
               <tbody>
-                {regulatoryApprovals.map((row, i) => (
+                {(content?.certifications?.regulatoryApprovals || regulatoryApprovals).map((row, i) => (
                   <tr key={i} style={{ borderBottom: '1px solid var(--border)', backgroundColor: i % 2 === 0 ? 'var(--white)' : 'var(--bg-light)' }}>
                     <td style={{ padding: '14px 20px', fontWeight: 600, color: 'var(--blue-dark)' }}>{row.region}</td>
                     <td style={{ padding: '14px 20px', color: 'var(--blue-light)' }}>{row.body}</td>

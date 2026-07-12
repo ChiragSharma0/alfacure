@@ -2,9 +2,17 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Layers, ChevronDown, Search } from 'lucide-react';
 import productsData from '../data/products.json';
+import { useCMS } from '../context/CMSContext';
 
 export default function Products() {
   const navigate = useNavigate();
+  const { content, R2_PUBLIC_URL } = useCMS();
+
+  const resolveImage = (img) => {
+    if (!img) return '';
+    if (img.startsWith('http') || img.startsWith('/')) return img;
+    return `${R2_PUBLIC_URL}/${img}`;
+  };
   const [catalogTab, setCatalogTab] = useState('formulations');
   const [selectedPurpose, setSelectedPurpose] = useState('all');
   const [selectedTherapeutic, setSelectedTherapeutic] = useState('all');
@@ -94,13 +102,13 @@ export default function Products() {
       <section style={{ backgroundColor: '#f4f7fc', padding: '100px 0 60px', borderBottom: '1px solid var(--border)' }}>
         <div className="container">
           <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--primary)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '12px', display: 'inline-block' }}>
-            PRECISION FORMULATIONS & SYSTEMS
+            {content?.products?.heroTag || 'PRECISION FORMULATIONS & SYSTEMS'}
           </span>
           <h1 style={{ fontWeight: 800, color: 'var(--secondary)', marginBottom: '20px' }} className="products-hero-title">
-            Products & Solutions
+            {content?.products?.heroTitle || 'Products & Solutions'}
           </h1>
           <p style={{ fontSize: '1rem', color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: '32px', maxWidth: '680px' }}>
-            Explore our comprehensive range of sterile medical parenterals and high-precision Blow-Fill-Seal systems, engineered to meet the highest regulatory standards.
+            {content?.products?.heroDesc || 'Explore our comprehensive range of sterile medical parenterals and high-precision Blow-Fill-Seal systems, engineered to meet the highest regulatory standards.'}
           </p>
           <div className="hero-buttons">
             <button className="btn btn-primary" onClick={() => {
@@ -124,7 +132,7 @@ export default function Products() {
           <div style={{ display: 'flex', borderBottom: '1px solid var(--border)', marginBottom: '40px', gap: '0', overflowX: 'auto' }}>
             {[
               { id: 'formulations', label: `Parenteral Formulations (${productsData.length})` },
-              { id: 'machinery', label: `BFS Machinery Systems (${machineryItems.length})` }
+              { id: 'machinery', label: `BFS Machinery Systems (${(content?.products?.machineryItems || machineryItems).length})` }
             ].map(tab => (
               <button
                 key={tab.id}
@@ -229,7 +237,7 @@ export default function Products() {
           {/* Product Grid */}
           <div className="products-grid">
             {catalogTab === 'formulations' ? (
-              filteredProducts.slice(0, 18).map(product => (
+              filteredProducts.map(product => (
                 <div
                   key={product.id}
                   className="card"
@@ -281,7 +289,7 @@ export default function Products() {
                 </div>
               ))
             ) : (
-              machineryItems.map(mach => (
+              (content?.products?.machineryItems || machineryItems).map(mach => (
                 <div
                   key={mach.id}
                   className="card"
@@ -293,7 +301,7 @@ export default function Products() {
                     </span>
                   </div>
                   <div style={{ height: '180px', overflow: 'hidden', borderBottom: '1px solid var(--border)' }}>
-                    <img src={mach.image} alt={mach.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <img src={resolveImage(mach.image)} alt={mach.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   </div>
                   <div style={{ padding: '20px', flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                     <div>
@@ -343,7 +351,7 @@ export default function Products() {
           </div>
 
           <div className="grid grid-cols-3" style={{ gap: '24px' }}>
-            {industrySolutions.map((sol, i) => (
+            {(content?.products?.industrySolutions || industrySolutions).map((sol, i) => (
               <div
                 key={i}
                 className="card"

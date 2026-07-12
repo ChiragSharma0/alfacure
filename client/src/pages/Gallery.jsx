@@ -1,9 +1,17 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Play, X, Eye, Info, Share2, Globe } from 'lucide-react';
+import { useCMS } from '../context/CMSContext';
 
 export default function Gallery() {
   const navigate = useNavigate();
+  const { content, R2_PUBLIC_URL } = useCMS();
+
+  const resolveImage = (img) => {
+    if (!img) return '';
+    if (img.startsWith('http') || img.startsWith('/')) return img;
+    return `${R2_PUBLIC_URL}/${img}`;
+  };
   const [activeTab, setActiveTab] = useState('all');
   const [videoModal, setVideoModal] = useState({ isOpen: false, title: '', videoUrl: '' });
 
@@ -88,15 +96,7 @@ export default function Gallery() {
     }
   ];
 
-  const filteredItems = activeTab === 'all'
-    ? galleryItems
-    : galleryItems.filter(item => {
-      if (activeTab === 'machinery' && item.category === 'machinery') return true;
-      if (activeTab === 'cleanrooms' && item.category === 'cleanrooms') return true;
-      if (activeTab === 'qc' && item.category === 'qc') return true;
-      if (activeTab === 'installations' && item.category === 'installations') return true;
-      return false;
-    });
+
 
   const openVideo = (title, videoUrl) => {
     setVideoModal({ isOpen: true, title, videoUrl });
@@ -110,31 +110,199 @@ export default function Gallery() {
     <div className="page-container animate-fade-in" style={{ backgroundColor: '#ffffff', paddingBottom: '80px' }}>
 
       {/* 1. Hero Header */}
-      <section className="section" style={{ background: '#f4f7fc', padding: '100px 0 60px 0', borderBottom: '1px solid var(--border)', textAlign: 'left' }}>
+      <section
+        className="section"
+        style={{
+          background: 'linear-gradient(180deg, #f8fafc 0%, #ffffff 100%)',
+          padding: '70px 0 50px',
+          borderBottom: '1px solid var(--border)'
+        }}
+      >
         <div className="container">
-          <div className="grid grid-cols-12 align-center" style={{ gap: '32px' }}>
-            <div style={{ gridColumn: 'span 8' }}>
-              <span className="badge badge-blue" style={{ marginBottom: '12px' }}>OPERATIONAL TRANSPARENCY</span>
-              <h1 style={{ fontSize: '2.5rem', fontWeight: 800, marginBottom: '20px', lineHeight: '1.2', color: 'var(--secondary)' }}>
-                Precision in Every Component, Integrity in Every Room.
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: '2fr 1fr',
+              gap: '32px',
+              alignItems: 'center'
+            }}
+          >
+            {/* Left Side */}
+            <div style={{ textAlign: 'left' }}>
+              <span
+                className="badge badge-blue"
+                style={{ marginBottom: '14px' }}
+              >
+                {content?.gallery?.heroBadge || 'FACILITY GALLERY'}
+              </span>
+
+              <h1
+                style={{
+                  fontSize: '2.25rem',
+                  fontWeight: 800,
+                  color: 'var(--secondary)',
+                  marginBottom: '16px',
+                  lineHeight: 1.2
+                }}
+              >
+                {content?.gallery?.heroTitle || 'Inside Our Manufacturing & Quality Facilities'}
               </h1>
-              <p style={{ fontSize: '1.05rem', lineHeight: '1.6', color: 'var(--text-muted)' }}>
-                Explore our medical-grade cleanrooms and high-performance industrial assembly lines. We maintain an open-door policy through visual documentation, showcasing the uncompromising standards of our pharmaceutical manufacturing ecosystems.
+
+              <p
+                style={{
+                  maxWidth: '700px',
+                  fontSize: '1rem',
+                  lineHeight: 1.7,
+                  color: 'var(--text-muted)',
+                  marginBottom: '24px'
+                }}
+              >
+                {content?.gallery?.heroDesc ||
+                  'Explore our production units, quality-control laboratories, cleanroom environments, and manufacturing infrastructure through a curated collection of images.'}
               </p>
+
+              <div
+                style={{
+                  display: 'flex',
+                  gap: '12px',
+                  flexWrap: 'wrap'
+                }}
+              >
+                {[
+                  'Production Units',
+                  'Quality Control',
+                  'Cleanrooms',
+                  'Packaging'
+                ].map((item) => (
+                  <div
+                    key={item}
+                    style={{
+                      padding: '8px 14px',
+                      background: '#ffffff',
+                      border: '1px solid var(--border)',
+                      borderRadius: '999px',
+                      fontSize: '0.85rem',
+                      fontWeight: 600,
+                      color: 'var(--secondary)'
+                    }}
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
             </div>
 
-            {/* QA highlights */}
-            <div style={{ gridColumn: 'span 4' }}>
-              <div className="card" style={{ padding: '20px', border: '1px solid var(--border)', backgroundColor: '#ffffff', textAlign: 'left' }}>
-                <h3 style={{ fontSize: '0.875rem', fontWeight: 800, color: 'var(--secondary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <Info size={14} style={{ color: 'var(--primary)' }} /> Sterile Plant Standards
-                </h3>
+            {/* Right Side */}
+            <div>
+              <div
+                className="card"
+                style={{
+                  padding: '24px',
+                  backgroundColor: '#ffffff',
+                  border: '1px solid var(--border)',
+                  boxShadow: 'none',
+                  borderRadius: '12px'
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: '0.75rem',
+                    fontWeight: 700,
+                    color: 'var(--primary)',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.08em',
+                    marginBottom: '18px'
+                  }}
+                >
+                  Facility Snapshot
+                </div>
 
-                <div style={{ padding: '12px', backgroundColor: '#f8fafc', borderRadius: '4px', fontSize: '0.75rem', color: 'var(--primary)', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                  <div style={{ fontWeight: 700, color: 'var(--secondary)' }}>Alfacure Cleanroom Facility</div>
-                  <div className="flex justify-between"><span>CLEANROOM:</span><span style={{ color: 'var(--text-main)', fontWeight: 600 }}>Grade A (Class 100)</span></div>
-                  <div className="flex justify-between"><span>TECHNOLOGY:</span><span style={{ color: 'var(--text-main)', fontWeight: 600 }}>Blow-Fill-Seal (BFS)</span></div>
-                  <div className="flex justify-between"><span>QA COMPLIANCE:</span><span style={{ color: 'var(--success)', fontWeight: 700 }}>WHO-GMP Validated</span></div>
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: '1fr 1fr',
+                    gap: '16px'
+                  }}
+                >
+                  <div>
+                    <div
+                      style={{
+                        fontSize: '1.6rem',
+                        fontWeight: 800,
+                        color: 'var(--secondary)'
+                      }}
+                    >
+                      25+
+                    </div>
+                    <div
+                      style={{
+                        fontSize: '0.85rem',
+                        color: 'var(--text-muted)'
+                      }}
+                    >
+                      Product Variants
+                    </div>
+                  </div>
+
+                  <div>
+                    <div
+                      style={{
+                        fontSize: '1.6rem',
+                        fontWeight: 800,
+                        color: 'var(--secondary)'
+                      }}
+                    >
+                      WHO-GMP
+                    </div>
+                    <div
+                      style={{
+                        fontSize: '0.85rem',
+                        color: 'var(--text-muted)'
+                      }}
+                    >
+                      Manufacturing
+                    </div>
+                  </div>
+
+                  <div>
+                    <div
+                      style={{
+                        fontSize: '1.6rem',
+                        fontWeight: 800,
+                        color: 'var(--secondary)'
+                      }}
+                    >
+                      BFS
+                    </div>
+                    <div
+                      style={{
+                        fontSize: '0.85rem',
+                        color: 'var(--text-muted)'
+                      }}
+                    >
+                      Technology
+                    </div>
+                  </div>
+
+                  <div>
+                    <div
+                      style={{
+                        fontSize: '1.6rem',
+                        fontWeight: 800,
+                        color: 'var(--secondary)'
+                      }}
+                    >
+                      Global
+                    </div>
+                    <div
+                      style={{
+                        fontSize: '0.85rem',
+                        color: 'var(--text-muted)'
+                      }}
+                    >
+                      Distribution
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -147,39 +315,6 @@ export default function Gallery() {
         <div className="container">
 
           {/* Navigation Tabs */}
-          <div
-            style={{
-              display: 'flex',
-              gap: '32px',
-              borderBottom: '1px solid var(--border)',
-              marginBottom: '36px',
-              overflowX: 'auto',
-              whiteSpace: 'nowrap',
-              paddingBottom: '2px'
-            }}
-          >
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                style={{
-                  padding: '12px 4px',
-                  border: 'none',
-                  borderBottom: activeTab === tab.id ? '2.5px solid var(--primary)' : '2.5px solid transparent',
-                  backgroundColor: 'transparent',
-                  color: activeTab === tab.id ? 'var(--primary)' : 'var(--text-light)',
-                  fontWeight: 700,
-                  fontSize: '0.85rem',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.05em',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s'
-                }}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </div>
 
           {/* Grid Layout */}
           <div
@@ -190,7 +325,7 @@ export default function Gallery() {
               justifyContent: 'flex-start'
             }}
           >
-            {filteredItems.map((item) => {
+            {(content?.gallery?.galleryItems || galleryItems).map((item) => {
               let flexBasis = 'calc(33.333% - 16px)';
               let height = '340px';
               if (item.size === 'horizontal') {
@@ -220,7 +355,7 @@ export default function Gallery() {
                   }}
                 >
                   <img
-                    src={item.image}
+                    src={resolveImage(item.image)}
                     alt={item.title}
                     style={{
                       width: '100%',
@@ -286,13 +421,13 @@ export default function Gallery() {
 
           {/* Two Case Studies Grid */}
           <div className="grid grid-cols-2" style={{ gap: '32px' }}>
-            {caseStudies.map((cs, idx) => (
+            {(content?.gallery?.caseStudies || caseStudies).map((cs, idx) => (
               <div key={idx} className="card" style={{ display: 'flex', flexDirection: 'column', textAlign: 'left', border: '1px solid var(--border)', backgroundColor: '#ffffff', borderRadius: '8px', overflow: 'hidden' }}>
 
                 {/* Video Area */}
                 <div style={{ position: 'relative', height: '240px', overflow: 'hidden', cursor: 'pointer' }} onClick={() => openVideo(cs.title, cs.videoUrl)}>
                   <img
-                    src={cs.thumbnail}
+                    src={resolveImage(cs.thumbnail)}
                     alt={cs.title}
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     onError={(e) => {

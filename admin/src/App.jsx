@@ -214,6 +214,11 @@ function App() {
         },
         body: JSON.stringify(updatedContent)
       });
+      if (res.status === 401) {
+        handleLogout();
+        setAlertMsg({ type: 'danger', text: 'Session expired. Please log in again.' });
+        return;
+      }
       if (res.ok) {
         setAlertMsg({ type: 'success', text: 'Changes saved successfully to R2!' });
         setContent(updatedContent);
@@ -353,14 +358,18 @@ function ImageUpload({ token, defaultKey, currentKey, onUploadSuccess, r2PublicU
   const [file, setFile] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [msg, setMsg] = useState('');
+  const [cacheBuster, setCacheBuster] = useState(Date.now());
 
   const handleUpload = async () => {
     if (!file) return;
     setUploading(true);
     setMsg('');
 
+    // Force rename the File object to defaultKey to overwrite cleanly and keep the same URL
+    const renamedFile = new File([file], defaultKey, { type: file.type });
+
     const formData = new FormData();
-    formData.append('image', file);
+    formData.append('image', renamedFile);
     formData.append('key', defaultKey);
     if (currentKey) {
       formData.append('oldKey', currentKey);
@@ -376,6 +385,7 @@ function ImageUpload({ token, defaultKey, currentKey, onUploadSuccess, r2PublicU
         const data = await res.json();
         setMsg('Uploaded successfully!');
         setFile(null);
+        setCacheBuster(Date.now());
         if (onUploadSuccess) onUploadSuccess(data.key);
       } else {
         setMsg('Upload failed');
@@ -391,7 +401,7 @@ function ImageUpload({ token, defaultKey, currentKey, onUploadSuccess, r2PublicU
       <div className="image-preview">
         {currentKey ? (
           <img
-            src={`${r2PublicUrl}/${currentKey}`}
+            src={`${r2PublicUrl}/${currentKey}?t=${cacheBuster}`}
             alt="Preview"
             onError={(e) => {
               e.target.onerror = null;

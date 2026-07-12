@@ -10,9 +10,11 @@ import {
   Pill,
   Syringe
 } from 'lucide-react';
+import { useCMS } from '../context/CMSContext';
 
 export default function Home() {
   const navigate = useNavigate();
+  const { content, R2_PUBLIC_URL } = useCMS();
   const [visibleStats, setVisibleStats] = useState(false);
 
   useEffect(() => {
@@ -77,6 +79,14 @@ export default function Home() {
     'Complete batch traceability & CoA',
     'ISO & CRISIL certified'
   ];
+
+  const getAssetUrl = (fileName, defaultPath) => {
+    if (content && Object.keys(content).length > 0) {
+      return `${R2_PUBLIC_URL}/${fileName}`;
+    }
+    return defaultPath;
+  };
+
   return (
     <div
       className="page-container animate-fade-in"
@@ -99,7 +109,7 @@ export default function Home() {
           loop
           muted
           playsInline
-          poster="/assets/production_floor.png"
+          poster={getAssetUrl('production_floor.png', '/assets/production_floor.png')}
           style={{
             position: 'absolute',
             top: 0,
@@ -168,10 +178,10 @@ export default function Home() {
               className="hero-title animate-fade-in-up"
               style={{ animationDelay: '0.1s' }}
             >
-              Premium Large Volume
+              {content?.home?.heroTitle1 || 'Premium Large Volume'}
               <br />
               <span style={{ color: '#64a178ff' }}>
-                Parenteral Solutions
+                {content?.home?.heroTitle2 || 'Parenteral Solutions'}
               </span>
             </h1>
 
@@ -179,12 +189,7 @@ export default function Home() {
               className="hero-text animate-fade-in-up"
               style={{ animationDelay: '0.2s' }}
             >
-              Alfacure Lifescience Pvt. Ltd. is an Ahmedabad-based pharmaceutical
-              export company specializing in the commercialization and global
-              distribution of life-saving Large Volume Parenteral (LVP)
-              formulations, serving healthcare institutions across domestic and
-              international markets through its strategic partnership with
-              Realcade Lifescience Pvt. Ltd.
+              {content?.home?.heroDesc || 'Alfacure Lifescience Pvt. Ltd. is an Ahmedabad-based pharmaceutical export company specializing in the commercialization and global distribution of life-saving Large Volume Parenteral (LVP) formulations, serving healthcare institutions across domestic and international markets through its strategic partnership with Realcade Lifescience Pvt. Ltd.'}
             </p>
 
             <div
@@ -241,7 +246,7 @@ export default function Home() {
       >
         <div className="container">
           <div className="stats-grid">
-            {stats.map((stat, i) => (
+            {(content?.home?.stats || stats).map((stat, i) => (
               <div
                 key={i}
                 className="stat-card"
@@ -351,7 +356,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-3" style={{ gap: '28px' }}>
-            {capabilities.map((cap, i) => (
+            {(content?.home?.capabilities || capabilities).map((cap, i) => (
               <div
                 key={i}
                 className="card"
@@ -379,7 +384,9 @@ export default function Home() {
                     marginBottom: '20px'
                   }}
                 >
-                  {cap.icon}
+                  {i === 0 && <Droplets size={24} />}
+                  {i === 1 && <Pill size={24} />}
+                  {i === 2 && <Syringe size={24} />}
                 </div>
 
                 <h3
@@ -446,7 +453,11 @@ export default function Home() {
                 }}
               >
                 <img
-                  src="/assets/production_floor.png"
+                  src={getAssetUrl('why_alfacure.png', '/assets/production_floor.png')}
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = '/assets/production_floor.png';
+                  }}
                   alt="Alfacure Lifescience Export Operations"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
@@ -534,7 +545,7 @@ export default function Home() {
                   gap: '12px'
                 }}
               >
-                {trustPoints.map((point, i) => (
+                {(content?.home?.trustPoints || trustPoints).map((point, i) => (
                   <div
                     key={i}
                     className="flex align-center"
@@ -578,146 +589,146 @@ export default function Home() {
 
       {/* ─── MANUFACTURING BACKBONE ─── */}
       <section
-  className="section"
-  style={{
-    backgroundColor: 'var(--blue-dark)',
-    padding: '80px 0',
-    color: '#ffffff'
-  }}
->
-  <div className="container">
-    <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-      <span
+        className="section"
         style={{
-          fontSize: '0.75rem',
-          fontWeight: 700,
-          color: 'var(--green-light)',
-          letterSpacing: '0.15em',
-          textTransform: 'uppercase',
-          display: 'inline-block',
-          marginBottom: '12px'
+          backgroundColor: 'var(--blue-dark)',
+          padding: '80px 0',
+          color: '#ffffff'
         }}
       >
-        OUR MARKETS
-      </span>
+        <div className="container">
+          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+            <span
+              style={{
+                fontSize: '0.75rem',
+                fontWeight: 700,
+                color: 'var(--green-light)',
+                letterSpacing: '0.15em',
+                textTransform: 'uppercase',
+                display: 'inline-block',
+                marginBottom: '12px'
+              }}
+            >
+              OUR MARKETS
+            </span>
 
-      <h2
-        style={{
-          fontSize: '2.25rem',
-          fontWeight: 700,
-          color: '#ffffff',
-          marginBottom: '16px'
-        }}
-      >
-        Expanding Across Global Healthcare Networks
-      </h2>
+            <h2
+              style={{
+                fontSize: '2.25rem',
+                fontWeight: 700,
+                color: '#ffffff',
+                marginBottom: '16px'
+              }}
+            >
+              Expanding Across Global Healthcare Networks
+            </h2>
 
-      <p
-        style={{
-          fontSize: '0.95rem',
-          color: 'rgba(255,255,255,0.7)',
-          maxWidth: '700px',
-          margin: '0 auto'
-        }}
-      >
-        Alfacure Lifescience Pvt. Ltd. serves domestic and international
-        markets through a strong export network, delivering high-quality
-        pharmaceutical formulations with complete regulatory support.
-      </p>
-    </div>
-
-    <div className="grid grid-cols-3" style={{ gap: '24px' }}>
-      {[
-        {
-          label: 'Europe',
-          title: 'Germany & European Union',
-          specs: [
-            'Regulatory documentation support',
-            'Large volume parenteral portfolio',
-            'Long-term business partnerships'
-          ]
-        },
-        {
-          label: 'Middle East',
-          title: 'United Arab Emirates',
-          specs: [
-            'Strategic export operations',
-            'Reliable supply chain',
-            'Healthcare distribution support'
-          ]
-        },
-        {
-          label: 'Global Reach',
-          title: 'UN & International Markets',
-          specs: [
-            'CTD / eCTD / ACTD dossiers',
-            'Certificates & compliance support',
-            'Worldwide commercial expansion'
-          ]
-        }
-      ].map((market, i) => (
-        <div
-          key={i}
-          style={{
-            padding: '32px 28px',
-            borderRadius: '10px',
-            border: '1px solid rgba(127, 161, 138, 0.25)',
-            backgroundColor: 'rgba(255,255,255,0.04)',
-            textAlign: 'left'
-          }}
-        >
-          <div
-            style={{
-              fontSize: '0.65rem',
-              fontWeight: 800,
-              color: 'var(--green-light)',
-              letterSpacing: '0.12em',
-              textTransform: 'uppercase',
-              marginBottom: '8px'
-            }}
-          >
-            {market.label}
+            <p
+              style={{
+                fontSize: '0.95rem',
+                color: 'rgba(255,255,255,0.7)',
+                maxWidth: '700px',
+                margin: '0 auto'
+              }}
+            >
+              Alfacure Lifescience Pvt. Ltd. serves domestic and international
+              markets through a strong export network, delivering high-quality
+              pharmaceutical formulations with complete regulatory support.
+            </p>
           </div>
 
-          <h3
-            style={{
-              fontSize: '1.1rem',
-              fontWeight: 700,
-              color: '#ffffff',
-              marginBottom: '20px'
-            }}
-          >
-            {market.title}
-          </h3>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            {market.specs.map((spec, j) => (
+          <div className="grid grid-cols-3" style={{ gap: '24px' }}>
+            {[
+              {
+                label: 'Europe',
+                title: 'Germany & European Union',
+                specs: [
+                  'Regulatory documentation support',
+                  'Large volume parenteral portfolio',
+                  'Long-term business partnerships'
+                ]
+              },
+              {
+                label: 'Middle East',
+                title: 'United Arab Emirates',
+                specs: [
+                  'Strategic export operations',
+                  'Reliable supply chain',
+                  'Healthcare distribution support'
+                ]
+              },
+              {
+                label: 'Global Reach',
+                title: 'UN & International Markets',
+                specs: [
+                  'CTD / eCTD / ACTD dossiers',
+                  'Certificates & compliance support',
+                  'Worldwide commercial expansion'
+                ]
+              }
+            ].map((market, i) => (
               <div
-                key={j}
-                className="flex align-center"
+                key={i}
                 style={{
-                  gap: '8px',
-                  fontSize: '0.8rem',
-                  color: 'rgba(255,255,255,0.7)'
+                  padding: '32px 28px',
+                  borderRadius: '10px',
+                  border: '1px solid rgba(127, 161, 138, 0.25)',
+                  backgroundColor: 'rgba(255,255,255,0.04)',
+                  textAlign: 'left'
                 }}
               >
-                <CheckCircle
-                  size={14}
+                <div
                   style={{
+                    fontSize: '0.65rem',
+                    fontWeight: 800,
                     color: 'var(--green-light)',
-                    flexShrink: 0
+                    letterSpacing: '0.12em',
+                    textTransform: 'uppercase',
+                    marginBottom: '8px'
                   }}
-                />
+                >
+                  {market.label}
+                </div>
 
-                <span>{spec}</span>
+                <h3
+                  style={{
+                    fontSize: '1.1rem',
+                    fontWeight: 700,
+                    color: '#ffffff',
+                    marginBottom: '20px'
+                  }}
+                >
+                  {market.title}
+                </h3>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                  {market.specs.map((spec, j) => (
+                    <div
+                      key={j}
+                      className="flex align-center"
+                      style={{
+                        gap: '8px',
+                        fontSize: '0.8rem',
+                        color: 'rgba(255,255,255,0.7)'
+                      }}
+                    >
+                      <CheckCircle
+                        size={14}
+                        style={{
+                          color: 'var(--green-light)',
+                          flexShrink: 0
+                        }}
+                      />
+
+                      <span>{spec}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             ))}
           </div>
         </div>
-      ))}
-    </div>
-  </div>
-</section>
+      </section>
 
       {/* ─── CTA BANNER ─── */}
       <section className="section" style={{ backgroundColor: 'var(--white)', padding: '80px 0' }}>
