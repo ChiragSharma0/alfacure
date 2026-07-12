@@ -4,6 +4,7 @@ import "./App.css";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import WhatsAppButton from "./components/WhatsAppButton";
 
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -43,6 +44,9 @@ function App() {
       </main>
 
       <Footer />
+      
+      {/* Sticky WhatsApp Floating Button */}
+      <WhatsAppButton />
     </BrowserRouter>
   );
 }

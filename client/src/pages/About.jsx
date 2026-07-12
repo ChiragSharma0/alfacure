@@ -30,8 +30,8 @@ export default function About() {
     },
     {
       icon: <Factory size={22} />,
-      title: 'Pharmaceutical Manufacturing',
-      desc: 'Manufacturing premium sterile Large Volume Parenteral products under stringent quality control standards and advanced pharmaceutical protocols.'
+      title: 'Global Pharmaceutical Export',
+      desc: 'Exporting and supplying premium sterile Large Volume Parenteral products under stringent quality control standards and advanced pharmaceutical protocols through our manufacturing partners.'
     },
     {
       icon: <Users size={22} />,
@@ -43,7 +43,7 @@ export default function About() {
   const whyAlfacure = [
     {
       icon: <Award size={18} />,
-      text: 'Premium Large Volume Parenteral (LVP) manufacturer established in Ahmedabad, Gujarat.'
+      text: 'Premium Large Volume Parenteral (LVP) exporter established in Ahmedabad, Gujarat.'
     },
     {
       icon: <ShieldCheck size={18} />,
@@ -124,7 +124,7 @@ export default function About() {
                   lineHeight: 1.15
                 }}
               >
-                Premium Manufacturer of{' '}
+                Premium Exporter & Supplier of{' '}
                 <span style={{ color: 'var(--green-dark)' }}>
                   Large Volume Parenterals (LVP)
                 </span>
@@ -138,7 +138,7 @@ export default function About() {
                   marginBottom: '28px'
                 }}
               >
-                {content?.about?.heroDesc || 'Alfacure Lifescience Pvt. Ltd. is a premier Ahmedabad-based pharmaceutical company specializing in the manufacturing, commercialization, and global distribution of life-saving therapeutics. With a strong focus on quality, sterility, and regulatory compliance, we deliver high-quality Large Volume Parenteral (LVP) solutions to healthcare institutions, distributors, and international partners across the world.'}
+                {content?.about?.heroDesc || 'Alfacure Lifescience Pvt. Ltd. is a premier Ahmedabad-based pharmaceutical company specializing in the export commercialization, and global distribution of life-saving therapeutics. With a strong focus on quality, sterility, and regulatory compliance, we deliver high-quality Large Volume Parenteral (LVP) solutions to healthcare institutions, distributors, and international partners across the world.'}
               </p>
 
               <div className="flex" style={{ gap: '12px' }}>

@@ -34,6 +34,13 @@ export default function Support({ setCurrentPage }) {
       location: 'United Arab Emirates',
       phone: '+971 55 601 2891',
       email: 'export@alfacure.com',
+    },
+    {
+      name: 'Priyam Joshi',
+      role: 'Export Representative',
+      location: 'Germany / Europe',
+      phone: '+49 1525 9109949',
+      email: 'export@alfacure.com',
     }
   ];
 

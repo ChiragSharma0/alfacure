@@ -31,7 +31,7 @@ export default function Home() {
     {
       value: 'Global',
       label: 'Export Markets',
-      desc: 'Germany, UAE, EU & UN'
+      desc: 'India, UAE, Asia & Africa'
     },
     {
       value: '2026',
@@ -631,26 +631,53 @@ export default function Home() {
                 margin: '0 auto'
               }}
             >
-              Alfacure Lifescience Pvt. Ltd. serves domestic and international
-              markets through a strong export network, delivering high-quality
-              pharmaceutical formulations with complete regulatory support.
-            </p>
-          </div>
+            Alfacure Lifescience Pvt. Ltd. serves domestic and international
+            markets through a strong export network, delivering high-quality
+            pharmaceutical formulations with complete regulatory support.
+          </p>
+        </div>
 
-          <div className="grid grid-cols-3" style={{ gap: '24px' }}>
+        {/* Global Export World Map */}
+        <div 
+          style={{ 
+            maxWidth: '900px', 
+            margin: '0 auto 48px auto', 
+            borderRadius: '12px', 
+            overflow: 'hidden', 
+            border: '1px solid rgba(127, 161, 138, 0.15)',
+            boxShadow: '0 16px 36px rgba(0, 0, 0, 0.3)',
+            backgroundColor: 'rgba(255, 255, 255, 0.02)'
+          }}
+        >
+          <img 
+            src={getAssetUrl('export_map.png', '/assets/export_map.png')} 
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = '/assets/export_map.png';
+            }}
+            alt="Alfacure Global Export Map" 
+            style={{ 
+              width: '100%', 
+              height: 'auto', 
+              display: 'block' 
+            }} 
+          />
+        </div>
+
+        <div className="grid grid-cols-3" style={{ gap: '24px' }}>
             {[
               {
-                label: 'Europe',
-                title: 'Germany & European Union',
+                label: 'Indian Market',
+                title: 'India (Primary Market)',
                 specs: [
-                  'Regulatory documentation support',
-                  'Large volume parenteral portfolio',
-                  'Long-term business partnerships'
+                  'Robust domestic supply network',
+                  'Leading supplier of critical IV fluids',
+                  'Strategic hospital partnerships'
                 ]
               },
               {
                 label: 'Middle East',
-                title: 'United Arab Emirates',
+                title: 'United Arab Emirates (UAE Main)',
                 specs: [
                   'Strategic export operations',
                   'Reliable supply chain',
@@ -658,12 +685,12 @@ export default function Home() {
                 ]
               },
               {
-                label: 'Global Reach',
-                title: 'UN & International Markets',
+                label: 'Asia & Africa',
+                title: 'Global Export Network',
                 specs: [
-                  'CTD / eCTD / ACTD dossiers',
-                  'Certificates & compliance support',
-                  'Worldwide commercial expansion'
+                  'Nepal, Philippines, Thailand (Asia)',
+                  'Ghana, Kenya (Africa), & more',
+                  'CTD / eCTD dossier support'
                 ]
               }
             ].map((market, i) => (

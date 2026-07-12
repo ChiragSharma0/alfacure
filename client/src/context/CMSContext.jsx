@@ -14,7 +14,7 @@ const defaultContent = {
     heroDesc: 'Alfacure Lifescience Pvt. Ltd. is an Ahmedabad-based pharmaceutical export company specializing in the commercialization and global distribution of life-saving Large Volume Parenteral (LVP) formulations, serving healthcare institutions across domestic and international markets through its strategic partnership with Realcade Lifescience Pvt. Ltd.',
     stats: [
       { value: '6', label: 'Pack Sizes', desc: '100 mL to 1000 mL' },
-      { value: 'Global', label: 'Export Markets', desc: 'Germany, UAE, EU & UN' },
+      { value: 'Global', label: 'Export Markets', desc: 'India, UAE, Asia & Africa' },
       { value: '2026', label: 'Established', desc: 'Ahmedabad-based enterprise' },
       { value: 'ISO', label: 'Certified', desc: 'ISO & CRISIL certified' }
     ],
@@ -33,15 +33,15 @@ const defaultContent = {
     ]
   },
   about: {
-    heroDesc: 'Alfacure Lifescience Pvt. Ltd. is a premier Ahmedabad-based pharmaceutical company specializing in the manufacturing, commercialization, and global distribution of life-saving therapeutics. With a strong focus on quality, sterility, and regulatory compliance, we deliver high-quality Large Volume Parenteral (LVP) solutions to healthcare institutions, distributors, and international partners across the world.',
+    heroDesc: 'Alfacure Lifescience Pvt. Ltd. is a premier Ahmedabad-based pharmaceutical company specializing in the export commercialization, and global distribution of life-saving therapeutics. With a strong focus on quality, sterility, and regulatory compliance, we deliver high-quality Large Volume Parenteral (LVP) solutions to healthcare institutions, distributors, and international partners across the world.',
     whatWeDo: [
       { title: 'Global Distribution', desc: 'Supplying Large Volume Parenterals (LVP), IV fluids, anti-infectives, and critical care formulations to healthcare institutions and distribution partners across domestic and international markets.' },
       { title: 'Regulatory & Documentation Support', desc: 'Providing end-to-end regulatory assistance including CTD, eCTD, and ACTD dossiers, product registrations, and country-specific compliance documentation.' },
-      { title: 'Pharmaceutical Manufacturing', desc: 'Manufacturing premium sterile Large Volume Parenteral products under stringent quality control standards and advanced pharmaceutical protocols.' },
+      { title: 'Global Pharmaceutical Export', desc: 'Exporting and supplying premium sterile Large Volume Parenteral products under stringent quality control standards and advanced pharmaceutical protocols through our manufacturing partners.' },
       { title: 'Strategic Partnerships', desc: 'Building long-term relationships with importers, distributors, hospitals, and healthcare organizations worldwide.' }
     ],
     whyAlfacure: [
-      { title: 'Premium LVP Focus', desc: 'Premium Large Volume Parenteral (LVP) manufacturer established in Ahmedabad, Gujarat.' },
+      { title: 'Premium LVP Focus', desc: 'Premium Large Volume Parenteral (LVP) exporter established in Ahmedabad, Gujarat.' },
       { title: 'Certified Organisation', desc: 'ISO and CRISIL certified organization committed to quality, safety, and regulatory compliance.' },
       { title: 'Diverse Portfolio', desc: 'Comprehensive portfolio of sterile IV fluids, electrolytes, anti-infectives, and critical care products.' },
       { title: 'Comprehensive Regulatory Support', desc: 'Dedicated Regulatory Affairs team supporting dossiers, registrations, and global market entry.' },
@@ -225,6 +225,13 @@ const defaultContent = {
         location: 'United Arab Emirates',
         phone: '+971 55 601 2891',
         email: 'export@alfacure.com',
+      },
+      {
+        name: 'Priyam Joshi',
+        role: 'Export Representative',
+        location: 'Germany / Europe',
+        phone: '+49 1525 9109949',
+        email: 'export@alfacure.com',
       }
     ]
   },
@@ -265,7 +272,7 @@ const sanitizeFetchedContent = (data) => {
   }
 
   // Migrate contact hubs to verify we have cards
-  if (!data.contact?.contactHubs || data.contact.contactHubs.length < 3) {
+  if (!data.contact?.contactHubs || data.contact.contactHubs.length < 4) {
     clean.contact.contactHubs = defaultContent.contact.contactHubs;
   }
 
