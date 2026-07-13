@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import HeroImage from "../assets/images/hero.webp"
+import MapImage from '../assets/images/map.webp'
 import {
   ArrowRight,
   Globe,
@@ -453,7 +455,7 @@ export default function Home() {
                 }}
               >
                 <img
-                  src={getAssetUrl('why_alfacure.png', '/assets/production_floor.png')}
+                  src={HeroImage}
                   onError={(e) => {
                     e.target.onerror = null;
                     e.target.src = '/assets/production_floor.png';
@@ -650,7 +652,7 @@ export default function Home() {
           }}
         >
           <img 
-            src={getAssetUrl('export_map.png', '/assets/export_map.png')} 
+            src={MapImage} 
             onError={(e) => {
               e.target.onerror = null;
               e.target.src = '/assets/export_map.png';

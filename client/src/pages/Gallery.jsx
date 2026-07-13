@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Play, X, Eye, Info, Share2, Globe } from 'lucide-react';
 import { useCMS } from '../context/CMSContext';
+import Vid1 from "../assets/videos/lv_0_20260711213052 (1).mp4"
+console.log(Vid1);
 
 export default function Gallery() {
   const navigate = useNavigate();
@@ -81,7 +83,7 @@ export default function Gallery() {
       sensors: 'Increased sterilization accuracy',
       desc: 'A full-stack automation project for a major biotech partner, integrating 12 robotic units with real-time AI quality checking.',
       thumbnail: '/assets/biosync_video.png',
-      videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4'
+      videoUrl: Vid1
     },
     {
       title: 'Cold-Chain Distribution Hub',
@@ -92,13 +94,14 @@ export default function Gallery() {
       sensors: 'Continuous atmospheric sensors',
       desc: 'Design and implementation of a temperature-controlled logistics center. Featuring autonomous ground vehicles and continuous atmospheric monitoring sensors.',
       thumbnail: '/assets/cold_chain_video.png',
-      videoUrl: 'https://www.w3schools.com/html/movie.mp4'
+      videoUrl: Vid1
     }
   ];
 
 
 
   const openVideo = (title, videoUrl) => {
+    console.log("Video URL:", videoUrl);
     setVideoModal({ isOpen: true, title, videoUrl });
   };
 
@@ -169,10 +172,7 @@ export default function Gallery() {
                 }}
               >
                 {[
-                  'Production Units',
-                  'Quality Control',
-                  'Cleanrooms',
-                  'Packaging'
+                  
                 ].map((item) => (
                   <div
                     key={item}
