@@ -1,5 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import AboutImg from "../assets/images/about-1.webp"
+import About2 from "../assets/images/About-2.webp"
+import About3 from "../assets/images/About-3.webp"
+import About4 from "../assets/images/About-4.webp"
 import {
   Target, Eye, Briefcase, Globe, Factory, ShieldCheck,
   ArrowRight, MapPin, Phone, Award, Users, Truck
@@ -178,7 +182,7 @@ export default function About() {
                 }}
               >
                 <img
-                  src={getAssetUrl('about_hero.png', '/assets/production_floor.png')}
+                  src= {AboutImg}
                   onError={(e) => {
                     e.target.onerror = null;
                     e.target.src = '/assets/production_floor.png';
@@ -593,7 +597,7 @@ export default function About() {
                 }}
               >
                 <img
-                  src={getAssetUrl('clean_hub.png', '/assets/clean_hub.png')}
+                  src={About2}
                   onError={(e) => {
                     e.target.onerror = null;
                     e.target.src = '/assets/clean_hub.png';
@@ -616,7 +620,7 @@ export default function About() {
                 }}
               >
                 <img
-                  src={getAssetUrl('auto_capping.png', '/assets/auto_capping.png')}
+                  src={About3}
                   onError={(e) => {
                     e.target.onerror = null;
                     e.target.src = '/assets/auto_capping.png';
@@ -640,7 +644,7 @@ export default function About() {
                 }}
               >
                 <img
-                  src={getAssetUrl('spectrometric_lab.png', '/assets/spectrometric_lab.png')}
+                  src={About4}
                   onError={(e) => {
                     e.target.onerror = null;
                     e.target.src = '/assets/spectrometric_lab.png';

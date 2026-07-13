@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { Layers, ChevronDown, Search } from 'lucide-react';
 import productsData from '../data/products.json';
 import { useCMS } from '../context/CMSContext';
+import ProductBg from "../assets/images/Product-bg.webp";
+
 
 export default function Products() {
   const navigate = useNavigate();
@@ -102,30 +104,49 @@ export default function Products() {
     <div className="page-container animate-fade-in" style={{ backgroundColor: '#ffffff', paddingBottom: '80px' }}>
 
       {/* ── HEADER ── */}
-      <section style={{ backgroundColor: '#f4f7fc', padding: '100px 0 60px', borderBottom: '1px solid var(--border)' }}>
-        <div className="container">
-          <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--primary)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '12px', display: 'inline-block' }}>
-            {content?.products?.heroTag || 'PRECISION FORMULATIONS & SYSTEMS'}
-          </span>
-          <h1 style={{ fontWeight: 800, color: 'var(--secondary)', marginBottom: '20px' }} className="products-hero-title">
-            {content?.products?.heroTitle || 'Products & Solutions'}
-          </h1>
-          <p style={{ fontSize: '1rem', color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: '32px', maxWidth: '680px' }}>
-            {content?.products?.heroDesc || 'Explore our comprehensive range of sterile medical parenterals and high-precision Blow-Fill-Seal systems, engineered to meet the highest regulatory standards.'}
-          </p>
-          <div className="hero-buttons">
-            <button className="btn btn-primary" onClick={() => {
-              const el = document.getElementById('catalog');
-              if (el) el.scrollIntoView({ behavior: 'smooth' });
-            }}>
-              View Catalog →
-            </button>
-            <button className="btn btn-outline" onClick={() => window.open(getAssetUrl('products_specs.pdf', '/assets/brochure.pdf'), '_blank')}>
-              Download Specs
-            </button>
-          </div>
-        </div>
-      </section>
+      <section
+  className="products-hero"
+  style={{ "--hero-bg": `url(${ProductBg})` }}
+>
+  <div className="container">
+    <span className="products-hero-tag">
+      {content?.products?.heroTag || "PRECISION FORMULATIONS & SYSTEMS"}
+    </span>
+
+    <h1 className="products-hero-title">
+      {content?.products?.heroTitle || "Products & Solutions"}
+    </h1>
+
+    <p className="products-hero-desc">
+      {content?.products?.heroDesc ||
+        "Explore our comprehensive range of sterile medical parenterals and high-precision Blow-Fill-Seal systems, engineered to meet the highest regulatory standards."}
+    </p>
+
+    <div className="hero-buttons">
+      <button
+        className="btn btn-primary"
+        onClick={() => {
+          const el = document.getElementById("catalog");
+          if (el) el.scrollIntoView({ behavior: "smooth" });
+        }}
+      >
+        View Catalog →
+      </button>
+
+      <button
+        className="btn btn-outline"
+        onClick={() =>
+          window.open(
+            getAssetUrl("products_specs.pdf", "/assets/brochure.pdf"),
+            "_blank"
+          )
+        }
+      >
+        Download Specs
+      </button>
+    </div>
+  </div>
+</section>
 
       {/* ── CATALOG ── */}
       <section id="catalog" style={{ padding: '60px 0' }}>

@@ -3,7 +3,7 @@ import "./WhatsAppButton.css";
 
 export default function WhatsAppButton() {
   // Placeholder WhatsApp number + message
-  const phoneNumber = "1234567890"; // Placeholder number
+  const phoneNumber = "7600034020"; // Placeholder number
   const message = encodeURIComponent("Hello! I'm interested in Alfacure medical services.");
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
 
