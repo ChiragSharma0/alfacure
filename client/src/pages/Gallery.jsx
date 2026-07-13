@@ -100,9 +100,16 @@ export default function Gallery() {
 
 
 
+  const resolveVideo = (vid) => {
+    if (!vid) return '';
+    if (vid.startsWith('http') || vid.startsWith('/')) return vid;
+    return `${R2_PUBLIC_URL}/${vid}`;
+  };
+
   const openVideo = (title, videoUrl) => {
-    console.log("Video URL:", videoUrl);
-    setVideoModal({ isOpen: true, title, videoUrl });
+    const resolvedUrl = resolveVideo(videoUrl);
+    console.log("Video URL:", resolvedUrl);
+    setVideoModal({ isOpen: true, title, videoUrl: resolvedUrl });
   };
 
   const closeVideo = () => {
