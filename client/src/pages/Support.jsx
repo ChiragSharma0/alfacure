@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import SEO from '../components/SEO';
 import { Mail, Phone, MapPin, CheckCircle, ShieldCheck } from 'lucide-react';
 import { useCMS } from '../context/CMSContext';
 
@@ -55,7 +56,11 @@ export default function Support({ setCurrentPage }) {
 
   return (
     <div className="page-container animate-fade-in" style={{ backgroundColor: 'var(--bg-light)', paddingBottom: '80px' }}>
-
+      <SEO
+        title="Contact Us — Get in Touch"
+        description="Contact Alfacure Lifescience Pvt. Ltd. for export inquiries, product information, and partnership opportunities. Reach our global business development team in Ahmedabad, India."
+        canonical="https://alfacurelifescience.com/support"
+      />
       {/* 1. Header */}
       <section className="section" style={{ backgroundColor: 'var(--bg-white)', padding: '100px 0 60px 0', borderBottom: '1px solid var(--border)', textAlign: 'left' }}>
         <div className="container">

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import SEO from '../components/SEO';
 import {
   ShieldCheck, Award, Globe, FileCheck, CheckCircle,
   ArrowRight, Star, Microscope, Building2, ClipboardList,
@@ -279,7 +280,11 @@ export default function Certifications() {
 
   return (
     <div className="page-container animate-fade-in" style={{ backgroundColor: 'var(--white)' }}>
-
+      <SEO
+        title="Certifications — WHO-GMP, ISO 9001 & Regulatory Compliance"
+        description="View Alfacure Lifescience's certifications including WHO-GMP, ISO 9001:2015, Schedule M, Export License, and FSSAI validation. Committed to global pharmaceutical quality standards."
+        canonical="https://alfacurelifescience.com/certifications"
+      />
       {/* ── HERO ── */}
       <section
         style={{

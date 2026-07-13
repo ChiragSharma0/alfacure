@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import SEO from '../components/SEO';
 import HeroImage from "../assets/images/hero.webp"
 import MapImage from '../assets/images/map.webp'
 import {
@@ -94,6 +95,11 @@ export default function Home() {
       className="page-container animate-fade-in"
       style={{ backgroundColor: 'var(--white)' }}
     >
+      <SEO
+        title="Premium Large Volume Parenteral Solutions"
+        description="Alfacure Lifescience Pvt. Ltd. — Ahmedabad-based pharmaceutical export company specializing in LVP formulations, IV fluids, anti-infective infusions and critical care products for global healthcare institutions."
+        canonical="https://alfacurelifescience.com/"
+      />
       {/* ─── HERO SECTION ─── */}
       <section
         style={{

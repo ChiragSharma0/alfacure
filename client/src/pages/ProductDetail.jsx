@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import SEO from '../components/SEO';
 import { ChevronRight, CheckCircle, Shield, Phone, ArrowUpRight, Check, ChevronDown, ChevronUp } from 'lucide-react';
 import productsData from '../data/products.json';
 import { useCMS } from '../context/CMSContext';
@@ -282,7 +283,11 @@ export default function ProductDetail() {
 
   return (
     <div className="page-container animate-fade-in" style={{ backgroundColor: '#ffffff', paddingBottom: '80px' }}>
-
+      <SEO
+        title={product ? `${product.name} — Product Detail` : 'Product'}
+        description={product ? `${product.category} — ${product.description?.substring(0, 150)}` : 'Alfacure Lifescience product detail page.'}
+        canonical={`https://alfacurelifescience.com/products/${id}`}
+      />
       {/* Breadcrumbs */}
       <div style={{ borderBottom: '1px solid var(--border)', backgroundColor: '#f8fafc', padding: '14px 0' }}>
         <div className="container flex align-center" style={{ gap: '8px', fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-light)', textTransform: 'uppercase', letterSpacing: '0.05em', flexWrap: 'wrap' }}>

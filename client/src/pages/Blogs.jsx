@@ -1,3 +1,4 @@
+import SEO from '../components/SEO';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { useCMS } from '../context/CMSContext';
@@ -15,6 +16,11 @@ export default function Blog() {
         minHeight: '100vh'
       }}
     >
+      <SEO
+        title="Blog — Insights & Resources"
+        description="Read the latest insights, news, and resources from Alfacure Lifescience about LVP formulations, pharmaceutical exports, regulatory updates, and healthcare industry trends."
+        canonical="https://alfacurelifescience.com/blog"
+      />
       <section
         className="section"
         style={{

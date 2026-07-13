@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import SEO from '../components/SEO';
 import { Layers, ChevronDown, Search } from 'lucide-react';
 import productsData from '../data/products.json';
 import { useCMS } from '../context/CMSContext';
@@ -102,7 +103,11 @@ export default function Products() {
 
   return (
     <div className="page-container animate-fade-in" style={{ backgroundColor: '#ffffff', paddingBottom: '80px' }}>
-
+      <SEO
+        title="Products — LVP Formulations & Sterile Infusions"
+        description="Explore Alfacure Lifescience's product portfolio of Large Volume Parenteral solutions, including IV fluids, anti-infective infusions, electrolyte solutions and critical care formulations in pack sizes from 100 mL to 1000 mL."
+        canonical="https://alfacurelifescience.com/products"
+      />
       {/* ── HEADER ── */}
       <section
   className="products-hero"

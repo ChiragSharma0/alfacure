@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import SEO from '../components/SEO';
 import { Play, X, Eye, Info, Share2, Globe } from 'lucide-react';
 import { useCMS } from '../context/CMSContext';
 import Vid1 from "../assets/videos/lv_0_20260711213052 (1).mp4"
@@ -118,7 +119,11 @@ export default function Gallery() {
 
   return (
     <div className="page-container animate-fade-in" style={{ backgroundColor: '#ffffff', paddingBottom: '80px' }}>
-
+      <SEO
+        title="Gallery — Manufacturing Facilities & Quality Control"
+        description="View our gallery of precision machinery, cleanroom facilities, quality control laboratories and client installations at Alfacure Lifescience's pharmaceutical manufacturing partner."
+        canonical="https://alfacurelifescience.com/gallery"
+      />
       {/* 1. Hero Header */}
       <section
         className="section"

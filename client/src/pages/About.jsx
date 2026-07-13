@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import SEO from '../components/SEO';
 import AboutImg from "../assets/images/about-1.webp"
 import About2 from "../assets/images/About-2.webp"
 import About3 from "../assets/images/About-3.webp"
@@ -91,7 +92,11 @@ export default function About() {
   ];
   return (
     <div className="page-container animate-fade-in" style={{ backgroundColor: 'var(--white)' }}>
-
+      <SEO
+        title="About Us — Global Pharmaceutical Exports"
+        description="Learn about Alfacure Lifescience Pvt. Ltd. — an Ahmedabad-based pharmaceutical export company specializing in Large Volume Parenteral solutions, global distribution, and regulatory-compliant healthcare partnerships."
+        canonical="https://alfacurelifescience.com/about"
+      />
       {/* ─── HERO ─── */}
       <section
         className="section"

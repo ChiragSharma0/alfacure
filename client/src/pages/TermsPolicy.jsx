@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import SEO from '../components/SEO';
 import { ChevronDown, ChevronUp, ArrowRight } from 'lucide-react';
 
 /* ─── DATA ─────────────────────────────────────────────────────────── */
@@ -134,7 +135,11 @@ export default function TermsPolicy() {
 
   return (
     <div className="page-container animate-fade-in" style={{ backgroundColor: 'var(--bg-light)' }}>
-
+      <SEO
+        title="Terms of Use & Privacy Policy"
+        description="Terms of Use and Privacy Policy for Alfacure Lifescience Pvt. Ltd. website. Information about use of site content, product disclaimers, export compliance, and data privacy."
+        canonical="https://alfacurelifescience.com/legal"
+      />
       {/* ── HERO ── */}
       <section
         style={{

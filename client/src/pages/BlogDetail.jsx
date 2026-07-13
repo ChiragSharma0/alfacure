@@ -1,3 +1,4 @@
+import SEO from '../components/SEO';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { useCMS } from '../context/CMSContext';
@@ -28,6 +29,11 @@ export default function BlogDetail() {
         minHeight: "100vh",
       }}
     >
+      <SEO
+        title={blog ? `${blog.title} — Blog` : 'Blog Article'}
+        description={blog ? `${blog.excerpt?.substring(0, 160) || blog.title}` : 'Alfacure Lifescience blog article.'}
+        canonical={blog ? `https://alfacurelifescience.com/blog/${blog.slug}` : 'https://alfacurelifescience.com/blog'}
+      />
       {/* Hero */}
 
       <section
