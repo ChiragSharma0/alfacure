@@ -2036,6 +2036,34 @@ function GallerySectionEditor({ content, setContent, token, r2PublicUrl }) {
     });
   };
 
+  const addCaseStudy = () => {
+    const list = [...(content.gallery.caseStudies || []), {
+      title: 'New Case Study',
+      tag: 'NEW REGION',
+      year: new Date().getFullYear().toString(),
+      projCode: 'PROC-NEW-01',
+      reduction: 'Metric Highlight 1',
+      sensors: 'Metric Highlight 2',
+      desc: 'Short description of the validation process or case study project.',
+      thumbnail: '',
+      videoUrl: ''
+    }];
+    setContent({
+      ...content,
+      gallery: { ...content.gallery, caseStudies: list }
+    });
+  };
+
+  const removeCaseStudy = (idx) => {
+    if (window.confirm('Delete this case study?')) {
+      const list = content.gallery.caseStudies.filter((_, i) => i !== idx);
+      setContent({
+        ...content,
+        gallery: { ...content.gallery, caseStudies: list }
+      });
+    }
+  };
+
 
 
   const addGalleryItem = () => {
@@ -2200,14 +2228,20 @@ function GallerySectionEditor({ content, setContent, token, r2PublicUrl }) {
 
       {activeTab === 'cases' && (
         <div className="section-panel">
-          <div className="panel-header">
+          <div className="panel-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
             <h2>Technical Export Case Studies</h2>
+            <button className="btn btn-primary" onClick={addCaseStudy}>
+              <Plus size={16} /> Add Case Study
+            </button>
           </div>
           <div className="repeater-list">
-            {content.gallery.caseStudies.map((cs, idx) => (
+            {(content.gallery.caseStudies || []).map((cs, idx) => (
               <div key={idx} className="repeater-item" style={{ borderLeft: '3px solid var(--success)', marginBottom: '30px' }}>
                 <div className="panel-sub-header" style={{ marginTop: 0, marginBottom: '16px', fontWeight: 'bold', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <span>Technical Case Study #{idx + 1}: {cs.title || 'Untitled Case'}</span>
+                  <button className="btn btn-danger" style={{ padding: '4px 10px', fontSize: '0.75rem', display: 'flex', gap: '4px', alignItems: 'center' }} onClick={() => removeCaseStudy(idx)}>
+                    <Trash2 size={12} /> Remove
+                  </button>
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
                   <div className="form-group">
