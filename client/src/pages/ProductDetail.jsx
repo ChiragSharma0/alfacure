@@ -260,10 +260,39 @@ export default function ProductDetail() {
   const activeFaqs = isMachine ? (machine.faqs || formulationFaqs) : (product?.faqs && product.faqs.length > 0 ? product.faqs : formulationFaqs);
   const relatedFormulations = product ? activeProductsData.filter(p => p.purpose === product.purpose && p.id !== product.id).slice(0, 3) : [];
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    setFormSubmitted(true);
-    setTimeout(() => { setFormSubmitted(false); setFormData({ name: '', email: '', volume: 'low', notes: '' }); }, 4000);
+
+    const PRODUCT_SCRIPT_URL = import.meta.env.VITE_PRODUCT_SCRIPT_URL;
+
+    const payload = {
+      ...formData,
+      product: activeName,
+      type: isMachine ? 'machinery' : 'formulation'
+    };
+
+    try {
+      const response = await fetch(PRODUCT_SCRIPT_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setFormSubmitted(true);
+        setTimeout(() => {
+          setFormSubmitted(false);
+          setFormData({ name: '', email: '', volume: 'low', notes: '' });
+        }, 4000);
+      } else {
+        alert("Failed to submit inquiry.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong.");
+    }
   };
 
   const scrollTo = (sectionId) => {
